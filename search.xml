@@ -30,13 +30,17 @@
 <p><em>横向scroll-view</em></p>
 <blockquote>
 <p>issue：子元素宽度被压缩</p>
-<p>solve：父元素设置overflow:auto，子元素设置flex-shrink:0</p>
+<p>solve：父元素设置overflow:auto，子元素设置flex-shrink:0  </p>
+<br>
+
 <p>issue：滚动条显隐show-scrollbar失效</p>
 <p>solve：</p>
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line">::webkit-scrollbar&#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background-color</span>:transparent;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
 
+<br>
+
 <p>issue：分页滑动paging-enabled失效</p>
-<p>solve：用swiper组件替换scroll-view组件，实现分页滑动</p>
+<p>solve：用swiper组件替换scroll-view组件，实现分页滑动  </p>
 </blockquote>
 </li>
 <li><p><input checked disabled type="checkbox"> 
