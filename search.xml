@@ -12,7 +12,7 @@
 <p><em>横向scroll-view</em></p>
 <blockquote>
 <p>issue：子元素宽度被压缩</p>
-<p>solve：子元素设置flex-shrink:0  </p>
+<p>solve：父元素设置overflow:auto，子元素设置flex-shrink:0  </p>
 <br>
 
 <p>issue：滚动条显隐show-scrollbar失效</p>
@@ -29,7 +29,7 @@
 了解公司各部门业务：销售、运营、BPIT等，认识直系、旁系领导，产品概讲</p>
 </li>
 <li><p><input checked disabled type="checkbox"> 
-与会，涉及多数据对接、源代码版本跟进等，发懵</p>
+与会，数据对接、源代码版本跟进等，发懵</p>
 </li>
 </ul>
 <br>
@@ -50,6 +50,29 @@
 </li>
 <li><p><input checked disabled type="checkbox"> 
 协助任务：做产品玩法的详解，——福袋、抽盒、一番赏等。接触各部分对接。</p>
+</li>
+</ul>
+<br>
+
+<h6 id="Wednesday"><a href="#Wednesday" class="headerlink" title="Wednesday"></a><em>Wednesday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+对接中台部门，了解客户需求，做开发功能清单。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+协助中台，购置办公用品。</p>
+</li>
+</ul>
+<br>
+
+<h6 id="Thursday"><a href="#Thursday" class="headerlink" title="Thursday"></a><em>Thursday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+对比同类型小程序，总结表格。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+采购。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+做头部活动、兴趣选择的组件。</p>
 </li>
 </ul>
 ]]></content>
