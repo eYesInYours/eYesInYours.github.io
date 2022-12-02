@@ -50,8 +50,6 @@
 与会，发懵</p>
 </li>
 </ul>
-<br>
-
 <h6 id="Tuesday"><a href="#Tuesday" class="headerlink" title="Tuesday"></a><em>Tuesday</em></h6><ul>
 <li><p><input checked disabled type="checkbox"> 
 页面上2&#x2F;3部分是可滑动卡片swiper，下1&#x2F;3部分为横向滑动scroll-view。</p>
@@ -70,8 +68,6 @@
 协助任务：做产品玩法的详解，——福袋、抽盒、一番赏等。接触各部分对接。</p>
 </li>
 </ul>
-<br>
-
 <h6 id="Wednesday"><a href="#Wednesday" class="headerlink" title="Wednesday"></a><em>Wednesday</em></h6><ul>
 <li><p><input checked disabled type="checkbox"> 
 对接中台部门，了解客户需求，做开发功能清单。</p>
@@ -80,8 +76,6 @@
 协助中台，购置办公用品。</p>
 </li>
 </ul>
-<br>
-
 <h6 id="Thursday"><a href="#Thursday" class="headerlink" title="Thursday"></a><em>Thursday</em></h6><ul>
 <li><p><input checked disabled type="checkbox"> 
 对比同类型小程序，总结表格。</p>
@@ -93,8 +87,6 @@
 做头部活动、兴趣选择的组件。</p>
 </li>
 </ul>
-<br>
-
 <h6 id="Friday"><a href="#Friday" class="headerlink" title="Friday"></a><em>Friday</em></h6><ul>
 <li><input checked disabled type="checkbox"> 联系小程序源码方。</li>
 </ul>
@@ -103,23 +95,15 @@
 <h4 id="第二周（11-x2F-21-11-x2F-25）"><a href="#第二周（11-x2F-21-11-x2F-25）" class="headerlink" title="第二周（11&#x2F;21 - 11&#x2F;25）"></a>第二周（11&#x2F;21 - 11&#x2F;25）</h4><h6 id="Monday-1"><a href="#Monday-1" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
 <li><input checked disabled type="checkbox"> 打杂。</li>
 </ul>
-<br>
-
 <h6 id="Tuesday-1"><a href="#Tuesday-1" class="headerlink" title="Tuesday"></a><em>Tuesday</em></h6><ul>
 <li><input checked disabled type="checkbox"> 摸鱼。</li>
 </ul>
-<br>
-
 <h6 id="Wednesday-1"><a href="#Wednesday-1" class="headerlink" title="Wednesday"></a><em>Wednesday</em></h6><ul>
 <li><input checked disabled type="checkbox"> 给我的任务是试一下服务器部署，了解微擎框架：可以用很多插件到微信小程序和公众号上去，比如说设置公众号的自动回复，或者发布一个转盘抽奖的插件到小程序上去，暂时了解是这样。</li>
 </ul>
-<br>
-
 <h6 id="Thursday-1"><a href="#Thursday-1" class="headerlink" title="Thursday"></a><em>Thursday</em></h6><ul>
 <li><input checked disabled type="checkbox"> 宝塔配置服务器，创建站点，同实习生帮我解决的。之前搭个人博客的域名，在这用上作用了，我给域名解析添加了条记录，后面申请SSL证书也需要添加记录。</li>
 </ul>
-<br>
-
 <h6 id="Friday-1"><a href="#Friday-1" class="headerlink" title="Friday"></a><em>Friday</em></h6><ul>
 <li><p><input checked disabled type="checkbox"> 
 通过宝塔去下载微擎，有两个问题：</p>
@@ -134,8 +118,6 @@
 现在公司的服务器炸了，没能继续做。——更新：有云服务器了，下午准备的Linux虚拟机没用上，浅看了下，之前宝塔建站的问题是因为服务器，它推荐是在Linux环境下，当时在windows，所以再去做就会很快。后续微擎的安装还不知道。</p>
 </li>
 </ul>
-<br>
-
 <h6 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><em>总结：</em></h6><p>这一部分的任务需要Linux基础，如果有了解，可能宝塔搭建站点时就不会稀里糊涂了。总的来说，的确是没接触过服务器部署这方面，每天焦头烂额但又没什么进展，甚至微擎都还没安装好。</p>
 <p>打算周六周日把Linux学一下（非前端需要）。</p>
 <p>更新：不需要Linux基础，当时需要的是Linux环境。</p>
@@ -144,7 +126,7 @@
 <h4 id="第三周（11-x2F-28-12-x2F-2）"><a href="#第三周（11-x2F-28-12-x2F-2）" class="headerlink" title="第三周（11&#x2F;28 - 12&#x2F;2）"></a>第三周（11&#x2F;28 - 12&#x2F;2）</h4><h6 id="Monday-Wednesday"><a href="#Monday-Wednesday" class="headerlink" title="Monday - Wednesday"></a><em>Monday</em> - <em>Wednesday</em></h6><ul>
 <li><input checked disabled type="checkbox"> 居家隔离，总算把微擎安装好了，但是现在又需要已备案的域名。</li>
 </ul>
-<h4 id="Thursday-2"><a href="#Thursday-2" class="headerlink" title="Thursday"></a><em>Thursday</em></h4><ul>
+<h6 id="Thursday-2"><a href="#Thursday-2" class="headerlink" title="Thursday"></a><em>Thursday</em></h6><ul>
 <li><input checked disabled type="checkbox"> 了解：PC端的购物网站是通过Shopify这个平台，通过模块化添加的方式，它也会提供主题模板，快速搭建起来的。Shopify平台写的页面用的是liquid语法。</li>
 </ul>
 <h6 id="Friday-2"><a href="#Friday-2" class="headerlink" title="Friday"></a><em>Friday</em></h6><ul>
