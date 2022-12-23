@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>my 50Projects50days</title>
-    <url>/2022/12/18/my-50Projects50days/</url>
-    <content><![CDATA[<h4 id="Expanding-Card"><a href="#Expanding-Card" class="headerlink" title="Expanding Card"></a>Expanding Card</h4><p><em>html</em></p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;panel active&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-image: url(&#x27;https://images.unsplash.com/photo-1558979158-65a1eaa08691?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80&#x27;)&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Explore The Forest<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;panel&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-image: url(&#x27;https://images.unsplash.com/photo-1572276596237-5db2c3e16c5d?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80&#x27;)&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Wild Forest<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;panel&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-image: url(&#x27;https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1353&amp;q=80&#x27;)&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Sunny beach<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;panel&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-image: url(&#x27;https://images.unsplash.com/photo-1551009175-8a68da93d5f9?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1351&amp;q=80&#x27;)&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>City On Winter<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    <title>Hello World</title>
+    <url>/2022/10/17/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
-<br>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p><em>css</em></p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 字体 */</span></span><br><span class="line"><span class="keyword">@import</span> url(<span class="string">&#x27;https://fonts.googleapis.com/css?family=Muli&amp;display=swap&#x27;</span>);</span><br><span class="line"></span><br><span class="line">*&#123;</span><br><span class="line">    <span class="comment">/* 响应式布局：元素加上padding或margin后也不会超过外层元素 */</span></span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">    <span class="attribute">font-family</span>: <span class="string">&#x27;Muli&#x27;</span>, sans-serif;</span><br><span class="line">    <span class="comment">/* f容器页面居中 */</span></span><br><span class="line">    <span class="attribute">display</span>:flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="comment">/* 视窗高度：相当于% */</span></span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">overflow</span>:hidden;</span><br><span class="line">    <span class="attribute">margin</span>:<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#container</span>&#123;</span><br><span class="line">    <span class="comment">/* 横向排列 */</span></span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">90vw</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#container</span> <span class="selector-class">.panel</span>&#123;</span><br><span class="line">    <span class="comment">/* 图片保持比例，填充容器 */</span></span><br><span class="line">    <span class="attribute">background-size</span>: cover;     </span><br><span class="line">    <span class="comment">/* 图片初始位置 */</span></span><br><span class="line">    <span class="attribute">background-position</span>: center;</span><br><span class="line">    <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">80vh</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">        flex: flex-grow(默认0) flex-shrink(1) flex-basic(auto)</span></span><br><span class="line"><span class="comment">        表示：存在剩余空间不放大，空间不足自动缩小，项目本身大小</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="attribute">flex</span>: <span class="number">0.5</span>;</span><br><span class="line">    <span class="attribute">margin</span>:<span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">transition</span>: all .<span class="number">4s</span> ease-in;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#container</span> <span class="selector-class">.panel</span> <span class="selector-tag">h3</span>&#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">24px</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">bottom</span>: <span class="number">40px</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="comment">/* 未激活不显示 */</span></span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#container</span> <span class="selector-class">.panel</span><span class="selector-class">.active</span>&#123;</span><br><span class="line">    <span class="attribute">flex</span>: <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.panel</span><span class="selector-class">.active</span> <span class="selector-tag">h3</span>&#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">1</span> <span class="meta">!important</span>;</span><br><span class="line">    <span class="comment">/* 前：持续时间，后：延迟时间 */</span></span><br><span class="line">    <span class="attribute">transition</span>: opacity <span class="number">0.3s</span> ease-in <span class="number">0.4s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<br>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p><em>js</em></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">PANELS</span> = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;.panel&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable constant_">PANELS</span>.<span class="title function_">forEach</span>( <span class="function"><span class="params">panel</span> =&gt;</span> &#123;</span><br><span class="line">    panel.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">removeActiveClass</span>()</span><br><span class="line">        panel.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;active&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 移除所有的panel上的active显示效果</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">removeActiveClass</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable constant_">PANELS</span>.<span class="title function_">forEach</span>( <span class="function"><span class="params">panel</span> =&gt;</span> &#123;</span><br><span class="line">        panel.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&#x27;active&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>学习</tag>
-      </tags>
   </entry>
   <entry>
     <title>心有余戚的小说阅后感</title>
@@ -258,8 +253,27 @@ tab切换，展示不同的内容。小程序没有document语法了，要选中
 uni-drawer抽屉组件只能左右滑出，改了一下源码，从底部滑出。原本想用createAnimation方法将一个view以类似底部滑出的效果展现出来，但是这个view占据了一部分空间，导致页面可以整体上翻、下滑。</p>
 </li>
 </ul>
-<p>这周的成果一个是表单收集数据模块，另一个是小游戏模块，因为暂时没有数据给我，现在还只是基础的功能，页面肯定还要修饰。</p>
-<p>另外来了一个Java实习，也懂点前端。所以只是写页面的前端的话，没什么优势吧，可能。</p>
+<br>
+
+<h4 id="第六周（12-x2F-19-12-x2F-23）"><a href="#第六周（12-x2F-19-12-x2F-23）" class="headerlink" title="第六周（12&#x2F;19 - 12&#x2F;23）"></a>第六周（12&#x2F;19 - 12&#x2F;23）</h4><h6 id="Monday-4"><a href="#Monday-4" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+利用swiper原生内置组件，做中奖信息向上轮播的功能。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+100px.net上有转盘、老虎机等抽奖模块的用法，在uniapp上配置和实现。</p>
+</li>
+</ul>
+<h6 id="Tuesday-4"><a href="#Tuesday-4" class="headerlink" title="Tuesday"></a><em>Tuesday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+uniapp开发的微信小程序，它的代码是压缩的，比如说一些变量名缩减成一个字符、方法名变成数字，逻辑性降低了。可以通过反编译（b站有教程），把微信小程序（原生）的代码反编译为uniapp的语法。但是，uniapp开发的微信小程序不能再反编译回uniapp语法！</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+所以我现在在自己改代码，页面倒是能改回去，只是Js的逻辑代码和一些数据规范不是很好懂。而且这个微信小程序是很多模块的，模块和模块的交互，肯定不是我现在这样简单。总的老说，现在就是繁琐，没有操作性。</p>
+</li>
+</ul>
+<h6 id="Wednesday-Friday"><a href="#Wednesday-Friday" class="headerlink" title="Wednesday - Friday"></a><em>Wednesday</em> - <em>Friday</em></h6><ul>
+<li><input checked disabled type="checkbox"> 发烧居家。</li>
+</ul>
 ]]></content>
       <categories>
         <category>实习</category>
@@ -267,23 +281,5 @@ uni-drawer抽屉组件只能左右滑出，改了一下源码，从底部滑出�
       <tags>
         <tag>周记</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2022/10/17/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
   </entry>
 </search>
