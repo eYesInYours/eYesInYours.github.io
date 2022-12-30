@@ -330,6 +330,98 @@ uniapp开发的微信小程序，它的代码是压缩的，比如说一些变�
 <h6 id="Wednesday-Friday"><a href="#Wednesday-Friday" class="headerlink" title="Wednesday - Friday"></a><em>Wednesday</em> - <em>Friday</em></h6><ul>
 <li><input checked disabled type="checkbox"> 发烧居家。</li>
 </ul>
+<br>
+
+<h4 id="第七周（12-x2F-26-12-x2F-30）"><a href="#第七周（12-x2F-26-12-x2F-30）" class="headerlink" title="第七周（12&#x2F;26 - 12&#x2F;30）"></a>第七周（12&#x2F;26 - 12&#x2F;30）</h4><h6 id="Monday-5"><a href="#Monday-5" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+把之前做的登录组件拿过来用，根据token有无显示不同的组件。抽奖模块和登录结合起来，用户登录后可以记录奖品。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+对于抽奖过程的popup组件播放gif，设置isMaskClick为false，禁止用户操作。gif背景透明且播放一次，用定时器setTimeout在2s后（gif播放时间）弹出中奖信息。</p>
+</li>
+</ul>
+<h6 id="Tuesday-5"><a href="#Tuesday-5" class="headerlink" title="Tuesday"></a><em>Tuesday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+开始从后端验证抽奖模块的功能，比如中奖的数字由后端计算返回，不放在前端（爬虫很容易拿到并篡改）。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+反编译了“盒柜”和“我的”页面一部分。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+向后端提两个接口的需要，一个修改，一个查看。字段product定义为数组，元素是对象。用户登录后可以拿到用户id，然后用这个id去向查看接口发请求，拿到这个用户的已有的商品列表。同样，拿id去向修改接口发请求，修改用户的商品数据（中奖时添加）。</p>
+</li>
+</ul>
+<h6 id="Wednesday-4"><a href="#Wednesday-4" class="headerlink" title="Wednesday"></a><em>Wednesday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+把小程序的页面全都反编译出来了，js的逻辑还没去写。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+抽奖模块要和登录联合起来，vuex中store的token从storage中读取，登录时也存到storage中去，也就是说登录一次，一段时间内不用重复登录。有点小问题是，同页面内，用mapState去读store中的token，登录页面（v-if）和已有商品列表（v-else）总是显示登录页面，就是说token没有正常读取。</p>
+<p>它在登录后，页面还是能根据token来切换组件的，但在这之前，即使localStorage中有token的值也没有正常显示对应的组件。</p>
+<blockquote>
+<p>果然，mapState出来的token，在页面首次加载时打印为undefined，登录后则有值。</p>
+<br>
+
+<p>solve:</p>
+<p>在页面的data中也添加一个token字段，值从storage中读取getStorageSync(‘token’)。</p>
+<p>本来mapState的token就可以正常切换组件的（即使首次加载），我之前也是这个做法，当时是没有问题的。</p>
+</blockquote>
+</li>
+</ul>
+<h6 id="Thursday-5"><a href="#Thursday-5" class="headerlink" title="Thursday"></a><em>Thursday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+vuex mutations中定义的方法，携带第一个参数为state，访问为undefined。原因是state定义的形式为箭头函数，改成括号形式就可以了。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+下载的一个添加收获地址的组件里，input双向绑定用的是:value，但子传父打印的数据里都是空串，显然没有双向绑定成功，改用v-model。</p>
+<blockquote>
+<p>:value是v-bind:value的简写方式，这是单向数据绑定。</p>
+</blockquote>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+从页面A跳转到页面B，有一个参数需要在页面B用到，之前都是用vuex去设置。可以用另一种简单的方法，从页面A跳转到页面B时，在路径后携带参数，页面B中可以在生命周期onLoad(e)中接收到该参数。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+上一条的具体情景是：</p>
+<blockquote>
+<p>收货地址可以新增，也可以点击某一项进行修改。对后者，我们用到了路径携带过来的index参数，表示当前点击的收货地址数据的索引，进行数据渲染（点击不同项，显示不同的收货地址信息），当我们修改并确定保存，就将收获地址的数据字段userAddress中的第index项，修改为表单重新修改的对象。</p>
+<br>
+
+<p><em>issue:</em></p>
+<p>问题就是直接修改数组对象，即使数据的确改变了，但页面不会渲染。</p>
+<br>
+
+<p><em>solve:</em></p>
+<p>方法一：vuex是分模块做的，就在对应的js文件中引入Vue，调用方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Vue.set(targetArray, index, obj)</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">set</span>(state.<span class="property">userAddress</span>, state.<span class="property">updateIndex</span>, userAddress)</span><br></pre></td></tr></table></figure>
+
+<p>方法二：深拷贝</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">state.<span class="property">userAddress</span>[state.<span class="property">updateIndex</span>] = userAddress</span><br><span class="line">state.<span class="property">userAddress</span> = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(state.<span class="property">userAddress</span>))</span><br></pre></td></tr></table></figure></blockquote>
+</li>
+</ul>
+<h6 id="Friday-5"><a href="#Friday-5" class="headerlink" title="Friday"></a><em>Friday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+向后端写了个文档：需要收货地址的查询、设置接口；订单的创建（返回订单号）、预付订单（返回订单信息，用于微信支付requestPayment）、查询订单（参数：订单号，是否成功支付）的接口。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+微信公众平台可以申请几个接口的权限，比如获取用户收货地址chooseAddress、地图选择位置接口chooseLocation等，需要在manifest.json的源码中设置（uniapp）。否则是调用不成功的。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+chooseLocation唤起选择地址的界面（相当于嘀嘀打车快速定位）后，对地址数据处理，然后填充进收货地址的省区和详细地址input。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+这个收货地址的新增和修改是共用一个组件的，我在组件里定义了一个props，修改的话就会传一个数据对象给组件，然后把这个数据对象赋值给组件内部data的一个字段userAddress。</p>
+<p>现在的情景是如果我是新增收货地址，那么上一条所做的chooseLocation选择地址、填充input，此时失效。我一直以为是HBuilderX的问题时好时坏，最后发现是传入的props数据字段的赋值没有做条件限制。如果没有传入props，就会把空对象赋给本地，后面就找不到对象底下的数据字段。</p>
+<p>就是说，修改会传props给组件，新增不会。这里就要在组件里去判断对象（组件定义的那个prop）是否为空对象（default为{}），不是（表示有传入的数据）再做赋值给本地的操作。</p>
+<p>回去复习了一下判断是否为空对象的两个方法：</p>
+<blockquote>
+<p><em>方法一：</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">JSON</span>.<span class="title function_">stringify</span>(<span class="variable language_">this</span>.<span class="property">item</span>) !== <span class="string">&#x27;&#123;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><em>方法二</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="title function_">keys</span>(<span class="variable language_">this</span>.<span class="property">item</span>).<span class="property">length</span> !== <span class="number">0</span></span><br></pre></td></tr></table></figure></blockquote>
+</li>
+</ul>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -354,7 +446,7 @@ uniapp开发的微信小程序，它的代码是压缩的，比如说一些变�
     </div>
     
         <div class="side">
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%91%A8%EF%BC%882022-x2F-11-x2F-14-11-x2F-18%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">第一周（2022&#x2F;11&#x2F;14 - 11&#x2F;18）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Monday"><span class="toc-number">1.0.1.</span> <span class="toc-text">Monday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Tuesday"><span class="toc-number">1.0.2.</span> <span class="toc-text">Tuesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Wednesday"><span class="toc-number">1.0.3.</span> <span class="toc-text">Wednesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Thursday"><span class="toc-number">1.0.4.</span> <span class="toc-text">Thursday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Friday"><span class="toc-number">1.0.5.</span> <span class="toc-text">Friday</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%8811-x2F-21-11-x2F-25%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">第二周（11&#x2F;21 - 11&#x2F;25）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Monday-1"><span class="toc-number">2.0.1.</span> <span class="toc-text">Monday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Tuesday-1"><span class="toc-number">2.0.2.</span> <span class="toc-text">Tuesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Wednesday-1"><span class="toc-number">2.0.3.</span> <span class="toc-text">Wednesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Thursday-1"><span class="toc-number">2.0.4.</span> <span class="toc-text">Thursday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Friday-1"><span class="toc-number">2.0.5.</span> <span class="toc-text">Friday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">2.0.6.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E5%91%A8%EF%BC%8811-x2F-28-12-x2F-2%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">第三周（11&#x2F;28 - 12&#x2F;2）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Monday-Wednesday"><span class="toc-number">3.0.1.</span> <span class="toc-text">Monday - Wednesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Thursday-2"><span class="toc-number">3.0.2.</span> <span class="toc-text">Thursday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Friday-2"><span class="toc-number">3.0.3.</span> <span class="toc-text">Friday</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E5%91%A8%EF%BC%8812-x2F-5-12-x2F-9%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">第四周（12&#x2F;5 - 12&#x2F;9）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Monday-2"><span class="toc-number">4.0.1.</span> <span class="toc-text">Monday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Tuesday-2"><span class="toc-number">4.0.2.</span> <span class="toc-text">Tuesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Wednesday-2"><span class="toc-number">4.0.3.</span> <span class="toc-text">Wednesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Thursday-3"><span class="toc-number">4.0.4.</span> <span class="toc-text">Thursday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Friday-3"><span class="toc-number">4.0.5.</span> <span class="toc-text">Friday</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E5%91%A8%EF%BC%8812-x2F-12-12-x2F-16%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">第五周（12&#x2F;12 - 12&#x2F;16）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Monday-3"><span class="toc-number">5.0.1.</span> <span class="toc-text">Monday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Tuesday-3"><span class="toc-number">5.0.2.</span> <span class="toc-text">Tuesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Wednesday-3"><span class="toc-number">5.0.3.</span> <span class="toc-text">Wednesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Thursday-4"><span class="toc-number">5.0.4.</span> <span class="toc-text">Thursday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Friday-4"><span class="toc-number">5.0.5.</span> <span class="toc-text">Friday</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E5%91%A8%EF%BC%8812-x2F-19-12-x2F-23%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">第六周（12&#x2F;19 - 12&#x2F;23）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Monday-4"><span class="toc-number">6.0.1.</span> <span class="toc-text">Monday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Tuesday-4"><span class="toc-number">6.0.2.</span> <span class="toc-text">Tuesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Wednesday-Friday"><span class="toc-number">6.0.3.</span> <span class="toc-text">Wednesday - Friday</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%91%A8%EF%BC%882022-x2F-11-x2F-14-11-x2F-18%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">第一周（2022&#x2F;11&#x2F;14 - 11&#x2F;18）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Monday"><span class="toc-number">1.0.1.</span> <span class="toc-text">Monday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Tuesday"><span class="toc-number">1.0.2.</span> <span class="toc-text">Tuesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Wednesday"><span class="toc-number">1.0.3.</span> <span class="toc-text">Wednesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Thursday"><span class="toc-number">1.0.4.</span> <span class="toc-text">Thursday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Friday"><span class="toc-number">1.0.5.</span> <span class="toc-text">Friday</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E5%91%A8%EF%BC%8811-x2F-21-11-x2F-25%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">第二周（11&#x2F;21 - 11&#x2F;25）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Monday-1"><span class="toc-number">2.0.1.</span> <span class="toc-text">Monday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Tuesday-1"><span class="toc-number">2.0.2.</span> <span class="toc-text">Tuesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Wednesday-1"><span class="toc-number">2.0.3.</span> <span class="toc-text">Wednesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Thursday-1"><span class="toc-number">2.0.4.</span> <span class="toc-text">Thursday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Friday-1"><span class="toc-number">2.0.5.</span> <span class="toc-text">Friday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">2.0.6.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E5%91%A8%EF%BC%8811-x2F-28-12-x2F-2%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">第三周（11&#x2F;28 - 12&#x2F;2）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Monday-Wednesday"><span class="toc-number">3.0.1.</span> <span class="toc-text">Monday - Wednesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Thursday-2"><span class="toc-number">3.0.2.</span> <span class="toc-text">Thursday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Friday-2"><span class="toc-number">3.0.3.</span> <span class="toc-text">Friday</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E5%91%A8%EF%BC%8812-x2F-5-12-x2F-9%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">第四周（12&#x2F;5 - 12&#x2F;9）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Monday-2"><span class="toc-number">4.0.1.</span> <span class="toc-text">Monday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Tuesday-2"><span class="toc-number">4.0.2.</span> <span class="toc-text">Tuesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Wednesday-2"><span class="toc-number">4.0.3.</span> <span class="toc-text">Wednesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Thursday-3"><span class="toc-number">4.0.4.</span> <span class="toc-text">Thursday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Friday-3"><span class="toc-number">4.0.5.</span> <span class="toc-text">Friday</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E5%91%A8%EF%BC%8812-x2F-12-12-x2F-16%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">第五周（12&#x2F;12 - 12&#x2F;16）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Monday-3"><span class="toc-number">5.0.1.</span> <span class="toc-text">Monday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Tuesday-3"><span class="toc-number">5.0.2.</span> <span class="toc-text">Tuesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Wednesday-3"><span class="toc-number">5.0.3.</span> <span class="toc-text">Wednesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Thursday-4"><span class="toc-number">5.0.4.</span> <span class="toc-text">Thursday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Friday-4"><span class="toc-number">5.0.5.</span> <span class="toc-text">Friday</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E5%91%A8%EF%BC%8812-x2F-19-12-x2F-23%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">第六周（12&#x2F;19 - 12&#x2F;23）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Monday-4"><span class="toc-number">6.0.1.</span> <span class="toc-text">Monday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Tuesday-4"><span class="toc-number">6.0.2.</span> <span class="toc-text">Tuesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Wednesday-Friday"><span class="toc-number">6.0.3.</span> <span class="toc-text">Wednesday - Friday</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E5%91%A8%EF%BC%8812-x2F-26-12-x2F-30%EF%BC%89"><span class="toc-number">7.</span> <span class="toc-text">第七周（12&#x2F;26 - 12&#x2F;30）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Monday-5"><span class="toc-number">7.0.1.</span> <span class="toc-text">Monday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Tuesday-5"><span class="toc-number">7.0.2.</span> <span class="toc-text">Tuesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Wednesday-4"><span class="toc-number">7.0.3.</span> <span class="toc-text">Wednesday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Thursday-5"><span class="toc-number">7.0.4.</span> <span class="toc-text">Thursday</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Friday-5"><span class="toc-number">7.0.5.</span> <span class="toc-text">Friday</span></a></li></ol></li></ol></li></ol>
         </div>
     
 </div>
