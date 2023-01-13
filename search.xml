@@ -454,7 +454,18 @@ uniapp的drawer组件只能左右滑，上次修改了下可以底部滑出，�
 </li>
 </ul>
 <h6 id="Friday-7"><a href="#Friday-7" class="headerlink" title="Friday"></a><em>Friday</em></h6><ul>
-<li><input checked disabled type="checkbox"> 封装组件时（写页面同理），样式不写在组件的style内，而是单独写一个css文件，再在组件内引入。直到刚才要写一个重复的样式，我就明白这样的好处了。（看的github项目）</li>
+<li><p><input checked disabled type="checkbox"> 
+封装组件时（写页面同理），样式不写在组件的style内，而是单独写一个css文件，再在组件内引入。直到刚才要写一个重复的样式，我就明白这样的好处了。（看的github项目）</p>
+</li>
+<li><p><input disabled type="checkbox"> 
+好玩的reduce：</p>
+<blockquote>
+<p>购物车的结算金额是根据商品的勾选状态checked来计算的，首先筛选出勾选状态为true的商品数组，然后映射出其中每个对象的价格price，即此时数据的每个元素是符合条件的价格price。</p>
+<p>reduce方法：</p>
+<p>第一个参数为回调函数，——它的头两个参数为总数值（或前一次回调函数返回的数值）prev，和遍历数组的当前值current。</p>
+<p>第二个参数为回调函数中prev的初始值，默认0。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">cartList</span>.<span class="title function_">filter</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">checked</span>)</span><br><span class="line">    .<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">price</span>)</span><br><span class="line">    .<span class="title function_">reduce</span>(<span class="function">(<span class="params">prev, current</span>) =&gt;</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> prev + current</span><br><span class="line">	&#125;,<span class="number">0</span>)</span><br></pre></td></tr></table></figure></blockquote>
+</li>
 </ul>
 ]]></content>
       <categories>
