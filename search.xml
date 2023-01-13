@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>心有余戚的小说阅后感</title>
-    <url>/2022/12/09/%E5%BF%83%E6%9C%89%E4%BD%99%E6%88%9A%E7%9A%84%E5%B0%8F%E8%AF%B4%E9%98%85%E5%90%8E%E6%84%9F/</url>
-    <content><![CDATA[<h5 id="《宫墙柳》"><a href="#《宫墙柳》" class="headerlink" title="《宫墙柳》"></a>《宫墙柳》</h5><p><code>2022/12/9</code>    </p>
-<blockquote>
-<p>“我一直以为没什么好哭的，可那是人的一生。”</p>
-</blockquote>
-<p>从前还是青葱少女，好像只是眨眼间，已经垂垂老矣。击中我的那个瞬间是：故人都已经老去，她已经分不清是过去还是现在。不好吃的菜送去永安宫、想象中皇后和皇上的和好，带着我回到过去某时段，真有恍若隔世、怅然若失之感。</p>
-]]></content>
-      <categories>
-        <category>小说</category>
-      </categories>
-      <tags>
-        <tag>阅后感</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>前端实习每周记</title>
     <url>/2022/11/14/%E5%89%8D%E7%AB%AF%E5%AE%9E%E4%B9%A0%E6%AF%8F%E5%91%A8%E8%AE%B0/</url>
     <content><![CDATA[<h4 id="第一周（2022-x2F-11-x2F-14-11-x2F-18）"><a href="#第一周（2022-x2F-11-x2F-14-11-x2F-18）" class="headerlink" title="第一周（2022&#x2F;11&#x2F;14 - 11&#x2F;18）"></a>第一周（2022&#x2F;11&#x2F;14 - 11&#x2F;18）</h4><h6 id="Monday"><a href="#Monday" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
@@ -419,6 +403,59 @@ token失效，页面登出</p>
 做参数字段文档。</p>
 </li>
 </ul>
+<br>
+
+<h4 id="第九周（1-x2F-9-1-x2F-13）"><a href="#第九周（1-x2F-9-1-x2F-13）" class="headerlink" title="第九周（1&#x2F;9 - 1&#x2F;13）"></a>第九周（1&#x2F;9 - 1&#x2F;13）</h4><h6 id="Monday-7"><a href="#Monday-7" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+上周用一个轮播图组件的同时，底下有一块卡片区域，用于显示对应轮播图奖品的概率、品牌、价格。卡片左右分别是前进、后退按钮，可以切换轮播的奖品图。</p>
+<blockquote>
+<p>轮播图组件图片切换时，会更新组件的当前索引current字段，点击切换我们只要对这个字段进行加、减、小于0则赋值为图片个数减1（末尾同理）。</p>
+<p>当然要做节流处理，不然一个图片正在轮播时又点击切换，就会有切换效果的异常。</p>
+<p>思想就是设置一个标识moving，初始false。在点击切换（methods）时首先判断如果为true，return出去、不进入函数，然后再把moving设置为true。最后要在程序处理完后把标识重新设置为false，表示轮播结束，可再次切换。</p>
+<p>uniapp的原生组件swiper中有个动画结束方法animationfinish，此时把标识moving设置为false，符合思想并且实现了效果。之所以不在点击切换的method末尾设置为false，是这时即便设置了，图片轮播时标识已经为false（执行完切换的method再去轮播）。</p>
+</blockquote>
+</li>
+</ul>
+<h6 id="Tuesday-7"><a href="#Tuesday-7" class="headerlink" title="Tuesday"></a><em>Tuesday</em></h6><ul>
+<li><input checked disabled type="checkbox"> 写页面，没有设计稿。</li>
+</ul>
+<h6 id="Wednesday-6"><a href="#Wednesday-6" class="headerlink" title="Wednesday"></a><em>Wednesday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+写uniapp还是要用响应式rpx（2rpx等于1px）为单位去适配不同的机型。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+有一块区域设置了高度690rpx，A机型能全部显示出来，B机型最大显示高度650rpx。因此造成的布局样式错乱，把高度改成650rpx（兼容最小标准）。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+有时改一个样式，其他很多地方也要跟着一起改。用less预编译定义样式变量，要有这个习惯，之前真的好麻烦。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+写页面不会有太难的地方，就一点点耗时间。但就是昨天说的没有设计稿，大部分时间要用在设计上，要从产品的理念和客户视角出发。——其实就是借鉴其他的APP。</p>
+</li>
+</ul>
+<h6 id="Thursday-7"><a href="#Thursday-7" class="headerlink" title="Thursday"></a><em>Thursday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+不要给block标签添加样式，block不会渲染在结构上，如果用less的语法在block的class基础上往下写，不会有效。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+uniapp的drawer组件只能左右滑，上次修改了下可以底部滑出，但宽高只能指定。</p>
+<blockquote>
+<p>目的是：更换机型后都能做到drawer的宽度100%横屏、高度1&#x2F;2全屏。</p>
+<p>情况：用getWindowInfo获取设备的宽高后，用数据绑定将这个宽或高的字段（本地data默认为0），通过prop传入drawer组件，但在组件内这个值总为0。非动态绑定的数据字段比如一个数字，组件能正常获取。</p>
+<br>
+
+<p>也就是说动态绑定时，组件内部获取的是prop传入数据字段的默认值0，修改默认值查验得知。但在组件外的mounted钩子中，本地字段的宽高数据赋值，通过验证是没有问题的。</p>
+<p>可能：prop传入组件的时间在页面mounted钩子之前。</p>
+<p>结果：官方文档说width字段不支持动态绑定。</p>
+<br>
+
+<p>页面mounted的逻辑放在计算属性computed里进行，return一个宽度，这样通过动态绑定给组件内部传值时，就相当于传入一个静态的值。</p>
+</blockquote>
+</li>
+</ul>
+<h6 id="Friday-7"><a href="#Friday-7" class="headerlink" title="Friday"></a><em>Friday</em></h6><ul>
+<li><input checked disabled type="checkbox"> 封装组件时（写页面同理），样式不写在组件的style内，而是单独写一个css文件，再在组件内引入。直到刚才要写一个重复的样式，我就明白这样的好处了。（看的github项目）</li>
+</ul>
 ]]></content>
       <categories>
         <category>实习</category>
@@ -426,23 +463,5 @@ token失效，页面登出</p>
       <tags>
         <tag>周记</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2022/10/17/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
   </entry>
 </search>
