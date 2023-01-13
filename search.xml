@@ -457,7 +457,7 @@ uniapp的drawer组件只能左右滑，上次修改了下可以底部滑出，�
 <li><p><input checked disabled type="checkbox"> 
 封装组件时（写页面同理），样式不写在组件的style内，而是单独写一个css文件，再在组件内引入。直到刚才要写一个重复的样式，我就明白这样的好处了。（看的github项目）</p>
 </li>
-<li><p><input disabled type="checkbox"> 
+<li><p><input checked disabled type="checkbox"> 
 好玩的reduce：</p>
 <blockquote>
 <p>购物车的结算金额是根据商品的勾选状态checked来计算的，首先筛选出勾选状态为true的商品数组，然后映射出其中每个对象的价格price，即此时数据的每个元素是符合条件的价格price。</p>
