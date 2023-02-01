@@ -512,14 +512,13 @@ uni-swipe-action的滑动删除一项时，其余项都会自动关闭，autoClo
 <li><p><input checked disabled type="checkbox"> 
 购物车的商品每一个都勾选时，总的全选按钮也同时勾选。</p>
 <blockquote>
-<p> <em>vuex中的返回的getter</em></p>
-<p>方法一：</p>
+<p> 方法一：</p>
 <p>返回&lt;购物车商品总个数&gt;和&lt;购物车商品checked为true的个数&gt;两者全等的布尔值。</p>
 <p>方法二：</p>
 <p>数组every()方法，元素全返回true时，整体返回true。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">isAllChecked</span>(<span class="params">state</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> state.<span class="property">cartGoods</span>.<span class="property">length</span>!=<span class="number">0</span> ? </span><br><span class="line">        state.<span class="property">cartGoods</span>.<span class="title function_">every</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">checked</span>) : <span class="literal">false</span>    </span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">return</span> state.<span class="property">cartGoods</span>.<span class="title function_">every</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">checked</span>)</span><br></pre></td></tr></table></figure>
 
-<p>把购物车清空时，全选radio还是为勾选。因为此时cartGoods是个空数组，every()对空数组检测直接返回true。</p>
+<p>   但把购物车清空时，全选radio还是为勾选。因为此时cartGoods是个空数组，every()对空数组检测直接返回true。另外加个判断，cartGoods长度为0时直接返回false。</p>
 </blockquote>
 </li>
 </ul>
