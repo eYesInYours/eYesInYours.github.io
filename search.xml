@@ -1,106 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
-    <url>/2023/02/07/%E6%8B%89%E5%B8%83%E6%8B%89%E5%A4%9A/</url>
-    <content><![CDATA[<h4 id="周二"><a href="#周二" class="headerlink" title="周二"></a>周二</h4><h6 id="功能清单"><a href="#功能清单" class="headerlink" title="功能清单"></a>功能清单</h6><ul>
-<li><input checked disabled type="checkbox"> 搜索框</li>
-<li><input checked disabled type="checkbox"> IP导航navBar</li>
-<li><input checked disabled type="checkbox"> 保留轮播图广告</li>
-<li><input disabled type="checkbox"> 商品列表（常规形式），竖长方形</li>
-</ul>
-<h6 id="商品详情"><a href="#商品详情" class="headerlink" title="商品详情"></a>商品详情</h6><ul>
-<li><p><input checked disabled type="checkbox"> 
-不保留&lt;设计师&gt;、&lt;工作室&gt;</p>
-</li>
-<li><p><input checked disabled type="checkbox"> 
-保留&lt;角色故事&gt;</p>
-</li>
-<li><p><input checked disabled type="checkbox"> 
-<img src="Users\16236\AppData\Roaming\Typora\typora-user-images\image-20230207112249971.png" alt="image-20230207112249971">颜色改为暗红，如下图，价格字体稍小</p>
-</li>
-<li><p><input checked disabled type="checkbox"> 
-<img src="Users\16236\AppData\Roaming\Typora\typora-user-images\image-20230207112802461.png" alt="image-20230207112802461">商品介绍改为这种款式，&lt;油画&gt;改为&lt;盲盒（状态）&gt; &#x2F; IP &#x2F; 品牌。去除&lt;销售方&gt;、&lt;作品描述&gt;</p>
-</li>
-<li><p><input checked disabled type="checkbox"> 
-&lt;**小提示**&gt;跳转<img src="Users\16236\AppData\Roaming\Typora\typora-user-images\image-20230207113222685.png" alt="image-20230207113222685" style="zoom: 50%;"></p>
-<h6 id="购物车"><a href="#购物车" class="headerlink" title="购物车"></a>购物车</h6><ul>
-<li><input checked disabled type="checkbox"> </li>
-</ul>
-<ol>
-<li><p>购物车商品款式为</p>
-<ol>
-<li>商品名称</li>
-</ol>
-</li>
-<li><p>&lt;盲盒（状态）&gt; &#x2F; IP &#x2F; 品牌</p>
-</li>
-</ol>
-</li>
-</ul>
-<ol start="3">
-<li><p>价格</p>
-</li>
-<li><p>商品radio尺寸小一些</p>
-</li>
-<li><p>底部结算（结算按钮：直角、长）</p>
-<img src="Users\16236\AppData\Roaming\Typora\typora-user-images\image-20230207114632445.png" alt="image-20230207114632445" style="zoom:50%;"></li>
-</ol>
-<h6 id="结算页面"><a href="#结算页面" class="headerlink" title="结算页面"></a>结算页面</h6><ol>
-<li><p>商品列表如上描述</p>
-</li>
-<li><p>&lt;价格明细&gt;</p>
-<ol>
-<li><p>​	加一个&lt;邮费&gt;</p>
-</li>
-<li><p>合计的总金额字体加大，颜色为红</p>
-</li>
-<li><p>店铺优惠，金额颜色为黑</p>
-<img src="Users\16236\AppData\Roaming\Typora\typora-user-images\image-20230207115041594.png" alt="image-20230207115041594" style="zoom:50%;">
-</li>
-<li><p>设计价格的，小数点后字体稍小</p>
-</li>
-<li><p>商品背景框（浅灰）</p>
-<ol start="6">
-<li><p>底部支付</p>
-<ol>
-<li>支付如上</li>
-</ol>
-</li>
-<li><p>金额字体加大、小数点后小</p>
-<ol start="3">
-<li>微信支付（支付宝保留待定）</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h6 id="所有页面"><a href="#所有页面" class="headerlink" title="所有页面"></a>所有页面</h6><ol>
-<li>悬浮按钮：回到顶部、客服</li>
-</ol>
-<h6 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h6><ol>
-<li>微信登录</li>
-</ol>
-<h4 id="周三"><a href="#周三" class="headerlink" title="周三"></a>周三</h4><h6 id="拉布拉多"><a href="#拉布拉多" class="headerlink" title="拉布拉多"></a>拉布拉多</h6><ol>
-<li>减少因为链路过长而导致的用户体验不好</li>
-<li>了解跳转来源（比如：视频号跳转到小程序）的接口</li>
-</ol>
-<h4 id="周四"><a href="#周四" class="headerlink" title="周四"></a>周四</h4><h6 id="拉布拉多-1"><a href="#拉布拉多-1" class="headerlink" title="拉布拉多"></a>拉布拉多</h6><ol>
-<li>认证小程序后，有物流接口、客服接口<img src="Users\16236\AppData\Roaming\Typora\typora-user-images\image-20230209182904705.png" alt="image-20230209182904705"></li>
-</ol>
-</li>
-</ol>
-<h6 id="周五"><a href="#周五" class="headerlink" title="周五"></a>周五</h6><ul>
-<li><input checked disabled type="checkbox"> 微信小程序没办法直接唤起支付宝，就和支付宝、淘宝没法用微信支付一样<ol>
-<li>给一个支付宝的付款二维码</li>
-<li>用户复制链接，浏览器打开，再唤起支付宝</li>
-</ol>
-</li>
-<li><input disabled type="checkbox"> </li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>前端实习每周记</title>
     <url>/2022/11/14/%E5%89%8D%E7%AB%AF%E5%AE%9E%E4%B9%A0%E6%AF%8F%E5%91%A8%E8%AE%B0/</url>
     <content><![CDATA[<h4 id="第一周（2022-x2F-11-x2F-14-11-x2F-18）"><a href="#第一周（2022-x2F-11-x2F-14-11-x2F-18）" class="headerlink" title="第一周（2022&#x2F;11&#x2F;14 - 11&#x2F;18）"></a>第一周（2022&#x2F;11&#x2F;14 - 11&#x2F;18）</h4><h6 id="Monday"><a href="#Monday" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
@@ -761,6 +661,31 @@ getUserInfo和getUserProfile都不能获取用户昵称和头像了。</p>
 <p>微信原生的登录login是没有授权弹框的，借助getphonenumber的授权弹框获取手机号（作账号），同时调用login获取openid（作密码），用于向开发服务器请求登录（注册）。（是这么想的，没确定）</p>
 </li>
 </ul>
+<h4 id="第十四周（2-x2F-20-2-x2F-24）"><a href="#第十四周（2-x2F-20-2-x2F-24）" class="headerlink" title="第十四周（2&#x2F;20 - 2&#x2F;24）"></a>第十四周（2&#x2F;20 - 2&#x2F;24）</h4><h6 id="Monday-12"><a href="#Monday-12" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
+<li><input checked disabled type="checkbox"> 购物车的增、删、改、查接口（部分。数据以后端为准，避免实际数据和展示数据不一样）。</li>
+<li><input checked disabled type="checkbox"> 个人信息（头像昵称）的查改接口。</li>
+</ul>
+<h6 id="Tuesday-12"><a href="#Tuesday-12" class="headerlink" title="Tuesday"></a><em>Tuesday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+似乎数据库被攻击，导致后端接口调用失败。</p>
+<p>封装收货地址的CRUD接口、搜索框的热搜记录接口、分类接口。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+之前是用mixins在相应页面中调用接口，重新整合了一下，分模块封装在utils&#x2F;api目录下。</p>
+</li>
+</ul>
+<h6 id="Wednesday-10"><a href="#Wednesday-10" class="headerlink" title="Wednesday"></a><em>Wednesday</em></h6><ul>
+<li><input checked disabled type="checkbox"> 在PC后端管理端配置了一下热搜数据、分类数据，小程序能正常请求到了。</li>
+<li><input checked disabled type="checkbox"> 接口来源商家端、平台端、小程序端，现在我主要调的是小程序端的api，但有时也要去用到其他两端的api，比如上一点的数据配置和得到我希望用到的字段。复杂的地方还是在于数据的层级和映射关系，和后端沟通了一下就明白了。</li>
+</ul>
+<h6 id="Thursday-12"><a href="#Thursday-12" class="headerlink" title="Thursday"></a><em>Thursday</em></h6><ul>
+<li><input checked disabled type="checkbox"> 购物车要考虑多店铺、多sku，也就说一个店铺有多个商品，同时有多店铺的情况，现在是默认店铺唯一（初版由自身商铺上货），基本上没问题了。</li>
+</ul>
+<h6 id="Friday-11"><a href="#Friday-11" class="headerlink" title="Friday"></a><em>Friday</em></h6><ul>
+<li><input checked disabled type="checkbox"> 之前说的token过期登录失效，就是前端每次请求都会携带token给后端校验，校验不通过返回一个表示未授权的状态码，前端判断这个状态码，清除本地token，弹出重新登录提示框。</li>
+<li><input checked disabled type="checkbox"> 收货地址接口。</li>
+<li><input checked disabled type="checkbox"> 用jQuery写了段网页的自动关注代码，这是第一次在浏览器控制台上直接操作，有些新奇。</li>
+</ul>
 ]]></content>
       <categories>
         <category>实习</category>
@@ -768,138 +693,5 @@ getUserInfo和getUserProfile都不能获取用户昵称和头像了。</p>
       <tags>
         <tag>周记</tag>
       </tags>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2023/02/06/%E5%B7%A5%E4%BD%9C/</url>
-    <content><![CDATA[<p>2023&#x2F;2&#x2F;6</p>
-<h4 id="周一"><a href="#周一" class="headerlink" title="周一"></a>周一</h4><h6 id="商城功能模块清单"><a href="#商城功能模块清单" class="headerlink" title="商城功能模块清单"></a>商城功能模块清单</h6><ol>
-<li>推荐暂时不用</li>
-<li>商城</li>
-</ol>
-<h6 id="周会前端"><a href="#周会前端" class="headerlink" title="周会前端"></a>周会前端</h6><ol>
-<li>申请商户号需要的公司材料（用哪家公司注册）和微信号，正在讨论。</li>
-<li>已认证的公众号要认证小程序，之后的小程序上线到这上面（体验版），开发的话有些接口比如获取手机号就可以用了。商户号的支付也和它绑定。</li>
-<li>等原型图出来以后，把前端修改完。</li>
-<li>對接後端接口。</li>
-<li>图床。</li>
-</ol>
-<h4 id="周二"><a href="#周二" class="headerlink" title="周二"></a>周二</h4><h6 id="小程序前端需求"><a href="#小程序前端需求" class="headerlink" title="小程序前端需求"></a>小程序前端需求</h6><ol>
-<li><p>CSS</p>
-<ol>
-<li>Flex布局。</li>
-</ol>
-</li>
-<li><p>项目</p>
-<ol>
-<li><p>深浅拷贝的区别？如何实现深拷贝？在项目什么地方用到深拷贝（数据回流）？</p>
-</li>
-<li><p>什么是节流和防抖？项目中如何应用？（多次数据请求，只请求一次——列表触底加载下页数据（节流）、input搜索（防抖））</p>
-</li>
-<li><p>怎么实现图片懒加载？</p>
-</li>
-<li><p><strong>组件通信</strong>：熟悉Vuex知识点并在项目（电商）中的实现。比如：</p>
-<ol>
-<li>购物车。</li>
-<li>收货地址。</li>
-</ol>
-</li>
-<li><p>路由跳转的几个方式：</p>
-<ol>
-<li><p>switchTab</p>
-</li>
-<li><p>navigateTo</p>
-</li>
-<li><p>reLaunch</p>
-<p>如果从A页面跳转到B页面，两者不是父子关系，不用vuex情况，A如何传递参数？B页面如何接受？</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 传递</span></span><br><span class="line"><span class="string">&quot;路径?paynow=&quot;</span>+参数</span><br><span class="line"><span class="comment">// 接收</span></span><br><span class="line"><span class="title function_">onLoad</span>(<span class="params">options</span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> data = options.<span class="property">paynow</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h6 id="拉布拉多"><a href="#拉布拉多" class="headerlink" title="拉布拉多"></a>拉布拉多</h6><ol>
-<li>功能清单已经给出，在这个基础上开始修正前端了。</li>
-<li>一个主体可以有多个商户号，同时一个商户号也可以绑定多个小程序和公众号。<img src="Users\16236\AppData\Roaming\Typora\typora-user-images\image-20230207184628629.png" alt="image-20230207184628629"></li>
-<li>明天会走&lt;商户号&gt;申请流程。</li>
-<li>域名22天</li>
-</ol>
-<h6 id="周五"><a href="#周五" class="headerlink" title="周五"></a>周五</h6><p>【0210】Cookie：</p>
-<ol>
-<li>对接后端文档，接入用户相关、收货地址、商品相关接口。</li>
-<li>接入支付宝支付。</li>
-<li>前端优惠券模块，展示的样式、使用的位置和效果。</li>
-<li>小程序前端的更新。</li>
-</ol>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h6 id="前端面试（满分10）"><a href="#前端面试（满分10）" class="headerlink" title="前端面试（满分10）"></a>前端面试（满分10）</h6><ol>
-<li><strong>怎么实现搜索框的历史记录</strong><ol>
-<li>最新历史记录在最前。</li>
-<li>下次进入，仍保留记录。</li>
-<li>清空历史记录怎么实现（清空数组的三种方法）。</li>
-</ol>
-</li>
-<li><strong>怎么实现购物车（Vuex）</strong><ol>
-<li>每个商品都有自己的勾选radio，在底部的全选和全不选功能怎么实现？（全选按钮的勾选，根据every或goods数据长度&#x3D;&#x3D;&#x3D;filter(item&#x3D;&gt; item.checked).length）</li>
-<li>每个商品单独的radio点击不会造成全选&#x2F;全不选的效果</li>
-<li>商品详情页点击加入购物车，购物车数据如何显示？（增）</li>
-<li><strong>调用Vuex的mutations方法时，如果希望传入两个参数，怎么做？或者说在Vuex的这个mutations方法中，我需要用到外界传来的两个参数，有其他的方式吗？</strong></li>
-<li>（收货地址模块）有一个数组，元素都是对象。在mutations方法中外界传入一个新的对象，希望替换掉这个数组某一个索引的对象。但是直接操作数组，除了push、pop等那些方法外，是无法做到数据响应式的，也就是页面的数据没有更新。你要怎么实现我的需求？（改）<ol>
-<li>Vue.set</li>
-<li>JSON</li>
-</ol>
-</li>
-<li>删除购物车列表的一个商品？（删）</li>
-</ol>
-</li>
-<li>组件库的使用<ol>
-<li><uni-drawer>抽屉，这个组件需要传入width属性、height属性指定drawer的宽高，只能传入数字，我现在需要在页面中使用到它，并且以后换在其他页面也都是宽度撑满、高度为屏幕一半。怎么实现？</uni-drawer></li>
-</ol>
-</li>
-<li>微信的支付流程是什么？</li>
-<li>现在没有后端的接口来校验token有无失效，仅仅是在前端做一个token过期的页面登出效果的话，怎么实现？也就是说你怎么做token过期的判断然后登出？</li>
-<li>在线客服？</li>
-<li>B、C端，你简单介绍一下，这个商家端的数据改变的流程，从而设置改变到用户端</li>
-<li>然后你的用户端我看到是有个订单模块，顶部有个头部切换，你是根据什么来设置对应展示的订单呢？</li>
-<li>订单里的可以查看物流吗？</li>
-<li>我看用户端有个支付宝支付的选项，它可以支付吗？</li>
-</ol>
-<h4 id="周会"><a href="#周会" class="headerlink" title="周会"></a>周会</h4><ol>
-<li>用户交互节点路径树</li>
-<li>素材树（作用及路径）</li>
-<li>素材图片分辨路</li>
-<li>积分兑换数量</li>
-<li>邮费drawer</li>
-<li>删除露边</li>
-<li>头像背景设置（随头像毛玻璃）</li>
-<li>物流脉络</li>
-</ol>
-<h4 id="后端接口"><a href="#后端接口" class="headerlink" title="后端接口"></a>后端接口</h4><h6 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h6><ol>
-<li><p>后端接收前端code，换取手机号的接口</p>
-</li>
-<li><p>微信登录</p>
-<blockquote>
-<p>接收前端返回的登录code，返回openid</p>
-</blockquote>
-</li>
-<li><p>一键注册的登录接口</p>
-<blockquote>
-<p>唤起授权手机号弹窗，（执行以上两个接口后），用手机号和openid作为账户密码（绑定微信和手机号，微信登录接口见上）</p>
-</blockquote>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;img&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span>		<span class="comment">// 先给defaultAvatar</span></span><br><span class="line">  <span class="attr">&quot;nickName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span>	<span class="comment">// ？</span></span><br><span class="line">  <span class="attr">&quot;password&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span>	<span class="comment">// 换成用户的全局唯一标识openid？</span></span><br><span class="line">  <span class="attr">&quot;tempUid&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;userId&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span>		</span><br><span class="line">  <span class="attr">&quot;userName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span>	<span class="comment">// ？</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改用户信息（头像和昵称）的接口</p>
-</li>
-</ol>
-<h6 id="搜索框"><a href="#搜索框" class="headerlink" title="搜索框"></a>搜索框</h6><ol>
-<li>用户键入的关键词，作为参数传给后端。后端返回匹配、关联的数据</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2023/02/10/%E9%9D%A2%E8%AF%95/</url>
-    <content><![CDATA[]]></content>
   </entry>
 </search>
