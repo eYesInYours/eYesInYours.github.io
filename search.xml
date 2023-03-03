@@ -686,6 +686,55 @@ getUserInfo和getUserProfile都不能获取用户昵称和头像了。</p>
 <li><input checked disabled type="checkbox"> 收货地址接口。</li>
 <li><input checked disabled type="checkbox"> 用jQuery写了段网页的自动关注代码，这是第一次在浏览器控制台上直接操作，有些新奇。</li>
 </ul>
+<h4 id="第十五周（2-x2F-27-3-x2F-3）"><a href="#第十五周（2-x2F-27-3-x2F-3）" class="headerlink" title="第十五周（2&#x2F;27 - 3&#x2F;3）"></a>第十五周（2&#x2F;27 - 3&#x2F;3）</h4><h6 id="Monday-13"><a href="#Monday-13" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+和后端拉了个会。</p>
+<p>首页有一小区域是商品，原本以为既然是商品，那就调用sku的接口就好了，但后端只有通过spuId去获得sku的接口。</p>
+<p>可是一个spu会对应多个sku，那我进入商品详情页时渲染哪一个sku的数据呢？现在的做法就是这一块区域设置一个spuId对应一个skuId，有后台管理可以设置。首页的商品key绑定spuId，对应商品详情用spuId请求sku信息。</p>
+</li>
+</ul>
+<h6 id="Tuesday-13"><a href="#Tuesday-13" class="headerlink" title="Tuesday"></a><em>Tuesday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+做后端数据接入前端的处理。</p>
+<p>比如说购物车的数据我们从后端拿，那么渲染结构不能直接设置为获取的数据，否则会出现购物车商品删不掉、勾选异常等问题。</p>
+<p>前端用的是Vuex或本地的数据，那么此时这两者的数据就要更新为获取的后端数据，之后的crud不仅是请求上的，同时要注意本地数据的同步。</p>
+</li>
+</ul>
+<h6 id="Wednesday-11"><a href="#Wednesday-11" class="headerlink" title="Wednesday"></a><em>Wednesday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+分类接口，首先是获取一级分类categoryId，点击该菜单时请求指定分类（携参一级categoryId），得到二级菜单数据，然后可以渲染和遍历二级、三级分类。</p>
+<p>对于三级分类而言，点击进入商品详情。之前都是通过spuId请求商品信息，有一个搜索接口，可以分别通过categoryId等一系列参数请求商品信息。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+之后要解决一下Git分支合并、变基的冲突问题，调整规范。</p>
+<p>比方说我的A分支和另一个人的B分支都在同时编写，但现在B分支的一些功能要用到我A分支新提供的功能或API，就要变基rebase到我的分支上（在我的A分支的代码基础上开发，但还是在它的B分支上操作，同时提交或合并B分支的代码）。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+购物车修改数量的请求并不是直接赋值给后端字段的，数字加减框&lt;变化后的值&gt; - &lt;当前的值&gt; 的数值为正，则给后端字段加&lt;差值&gt;。减类推。</p>
+<p>同时请求成功后，也要用差值给本地的count字段更新。这样确保购物车的商品&lt;当前的值&gt;不总是为1，下次请求不会出现前后端数据不对的情况。</p>
+</li>
+</ul>
+<h6 id="Thursday-13"><a href="#Thursday-13" class="headerlink" title="Thursday"></a><em>Thursday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+记录一个Bug。</p>
+<blockquote>
+<p>&lt;分类进入的商品详情页&gt;和&lt;商品卡片进入的商品详情页&gt;，通过不同接口获得商品数据对象cate3Goods和detailGoods，需要传递给子组件渲染。</p>
+<p>一开始能正常使用，过了会就渲染不出来了，以下两种方式都只能传递第一个数据对象detailGoods给子组件：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">	首先对象不能调用length属性，typeof &#123;&#125;.length的值为&quot;undefined&quot;</span></span><br><span class="line"><span class="comment">	undefined类型和number类型比较时，会将undefined转换为NaN和number数值比较</span></span><br><span class="line"><span class="comment">	所以全不等返回true，总是传递第一个数据对象</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">card-description</span> <span class="attr">:goods</span>=<span class="string">&quot;detailGoods.length!==0 ? detailGoods : cate3Goods&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">card-description</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 原因：对象转布尔值，无论有无属性，都是true --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">card-description</span> <span class="attr">:goods</span>=<span class="string">&quot;detailGoods || cate3Goods&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">card-description</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其实也不是Bug，还是Js的基础不扎实。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 解决 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">card-description</span> <span class="attr">:goods</span>=<span class="string">&quot;Object.keys(detailGoods).length!==0 ? detailGoods : cate3Goods&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">card-description</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+<h6 id="Friday-12"><a href="#Friday-12" class="headerlink" title="Friday"></a><em>Friday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+订单的流程，初步走了一下，有创建订单、提交订单接口。</p>
+<p>可以确定的是提交订单的同时也要走支付，然后通过查询接口判断该订单有无支付</p>
+<p>但是创建订单是从购物车进入结算页时就发起，还是在结算页时一并创建订单、提交订单？</p>
+<p>之所以怀疑前者，是因为看淘宝从结算页返回购物车时，订单并不会多出一笔。</p>
+</li>
+</ul>
+<p>	</p>
 ]]></content>
       <categories>
         <category>实习</category>
