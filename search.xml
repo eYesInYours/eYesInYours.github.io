@@ -735,7 +735,7 @@ getUserInfo和getUserProfile都不能获取用户昵称和头像了。</p>
 </li>
 </ul>
 <p>	</p>
-<h4 id="第十四周（3-x2F-6-3-x2F-10）"><a href="#第十四周（3-x2F-6-3-x2F-10）" class="headerlink" title="第十四周（3&#x2F;6 - 3&#x2F;10）"></a>第十四周（3&#x2F;6 - 3&#x2F;10）</h4><h6 id="Monday-14"><a href="#Monday-14" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
+<h4 id="第十六周（3-x2F-6-3-x2F-10）"><a href="#第十六周（3-x2F-6-3-x2F-10）" class="headerlink" title="第十六周（3&#x2F;6 - 3&#x2F;10）"></a>第十六周（3&#x2F;6 - 3&#x2F;10）</h4><h6 id="Monday-14"><a href="#Monday-14" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
 <li><input checked disabled type="checkbox"> 准备用uniapp提供的unipay插件去做支付，不仅有微信小程序的，其他方式的支付都有。这个插件使用的是相当于后端功能的云函数，也包括云数据库等，直接开箱用（可以用免费版）。把实例项目跑通。</li>
 </ul>
 <h6 id="Tuesday-14"><a href="#Tuesday-14" class="headerlink" title="Tuesday"></a><em>Tuesday</em></h6><ul>
