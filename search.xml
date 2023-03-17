@@ -767,6 +767,66 @@ getUserInfo和getUserProfile都不能获取用户昵称和头像了。</p>
 <p>unpackage应该可由我们的代码来生成，而如果在Git中忽略掉它，可能这个冲突问题好解决很多。</p>
 </li>
 </ul>
+<h4 id="第十七周（3-x2F-13-3-x2F-17）"><a href="#第十七周（3-x2F-13-3-x2F-17）" class="headerlink" title="第十七周（3&#x2F;13 - 3&#x2F;17）"></a>第十七周（3&#x2F;13 - 3&#x2F;17）</h4><h6 id="Monday-15"><a href="#Monday-15" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+解决上周说的unpackage目录导致的分支大量冲突问题。</p>
+<blockquote>
+<p>在本地.gitignore文件中添加&#x2F;unpackage，提交时忽略这个目录。</p>
+<p>但此时远程仓库中已经有unpackage目录了，删除远程仓库对应分支的unpackage目录：</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="comment">// -r 表示递归删除目录下的所有文件、目录</span></span><br><span class="line"><span class="comment">// --cached 表示移除跟踪名单，但保留本地</span></span><br><span class="line">git rm -r <span class="attr">--cached</span> unpackage</span><br></pre></td></tr></table></figure>
+
+<p>再add、commit、push。最后把我的分支提交到master分支时冲突只有两三个文件了。</p>
+</blockquote>
+<p>我是通过命令行去合并的，首先切换到master分支，再去merge我需要合并的Cookie分支。此时我本地只有一个Cookie分支：</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="comment">// （√）拉取远程仓库主分支到本地新建master分支</span></span><br><span class="line">git checkout -<span class="selector-tag">b</span> master origin/master</span><br><span class="line"></span><br><span class="line"><span class="comment">// （×）之前一直尝试用以下方法去拉取master分支代码</span></span><br><span class="line"><span class="comment">// 但切换后的新建分支，其实还是和我的Cookie分支代码一样，此时pull只是更新了对应文件的代码</span></span><br><span class="line"><span class="comment">// 并不是我想要的master分支</span></span><br><span class="line">git checkout -<span class="selector-tag">b</span> master</span><br><span class="line">git pull origin master</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解决冲突后要重新add、commit，才能继续合并</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h6 id="Tuesday-15"><a href="#Tuesday-15" class="headerlink" title="Tuesday"></a><em>Tuesday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+分包与预加载。</p>
+<p>创建多个分包，同时在pages.json文件下与subPackages同级别的preloadRule中配置预加载。比如：</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 作用是当切换到shop页面时，就提前加载下一级页面资源，而不是点击进入时才下载。</span></span><br><span class="line">&quot;preloadRule&quot;: &#123;</span><br><span class="line">    &quot;pages/shop/shop&quot;:&#123;</span><br><span class="line">        &quot;network&quot;: <span class="string">&quot;all&quot;</span>,</span><br><span class="line">        <span class="string">&quot;packages&quot;</span>:[<span class="string">&quot;subpkg_goods&quot;</span>]	// 分包的root属性</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+除预加载外，解决页面抖动还有一方面：样式设置的数据是通过页面onLoad获取的数据，不应该采取这种方式，数据的获取、更新有一段时间间隔。</p>
+</li>
+</ul>
+<h6 id="Wednesday-13"><a href="#Wednesday-13" class="headerlink" title="Wednesday"></a><em>Wednesday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+收货地址。</p>
+<blockquote>
+<p>&lt;添加收货地址&gt;接口是不需要addrId参数的，此后的&lt;更新&gt;、&lt;删除&gt;需要这个参数。</p>
+<p>问题在于本地添加地址后，现在在&lt;地址列表&gt;页面的每一项是以index作为key绑定值，点击对应项如何请求更新后端对应地址？</p>
+<p>调用&lt;获取地址列表&gt;接口时做两个判断：</p>
+<ol>
+<li><p>本地没有地址时</p>
+<p>此时就使用接口获取的数据存储到本地。</p>
+</li>
+<li><p>本地有地址时</p>
+<p>外层循环对本地userAddress遍历，内层循环对&lt;获取地址列表&gt;请求的数据res遍历。</p>
+<p>将本地userAddress的收货人、电话、详细地址等都转为一串字符串localStr，res同理创建resStr。两者相等时，把res的遍历对象的addrId赋值到本地userAddress的对象上。</p>
+</li>
+</ol>
+<p>&lt;获取地址列表&gt;接口调用位置：</p>
+<p>除了&lt;地址列表&gt;页面onLoad时调用&lt;获取收货地址&gt;接口外，&lt;添加收货地址&gt;与&lt;修改收货地址&gt;navigateBack返回上一层页面的同时，也调用&lt;获取收货地址&gt;接口。</p>
+<p>&lt;地址列表&gt;页面的key就用addrId绑定。</p>
+</blockquote>
+<h6 id="Thursday-15"><a href="#Thursday-15" class="headerlink" title="Thursday"></a><em>Thursday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+处理加购逻辑。</p>
+<p>如果购物车中已经有当前&lt;商品详情页&gt;中的商品了，那么再点击加购，应该是增加对应购物车商品的数量。</p>
+<p>和昨天说的收货地址列表需要addrId一样，购物车列表需要cartItemId做添加、删除、修改请求。同样的方法，在请求&lt;购物车列表&gt;接口时把商品数据添加进本地。</p>
+<p>请求&lt;购物车列表&gt;接口的地方：判断购物车中该商品不存在，&lt;商品详情页&gt;点击加购、请求加购接口成功后；</p>
+<p>如果判断购物车该商品存在，则调用修改数量接口，同时修改本地对应商品的数量（既然已存在，就说明之前已请求&lt;购物车列表&gt;添加到本地，有cartItemId。通过cartItemId可以找到本地的商品）。</p>
+</li>
+</ul>
+<h6 id="Friday-14"><a href="#Friday-14" class="headerlink" title="Friday"></a><em>Friday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+页面抖动的解决还有一方面：view没有设置高度，是根据内容高度来设置自身高度的。所以获取到数据前后高度不一样，会发生抖动。</p>
+<p>顺便做了骨架屏，获取到数据前用css效果等待，而不是白屏。（之前有一期&lt;Web 50Projects 4&gt;刚好是这个）</p>
+</li>
+</ul>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>实习</category>
