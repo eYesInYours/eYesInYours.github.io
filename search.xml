@@ -893,7 +893,7 @@ getUserInfo和getUserProfile都不能获取用户昵称和头像了。</p>
 <p>  三、补充说明</p>
   <figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 根据animationFinish的状态显示隐藏元素</span></span><br><span class="line">&lt;image :animation=<span class="string">&quot;animationData&quot;</span> </span><br><span class="line">        :class=<span class="string">&quot;[&#x27;centerScreen&#x27;,animationFinish ? &#x27;hideView&#x27; : &#x27;showView&#x27;]&quot;</span></span><br><span class="line">        src=<span class="string">&quot;../../static/icons/brand.png&quot;</span>&gt;&lt;/image&gt;</span><br></pre></td></tr></table></figure>
 
-<h4 id="第十九周（3-x2F-27-3-x2F-21）"><a href="#第十九周（3-x2F-27-3-x2F-21）" class="headerlink" title="第十九周（3&#x2F;27 - 3&#x2F;21）"></a>第十九周（3&#x2F;27 - 3&#x2F;21）</h4><h6 id="Monday-17"><a href="#Monday-17" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
+<h4 id="第十九周（3-x2F-27-3-x2F-31）"><a href="#第十九周（3-x2F-27-3-x2F-31）" class="headerlink" title="第十九周（3&#x2F;27 - 3&#x2F;31）"></a>第十九周（3&#x2F;27 - 3&#x2F;31）</h4><h6 id="Monday-17"><a href="#Monday-17" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
 <li><p><input checked disabled type="checkbox"> 
 代码写到一半（新增了一个文件），突然想把另一个分支合到主分支上，所以用了git stash，把我的代码存到暂存区。</p>
 <p>等我处理完，切回我的分支，执行git stash pop，取出存在暂存区中的代码。</p>
@@ -940,6 +940,74 @@ getUserInfo和getUserProfile都不能获取用户昵称和头像了。</p>
 <li><p><input checked disabled type="checkbox"> 
 在&lt;微信开发者工具&gt;点击上传前，首先在<HBuilderX>中点击发行，作用是减少运行文件的体积。</HBuilderX></p>
 <p>由于&lt;微信开发者工具&gt;没有进行域名合法的校验（本地设置配置），所以可以直接请求后端接口。但在正式环境中，不依赖&lt;微信开发者工具&gt;的小程序必须解决域名的问题，即在&lt;公众平台&gt;配置服务器域名（request合法域名），需要备案。</p>
+</li>
+</ul>
+<h4 id="第二十周（4-x2F-3-4-x2F-7）"><a href="#第二十周（4-x2F-3-4-x2F-7）" class="headerlink" title="第二十周（4&#x2F;3 - 4&#x2F;7）"></a>第二十周（4&#x2F;3 - 4&#x2F;7）</h4><h6 id="Monday-18"><a href="#Monday-18" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+版本回退。</p>
+<p>把同学的分支推送到主分支上时，我拉取下来运行，发现他的代码引起了一个Bug。</p>
+<p>那么这一次提交肯定不能留在仓库里，需要去除。</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 查看每一次提交记录信息，包括提交Id</span></span><br><span class="line">git log <span class="attr">--oneline</span></span><br><span class="line"><span class="comment">// 将本地的代码回退到指定commitId，指定commitId之后的提交都被清除</span></span><br><span class="line">git reset <span class="attr">--hard</span> <span class="selector-attr">[commitId]</span></span><br><span class="line"><span class="comment">// 最后提交到远程分支，-f意为强制(force)。远程分支commitId后的提交也清除</span></span><br><span class="line">git push -f origin master</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	补充1：</span></span><br><span class="line"><span class="comment">	我在使用git reset时未使用--hard，</span></span><br><span class="line"><span class="comment">	即git reset，此时默认等同于git reset --mixed。</span></span><br><span class="line"><span class="comment">	这意味着工作内容（代码）保留，只把提交信息退回到指定版本。</span></span><br><span class="line"><span class="comment">	这就解释了当时代码Bug还保留。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	--hard表示把代码和提交信息都回退到指定版本。</span></span><br><span class="line"><span class="comment">	(慎用：会删除commitId后所有的新提交，因为我确定远程仓库这一部分的提交不会被使用，</span></span><br><span class="line"><span class="comment">	也没有正在协同使用，所以能直接删掉。)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	补充2：</span></span><br><span class="line"><span class="comment">	git push -f 推送前，虽然是强制推送，</span></span><br><span class="line"><span class="comment">	但要先在GitLab后台设置master分支为unproduct，否则也无法推送（权限原因）</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+云图片路径。</p>
+<p>图片放到云端后，需要通过地址去访问，我在一个Js文件中配置了图片域名picDomain，在使用到云图片的页面导入import这个picDomain，赋值给本地data中的imageDomain。</p>
+<p>标签内使用：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&lt;image class=&quot;shop-logo&quot; :src=<span class="string">&quot;imageDomain+&#x27;/info/logo.png&#x27;&quot;</span> mode=<span class="string">&quot;widthFix&quot;</span>&gt;&lt;/image&gt;</span><br></pre></td></tr></table></figure>
+
+<p>虽然图片能正常显示出来，但控制台会报错。</p>
+<ol>
+<li>路径中的斜杠”&#x2F;“需要转译，即”&#x2F;&#x2F;“。</li>
+<li>由于picDomain是由其他文件导入进当前页面，在当前页面渲染时，即image标签内去请求这个图片，页面本地的imageDomain还是初始的””，并没有进行到赋值操作。之所以图片能够显示出来，是此后picDomain加载进来并进行本地赋值，成功请求到正确的图片地址。报错所在就是image标签进行了两次图片请求，第一次imageDomain为空，则请求地址当然错误。</li>
+</ol>
+<p>最终：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&lt;image class=&quot;shop-logo&quot; :src=<span class="string">&quot;imageDomain ? imageDomain+&#x27;//info//logo.png&#x27; : &#x27;&#x27;&quot;</span> mode=<span class="string">&quot;widthFix&quot;</span>&gt;&lt;/image&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h6 id="Tuesday-18"><a href="#Tuesday-18" class="headerlink" title="Tuesday"></a><em>Tuesday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+之前的登录是写死的，今天根据微信官方Api——getPhoneNumber获取手机号code并传给后端，用作登录。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+抽屉drawer的Android适配。</p>
+<p>实在没找出代码的原因，只能不使用组件，在页面内通过动画上移、下移来实现了。</p>
+</li>
+</ul>
+<h6 id="Wednesday-15"><a href="#Wednesday-15" class="headerlink" title="Wednesday"></a><em>Wednesday</em></h6><ul>
+<li><input checked disabled type="checkbox"> 休假。</li>
+</ul>
+<h6 id="Thursday-17"><a href="#Thursday-17" class="headerlink" title="Thursday"></a><em>Thursday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+把封装的接口请求返回为一个Promise，这样在逻辑上，上一个接口请求成功后才会进行下一个接口请求（通过then）。</p>
+<p>之前是在一个接口的成功回调函数中调用另一个接口，但是在做注册登录时，接口太多了，一是耦合太高，一个地方改了后面都要改，二是回调地狱。</p>
+<p>同时这些接口只能同步进行，而非异步，其中最终的注册或登录接口的参数依赖于此前分别获得参数的接口，少一个都无法请求成功。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+前端请求的后端接口为api.abc.com，但SSL证书却是给域名abc.com配置的，所以正式环境无法请求接口。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+后端给我返回的优惠券数据，并没有汇总效果，比如同一个优惠券领取多次，在&lt;我的优惠券&gt;中该数据并没有个数count字段，而是分开的一条条数据，尽管优惠券id一样。</p>
+<blockquote>
+<p>所在在前端实现汇总，增加count字段。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 获取后端返回优惠券数据，计算每个优惠券个数</span></span><br><span class="line"><span class="comment">* @param &#123;Array&#125; coupons </span></span><br><span class="line"><span class="comment">* return countById 键值为id和个数</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">countCouponIds</span>(<span class="params">coupons</span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> countById = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;coupons.<span class="property">length</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">const</span> id = coupons[i].<span class="property">couponId</span></span><br><span class="line">        <span class="keyword">if</span>(countById[id])&#123;</span><br><span class="line">            countById[id]++</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            countById[id] = <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> countById</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1.在请求到后端的优惠券数据后，先通过&lt;countCouponIds&gt;方法，得出每个优惠券id对应的个数（键值对）</span></span><br><span class="line"><span class="keyword">const</span> countById = <span class="variable language_">this</span>.<span class="title function_">countCouponIds</span>(res.<span class="property">couponUser</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.在本地优惠券数据discount中遍历查找&lt;countById&gt;中的每一个优惠券id</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> id <span class="keyword">in</span> countById)&#123;</span><br><span class="line">    <span class="comment">// find方法查找第一个符合条件的元素，找到返回元素本身，否则返回undefined</span></span><br><span class="line">    <span class="keyword">const</span> isExist = <span class="variable language_">this</span>.<span class="property">discount</span>.<span class="title function_">find</span>(<span class="function"><span class="params">d</span> =&gt;</span> d.<span class="property">couponId</span> == id)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(isExist)&#123;</span><br><span class="line">        <span class="comment">// 如果存在，且个数不等，则更新个数</span></span><br><span class="line">        <span class="keyword">if</span>(isExist.<span class="property">count</span>!==countById[id])&#123;</span><br><span class="line">            <span class="keyword">const</span> couponIdAndCount = &#123;<span class="attr">count</span>: countById[id], <span class="attr">couponId</span>: id&#125;</span><br><span class="line">            <span class="comment">// Vuex根据id修改count</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">updateCount</span>(couponIdAndCount)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">// 不存在，则直接添加</span></span><br><span class="line">        <span class="keyword">const</span> newDiscount = res.<span class="property">couponUser</span>.<span class="title function_">find</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">couponId</span>==id)</span><br><span class="line">        newDiscount.<span class="property">count</span> = countById[id]</span><br><span class="line">        <span class="comment">// 本地勾选</span></span><br><span class="line">        newDiscount.<span class="property">isChecked</span> = <span class="literal">false</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">addDiscount</span>(newDiscount)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+地址列表点击设置默认。</p>
+<p>当前页面列表用本地数据遍历渲染，修改某一列表项数据时，虽然本地已经修改，但是页面未做到响应式。</p>
+<p>修改的字段处于对象数据中，不仅是数组，对象的修改也需要用Vue.set或深拷贝。</p>
+<p>眨眼的功夫，列表点击直接设置默认的效果又没了（数据又不能响应式了？）。改成让用户直接跳转到内容详情，手动更改switch。</p>
+</li>
+</ul>
+<h6 id="Friday-16"><a href="#Friday-16" class="headerlink" title="Friday"></a><em>Friday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+给各个需要等待请求反馈的按钮加上Popup Gif，优化用户等待效果。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+用户登录时设置默认昵称、头像，但要请求&lt;用户头像昵称&gt;接口，判断后端是否有头像、昵称，有则复用，无则默认。</p>
+<p>否则用户修改昵称头像后再次登录还是默认。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+解决修改地址详情，将默认switch置为false，不提交却导致数据改变的Bug。</p>
 </li>
 </ul>
 ]]></content>
