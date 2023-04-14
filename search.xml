@@ -1010,6 +1010,78 @@ getUserInfo和getUserProfile都不能获取用户昵称和头像了。</p>
 解决修改地址详情，将默认switch置为false，不提交却导致数据改变的Bug。</p>
 </li>
 </ul>
+<h4 id="第二十一周（4-x2F-10-4-x2F-14）"><a href="#第二十一周（4-x2F-10-4-x2F-14）" class="headerlink" title="第二十一周（4&#x2F;10 - 4&#x2F;14）"></a>第二十一周（4&#x2F;10 - 4&#x2F;14）</h4><h6 id="Monday-19"><a href="#Monday-19" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+在封装的请求中根据后端的状态码判断用户是否登录失效，用switchTab点击确认跳转到&lt;个人中心&gt;页，虽然本地token等数据已清除，但页面内还是保持有数据，未刷新。</p>
+<p>改用reLaunch，关闭所有页面，打开某页面（tabBar页也可）。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+解决页面内自定义底部抽屉的遮罩mask，使页面操作无效的Bug。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+navigateBack返回多级屏幕闪黑。</p>
+<p>由A页面依次进入B、C、D页面，在D页面的页面卸载OnUnload生命周期中调用navigateBack返回多级页面或其他路由事件，都会导致页面闪黑。</p>
+<p>将原生导航栏换成了自定义导航栏，将左上角的返回按钮设置点击事件，navigateBack向上跳回两级页面，此时没有问题。（因为支付成功后来到&lt;支付成功页&gt;，就不能让用户再回到&lt;支付信息页&gt;了）。</p>
+</li>
+</ul>
+<h6 id="Tuesday-19"><a href="#Tuesday-19" class="headerlink" title="Tuesday"></a><em>Tuesday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+昨天的自定义导航栏点击返回没问题，但是如果点手机底部自带的返回，还是返回上一级页面，不符合业务逻辑，所以还得修改。同时，自定义导航栏的高度是通过数据加载的，在页面渲染过程发生抖动。</p>
+<p>没解决成功，丢给另一个前端同学了。</p>
+</li>
+</ul>
+<h6 id="Wednesday-16"><a href="#Wednesday-16" class="headerlink" title="Wednesday"></a><em>Wednesday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+微信临时头像。</p>
+<p>用户选择头像后，前端获取到的头像地址是临时地址，过了一定时限，用户不能访问。</p>
+<p>则需要将图片上传到后端（见官方API，uni.uploadFile），用户访问后端的头像地址。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 需要注意的点：不能用户选择完头像，就立即上传，而是等他点击确认按钮再上传。	</span></span><br><span class="line"><span class="comment">// 修改后端用户信息逻辑</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">tempNickname</span>.<span class="title function_">trim</span>()) &#123;</span><br><span class="line">    <span class="comment">// 1.未改变：返回</span></span><br><span class="line">    <span class="comment">// temp表示当前页用户修改的昵称和头像，后者表示上次由后端返回的昵称和头像。onload时默认将后者赋值给前者</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">tempNickname</span>.<span class="title function_">trim</span>() + <span class="variable language_">this</span>.<span class="property">tempAvatar</span> == <span class="variable language_">this</span>.<span class="property">nickName</span> + <span class="variable language_">this</span>.<span class="property">avatar</span> ) </span><br><span class="line">        <span class="keyword">return</span> uni.<span class="title function_">navigateBack</span>()</span><br><span class="line">    <span class="comment">// 2.只改变昵称：直接修改后端（沿用原来图片）</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">tempAvatar</span>==<span class="variable language_">this</span>.<span class="property">avatar</span> &amp;&amp; <span class="variable language_">this</span>.<span class="property">tempNickname</span>.<span class="title function_">trim</span>()!=<span class="variable language_">this</span>.<span class="property">nickName</span>) </span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">updateUserNicknameAvatar</span>().<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">setAvatar</span>(<span class="variable language_">this</span>.<span class="property">resImage</span>)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">setNickName</span>(<span class="variable language_">this</span>.<span class="property">tempNickname</span>)</span><br><span class="line">            uni.<span class="title function_">navigateBack</span>()</span><br><span class="line">        &#125;)</span><br><span class="line">    <span class="comment">// 3.只修改头像：上传头像并修改后端（沿用原来昵称）</span></span><br><span class="line">    <span class="comment">// beforeUpload上传头像方法，包含了updateUserNicknameAvatar修改后端的请求</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">tempNickname</span>==<span class="variable language_">this</span>.<span class="property">nickName</span> &amp;&amp; <span class="variable language_">this</span>.<span class="property">tempAvatar</span>!=<span class="variable language_">this</span>.<span class="property">avatar</span>) <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">beforeUpload</span>()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4.头像昵称都修改：上传头像并修改后端（获取最新头像、昵称）</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">beforeUpload</span>()</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> uni.<span class="title function_">showToast</span>(&#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&quot;还未填写昵称&quot;</span>,</span><br><span class="line">        <span class="attr">icon</span>: <span class="string">&quot;none&quot;</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h6 id="Thursday-18"><a href="#Thursday-18" class="headerlink" title="Thursday"></a><em>Thursday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+数据预拉取。</p>
+<blockquote>
+<p>作用：在进入小程序前的加载过程，就提前将部分数据请求到本地，减少用户等待时间。</p>
+<p>步骤：</p>
+<ol>
+<li><p>在&lt;微信公众平台&gt;设置数据预拉取请求的接口，注意是https。</p>
+</li>
+<li><p>&lt;微信开发者工具&gt;本地设置打开&lt;数据预加载&gt;。</p>
+</li>
+<li><p>在App.vue的<em><strong>onLaunch</strong></em>生命周期中设置请求token，并请求。（先加载App.vue，再加载其他页面）</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">uni.<span class="title function_">setBackgroundFetchToken</span>(&#123;</span><br><span class="line">    <span class="attr">token</span>: <span class="string">&quot;HELLO WORLD&quot;</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> that = <span class="variable language_">this</span></span><br><span class="line">uni.<span class="title function_">getBackgroundFetchData</span>(&#123;</span><br><span class="line">    <span class="attr">fetchType</span>: <span class="string">&quot;pre&quot;</span>,		<span class="comment">// pre预加载，periodic周期（12h）更新</span></span><br><span class="line">    <span class="title function_">success</span>(<span class="params">res</span>)&#123;</span><br><span class="line">        <span class="keyword">const</span> goods = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(res.<span class="property">fetchedData</span>)</span><br><span class="line">        <span class="comment">// 预加载数据Vuex存入本地</span></span><br><span class="line">        that.<span class="title function_">setLocalShopGoods</span>(goods.<span class="property">data</span>.<span class="property">list</span>[<span class="number">0</span>].<span class="property">spus</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>渲染时使用本地数据，而非接口请求。但并不取消该接口的请求。</p>
+<p>也就是说，在进入首页前，通过预加载请求到了数据，进到首页后，仍然发起请求。（原因见下）</p>
+<blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	请求到的数据的字符串，与本地预拉取到的数据的字符串不相等，表示此时从后端请求到的数据发生了更新。</span></span><br><span class="line"><span class="comment">	则更新本地。</span></span><br><span class="line"><span class="comment">	预拉取只有用户首次进入小程序才会进行，并不是每次进入小程序都会进行的。</span></span><br><span class="line"><span class="comment">	那么此时该接口的请求，是为了及时更新数据。</span></span><br><span class="line"><span class="comment">	</span></span><br><span class="line"><span class="comment">	有&lt;数据预拉取&gt;机制，同样有&lt;数据周期性更新&gt;，但是它是每隔12小时进行一次，并不及时。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">if</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(res.<span class="property">list</span>[<span class="number">0</span>].<span class="property">spus</span>) !== <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(<span class="variable language_">this</span>.<span class="property">shopGoods</span>))&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">setLocalShopGoods</span>(res.<span class="property">list</span>[<span class="number">0</span>].<span class="property">spus</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>想了一下，还是需要12h周期性更新的。</p>
+<p>否则只在请求中更新数据，虽然有了更新机制，但是此时并没有做到减少用户等待时间了。</p>
+<p>&lt;微信开发者工具&gt;在头部&lt;工具&gt;拉取更新数据（调试）。</p>
+</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h6 id="Friday-17"><a href="#Friday-17" class="headerlink" title="Friday"></a><em>Friday</em></h6><blockquote>
+<ul>
+<li><p><input checked disabled type="checkbox"> 
+此时我请求了一个接口，拿到部分数据，渲染为一个列表，列表每一项都有补充信息需要额外请求接口，在逻辑上，我需要等到列表项所有请求完成，再进行后续操作。</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1.把列表项的每个请求（封装）都返回为Promise，请求成功时resolve，失败reject。</span></span><br><span class="line"><span class="comment">// 2.将每个Promise push进一个空数组promisesList。</span></span><br><span class="line"><span class="comment">// 3.Promise.all(promisesList) 等待所有请求完成，then中执行后续操作。</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+统一数据字段在前端的实现，比如说我封装了一个商品卡片组件，在搜索、购物车、订单都有使用，尽管在&lt;商品详情&gt;中获取到所需字段，但除此之外的请求的接口中并没有给我返回这些字段。</p>
+<p>又或者某字段在不同接口中的层级不一样，所以要通过 || 在标签内判断展示。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+本地存储与更新机制。</p>
+<p>想到的蠢一点的方法就是前面说的JSON.stringify比较云端和本地的数据。</p>
+<p>或者根据updateTime去判断（未实现）。</p>
+</li>
+</ul>
+</blockquote>
 ]]></content>
       <categories>
         <category>实习</category>
