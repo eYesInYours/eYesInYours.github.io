@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title> - 小书斋</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="用来分享平日接触到的有意思的知识,微信小程序前端退款用户旅程
+
+点击订单申请退款按钮，跳转下页。
+
+选择退款方式：
+
+我要退款
+我要退货退款
+
+跳转下页。
+
+选择退款理由：
+
+若是我要退款，退款完成，来到成功页面。
+若是我要退货退款,"> 
+    <meta name="author" content="ikchen"> 
+    <link rel="alternative" href="atom.xml" title="小书斋" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content=" - 小书斋"/>
+    <meta name="twitter:description" content="用来分享平日接触到的有意思的知识,微信小程序前端退款用户旅程
+
+点击订单申请退款按钮，跳转下页。
+
+选择退款方式：
+
+我要退款
+我要退货退款
+
+跳转下页。
+
+选择退款理由：
+
+若是我要退款，退款完成，来到成功页面。
+若是我要退货退款,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="小书斋"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content=" - 小书斋"/>
+    <meta property="og:description" content="用来分享平日接触到的有意思的知识,微信小程序前端退款用户旅程
+
+点击订单申请退款按钮，跳转下页。
+
+选择退款方式：
+
+我要退款
+我要退货退款
+
+跳转下页。
+
+选择退款理由：
+
+若是我要退款，退款完成，来到成功页面。
+若是我要退货退款,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">小书斋</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://ikchen.top"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle"></h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title"></h1>
+        <div class="stuff">
+            <span>七月 19, 2023</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h5 id="微信小程序前端退款"><a href="#微信小程序前端退款" class="headerlink" title="微信小程序前端退款"></a>微信小程序前端退款</h5><p><strong>用户旅程</strong></p>
+<ol>
+<li><p>点击订单<code>申请退款</code>按钮，跳转下页。</p>
+</li>
+<li><p>选择<code>退款方式</code>：</p>
+<ol>
+<li><code>我要退款</code></li>
+<li><code>我要退货退款</code></li>
+</ol>
+<p>跳转下页。</p>
+</li>
+<li><p>选择<code>退款理由</code>：</p>
+<ol>
+<li>若是<code>我要退款</code>，退款完成，来到<code>成功页面</code>。</li>
+<li>若是<code>我要退货退款</code>，跳转下页。</li>
+</ol>
+</li>
+<li><p>进入<code>审核页面</code>。</p>
+<ol>
+<li>等待审核。</li>
+<li>审核通过，填写物流，等待商家验货退款。</li>
+<li>审核拒绝，再次申请。</li>
+</ol>
+</li>
+</ol>
+<p><strong>流程</strong></p>
+<ol>
+<li>商品未发货，则直接退款。</li>
+<li>商品已发货，用户申请退款，此时状态1：正在审核。<ol>
+<li>商家通过审核，则退款状态为2：通过，此时用户可以提交物流单号；拒绝，则退款状态为3：拒绝。</li>
+<li>用户可取消退款，状态为6：取消。</li>
+<li>用户提交物流单号后，退款状态为4：待退款。</li>
+<li>商家收货验收，确认退款，退款状态为5：成功结束。</li>
+</ol>
+</li>
+</ol>
+<p><strong>接口</strong></p>
+<ol>
+<li><p><code>查询微信订单流水</code>接口 &amp;&amp; <code>提交退款申请</code>接口</p>
+<p>在选择<code>退款理由</code>后提交，首先通过自有平台的<code>订单号</code>，去查询微信平台上相应的<code>微信订单流水号</code>（背靠了微信支付，实际是微信平台原路退款），然后就是提交时带上这个参数。</p>
+</li>
+<li><p><code>查询退款状态</code>接口</p>
+<p>根据查询所得状态值，对应展示前端效果。</p>
+<p>用户每次通过<code>退款详情</code>进入时，onShow生命周期请求。</p>
+<p>（主要用于退货退款）</p>
+</li>
+<li><p>&#96;&#96;查询物流公司<code>接口 &amp;&amp; </code>提交物流&#96;接口</p>
+<p>查询后端所有物流公司的对应数值，与用户输入物流单号一起提交。</p>
+</li>
+<li><p><code>修改退款状态</code>接口</p>
+<p>撤销申请时与提交物流信息后调用。</p>
+<p>参数为自有平台<code>订单号</code>与<code>状态值</code>。</p>
+</li>
+</ol>
+<p><strong>注意</strong></p>
+<ol>
+<li>在进行了<code>退款操作</code>后，返回订单列表，应该重新调用接口刷新列表数据，此时退款订单可能由于<code>撤销申请</code>，状态从<code>退款中</code>退回<code>未发货</code>或<code>已发货</code>。目前我只做了第一页的数据替换，但如果操作的订单是第一页往后，则需要获取相应页数的数据进行页面数据的替换，这里主要是判断当前订单在哪一页。</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%89%8D%E7%AB%AF%E9%80%80%E6%AC%BE"><span class="toc-number">1.</span> <span class="toc-text">微信小程序前端退款</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

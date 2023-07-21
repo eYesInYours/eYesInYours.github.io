@@ -1,9 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title></title>
+    <url>/2023/07/19/%E5%89%8D%E7%AB%AF%E6%90%AC%E7%A0%96/</url>
+    <content><![CDATA[<h5 id="微信小程序前端退款"><a href="#微信小程序前端退款" class="headerlink" title="微信小程序前端退款"></a>微信小程序前端退款</h5><p><strong>用户旅程</strong></p>
+<ol>
+<li><p>点击订单<code>申请退款</code>按钮，跳转下页。</p>
+</li>
+<li><p>选择<code>退款方式</code>：</p>
+<ol>
+<li><code>我要退款</code></li>
+<li><code>我要退货退款</code></li>
+</ol>
+<p>跳转下页。</p>
+</li>
+<li><p>选择<code>退款理由</code>：</p>
+<ol>
+<li>若是<code>我要退款</code>，退款完成，来到<code>成功页面</code>。</li>
+<li>若是<code>我要退货退款</code>，跳转下页。</li>
+</ol>
+</li>
+<li><p>进入<code>审核页面</code>。</p>
+<ol>
+<li>等待审核。</li>
+<li>审核通过，填写物流，等待商家验货退款。</li>
+<li>审核拒绝，再次申请。</li>
+</ol>
+</li>
+</ol>
+<p><strong>流程</strong></p>
+<ol>
+<li>商品未发货，则直接退款。</li>
+<li>商品已发货，用户申请退款，此时状态1：正在审核。<ol>
+<li>商家通过审核，则退款状态为2：通过，此时用户可以提交物流单号；拒绝，则退款状态为3：拒绝。</li>
+<li>用户可取消退款，状态为6：取消。</li>
+<li>用户提交物流单号后，退款状态为4：待退款。</li>
+<li>商家收货验收，确认退款，退款状态为5：成功结束。</li>
+</ol>
+</li>
+</ol>
+<p><strong>接口</strong></p>
+<ol>
+<li><p><code>查询微信订单流水</code>接口 &amp;&amp; <code>提交退款申请</code>接口</p>
+<p>在选择<code>退款理由</code>后提交，首先通过自有平台的<code>订单号</code>，去查询微信平台上相应的<code>微信订单流水号</code>（背靠了微信支付，实际是微信平台原路退款），然后就是提交时带上这个参数。</p>
+</li>
+<li><p><code>查询退款状态</code>接口</p>
+<p>根据查询所得状态值，对应展示前端效果。</p>
+<p>用户每次通过<code>退款详情</code>进入时，onShow生命周期请求。</p>
+<p>（主要用于退货退款）</p>
+</li>
+<li><p>&#96;&#96;查询物流公司<code>接口 &amp;&amp; </code>提交物流&#96;接口</p>
+<p>查询后端所有物流公司的对应数值，与用户输入物流单号一起提交。</p>
+</li>
+<li><p><code>修改退款状态</code>接口</p>
+<p>撤销申请时与提交物流信息后调用。</p>
+<p>参数为自有平台<code>订单号</code>与<code>状态值</code>。</p>
+</li>
+</ol>
+<p><strong>注意</strong></p>
+<ol>
+<li>在进行了<code>退款操作</code>后，返回订单列表，应该重新调用接口刷新列表数据，此时退款订单可能由于<code>撤销申请</code>，状态从<code>退款中</code>退回<code>未发货</code>或<code>已发货</code>。目前我只做了第一页的数据替换，但如果操作的订单是第一页往后，则需要获取相应页数的数据进行页面数据的替换，这里主要是判断当前订单在哪一页。</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
     <title>前端实习每周记</title>
     <url>/2022/11/14/%E5%89%8D%E7%AB%AF%E5%AE%9E%E4%B9%A0%E6%AF%8F%E5%91%A8%E8%AE%B0/</url>
-    <content><![CDATA[<h4 id="第一周（2022-x2F-11-x2F-14-11-x2F-18）"><a href="#第一周（2022-x2F-11-x2F-14-11-x2F-18）" class="headerlink" title="第一周（2022&#x2F;11&#x2F;14 - 11&#x2F;18）"></a>第一周（2022&#x2F;11&#x2F;14 - 11&#x2F;18）</h4><h6 id="Monday"><a href="#Monday" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="第一周（2022-x2F-11-x2F-14-11-x2F-18）"><a href="#第一周（2022-x2F-11-x2F-14-11-x2F-18）" class="headerlink" title="第一周（2022&#x2F;11&#x2F;14 - 11&#x2F;18）"></a>第一周（2022&#x2F;11&#x2F;14 - 11&#x2F;18）</h4><h6 id="Monday"><a href="#Monday" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
 <li><p><input checked disabled type="checkbox"> 
 加飞书、企业微信</p>
 </li>
@@ -1492,25 +1557,154 @@ canvas压缩图片</p>
 <p><strong>代码</strong></p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 倍率压缩 base64 图片，到指定大小附近范围（单位：KB）</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@params</span> &#123;<span class="type">String</span>&#125; originBase64    初始图片</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@params</span> &#123;<span class="type">String</span>&#125; originType      原有图片格式</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@params</span> &#123;<span class="type">Number</span>&#125; compressionRatio    压缩倍率</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">String</span>&#125; compressBase64  压缩后图片</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@attention</span> 压缩倍率 compressionRatio 超过 1 时默认重置为 0.92</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">compressBase64ToSize</span>(<span class="params">originBase64, originType, compressionRatio</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> canvas = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;canvas&quot;</span>)</span><br><span class="line">        <span class="keyword">const</span> ctx = canvas.<span class="title function_">getContext</span>(<span class="string">&quot;2d&quot;</span>)</span><br><span class="line">        <span class="keyword">const</span> image = <span class="keyword">new</span> <span class="title class_">Image</span>()</span><br><span class="line">    image.<span class="property">src</span> = originBase64</span><br><span class="line">    </span><br><span class="line">        image.<span class="property">onload</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            canvas.<span class="property">width</span> = image.<span class="property">width</span></span><br><span class="line">        canvas.<span class="property">height</span> = image.<span class="property">height</span></span><br><span class="line">    </span><br><span class="line">        ctx.<span class="title function_">drawImage</span>(image, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    </span><br><span class="line">            <span class="comment">// canvas转base64图片：倍率压缩</span></span><br><span class="line">        <span class="keyword">const</span> canvas_compressedBase64 = canvas.<span class="title function_">toDataURL</span>(originType, compressionRatio)</span><br><span class="line">    </span><br><span class="line">            <span class="comment">// 压缩后大小</span></span><br><span class="line">            <span class="comment">// const compressedSize = Math.floor(canvas_compressedBase64.length / 1024)</span></span><br><span class="line">            <span class="comment">// console.log(&quot;compressedSize&quot;, compressedSize);</span></span><br><span class="line">            <span class="title function_">resolve</span>(canvas_compressedBase64)</span><br><span class="line">        &#125;</span><br><span class="line">        image.<span class="property">onerror</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&quot;image onerror&quot;</span>)</span><br><span class="line">        &#125;;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<p><strong>问题</strong></p>
-<ol>
-<li><p>一开始封装的这个方法，是通过<strong>return</strong>将压缩后的图片返回出去。但在方法调用处，获得的值却是undefined。</p>
-<p>这是因为：这个方法的调用是异步的，主程序调用后仍然会向下执行。</p>
-<p>就是说，要将其变成同步的，等待结果后再让主程序往下执行。</p>
-<p>所以用Promise的resolve返回结果，主程序.then处理。</p>
-</li>
-<li><p>传入方法的压缩倍率大于1时，canvas压缩会以0.92进行默认压缩。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 压缩倍率</span></span><br><span class="line"><span class="keyword">const</span> compressionRatio = designMaxSize / (file.<span class="property">file</span>.<span class="property">size</span> / <span class="number">1024</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  </span><br><span class="line">**问题**</span><br><span class="line">  </span><br><span class="line">1. 一开始封装的这个方法，是通过**return**将压缩后的图片返回出去。但在方法调用处，获得的值却是undefined。</span><br><span class="line">  </span><br><span class="line">   这是因为：这个方法的调用是异步的，主程序调用后仍然会向下执行。</span><br><span class="line">  </span><br><span class="line">   就是说，要将其变成同步的，等待结果后再让主程序往下执行。</span><br><span class="line">  </span><br><span class="line">   所以用Promise的resolve返回结果，主程序.then处理。</span><br><span class="line">  </span><br><span class="line">  2. 传入方法的压缩倍率大于1时，canvas压缩会以0.92进行默认压缩。</span><br><span class="line">  </span><br><span class="line">     ```javascript</span><br><span class="line">     // 压缩倍率</span><br><span class="line">     const compressionRatio = designMaxSize / (file.file.size / 1024)</span><br></pre></td></tr></table></figure>
 
-<p>压缩倍率大于1，意味着此时组件上传的图片大小（后者），已经比预设的图片期望压缩大小（前者），还要小了。</p>
-<p>此时就不进行压缩。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">compressionRatio &lt; <span class="number">1</span> &amp;&amp; </span><br><span class="line">  compressUtil.<span class="title function_">compressBase64ToSize</span>(file.<span class="property">content</span>, file.<span class="property">file</span>.<span class="property">type</span>, compressionRatio)</span><br><span class="line">                .<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> <span class="variable language_">this</span>.<span class="property">goodsInfo</span>.<span class="property">material</span>[last].<span class="property">content</span> = res)</span><br></pre></td></tr></table></figure></li>
-</ol>
+<pre><code> 压缩倍率大于1，意味着此时组件上传的图片大小（后者），已经比预设的图片期望压缩大小（前者），还要小了。
+  
+ 此时就不进行压缩。
+  
+ <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">compressionRatio &lt; <span class="number">1</span> &amp;&amp; </span><br><span class="line">  compressUtil.<span class="title function_">compressBase64ToSize</span>(file.<span class="property">content</span>, file.<span class="property">file</span>.<span class="property">type</span>, compressionRatio)</span><br><span class="line">                .<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> <span class="variable language_">this</span>.<span class="property">goodsInfo</span>.<span class="property">material</span>[last].<span class="property">content</span> = res)</span><br></pre></td></tr></table></figure>
+</code></pre>
 <p>  <strong>其他</strong></p>
 <p>  关于canvas压缩倍率大于1会使用0.92这个知识点，一开始从控制台能看到图片明显被压缩了，但问ChatGpt，很肯定地回复我：压缩倍率大于1时会按照最高图片质量返回。</p>
 <p>  还是不能太相信AI。</p>
 <h6 id="Friday-24"><a href="#Friday-24" class="headerlink" title="Friday"></a><em>Friday</em></h6><ul>
 <li><input checked disabled type="checkbox"> 做柔性供应链页面。</li>
+</ul>
+<h4 id="第三十周（6-x2F-12-6-x2F-16）"><a href="#第三十周（6-x2F-12-6-x2F-16）" class="headerlink" title="第三十周（6&#x2F;12 - 6&#x2F;16）"></a>第三十周（6&#x2F;12 - 6&#x2F;16）</h4><h6 id="Monday-27"><a href="#Monday-27" class="headerlink" title="Monday"></a><em>Monday</em></h6><ul>
+<li><input checked disabled type="checkbox"> 人员与商品权限的增删改查（前端）。</li>
+</ul>
+<h6 id="Tuesday-Wednesday"><a href="#Tuesday-Wednesday" class="headerlink" title="Tuesday - Wednesday"></a><em>Tuesday - Wednesday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+H5的权限管理</p>
+<p><strong>说明</strong></p>
+<p>管理员添加成员时，发起一个请求，向该成员的登录账号添加一个<code>权限数组</code>：包含了管理员勾选的权限所对应的前端路由name。</p>
+<p>前端将路由分为<code>常量路由</code>：不用权限谁都可见，<code>异步路由</code>：需要权限，<code>任意路由</code>：404等页面。默认只展示常量路由。</p>
+<p>成员登录，获取token同时获得权限数组，前端需要做的就是根据后端的这个权限数组，将符合条件的前端路由（异步路由）<code>筛选</code>出来，并添加到路由中（一开始路由只挂载了常量路由）。</p>
+<p>异步路由是动态添加的，所以访问无权限的路由（即不匹配后端权限数组的）会是一片空白，应该重定向404或当前页。（这里防止直接输入链接地址跳转页面）</p>
+<p>最后考虑<code>页面权限</code>，没有权限的页面入口，理论上通过v-if隐藏掉，通过自定义指令便捷实现。</p>
+<p>而<code>接口权限</code>，就是请求接口时后端会去校验用户的权限，前端只需要请求时带上token就行。</p>
+<p><strong>疑难</strong></p>
+<ol>
+<li>前端路由匹配后端权限数组的筛选</li>
+<li>权限数组的保留与路由重新挂载</li>
+<li>自定义指令控制显示隐藏的不及时性</li>
+</ol>
+<p><strong>解决一：异步路由筛选</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 计算符合后端权限的异步路由</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Array</span>&#125; asyncRoutes 异步路由</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Array</span>&#125; authorityArray 后端返回的权限数组</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns</span> 过滤后的路由</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">computedAsyncRoutes</span> = (<span class="params">asyncRoutes, authorityArray</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> asyncRoutes.<span class="title function_">filter</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 本级找到</span></span><br><span class="line">        <span class="keyword">if</span> (authorityArray.<span class="title function_">indexOf</span>(item.<span class="property">name</span>) != -<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (item.<span class="property">children</span>?.<span class="property">length</span>) &#123;</span><br><span class="line">                <span class="keyword">const</span> childFiltersArr = <span class="title function_">computedAsyncRoutes</span>(item.<span class="property">children</span>, authorityArray)</span><br><span class="line">                childFiltersArr.<span class="property">length</span> != <span class="number">0</span> &amp;&amp; (item.<span class="property">children</span> = childFiltersArr)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (item.<span class="property">children</span>?.<span class="property">length</span>) &#123;</span><br><span class="line">                <span class="keyword">const</span> childFiltersArr = <span class="title function_">computedAsyncRoutes</span>(item.<span class="property">children</span>, authorityArray)</span><br><span class="line">                <span class="comment">// 仅当下级找到时保留</span></span><br><span class="line">                <span class="keyword">if</span> (childFiltersArr.<span class="property">length</span> != <span class="number">0</span>) &#123;</span><br><span class="line">                    item.<span class="property">children</span> = childFiltersArr</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>filter方法对于符合条件的元素（true）的会保留。</p>
+</li>
+</ul>
+<p><strong>解决二：路由重新挂载</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 需要将异步路由遍历添加</span></span><br><span class="line">router.<span class="title function_">addRoute</span>()</span><br></pre></td></tr></table></figure>
+
+<p>通过addRoute方法将筛选后的异步路由挂载到路由上后，路由的权限控制就完成了，从效果上看：访问无权限路由就是一片空白。</p>
+<p>不过，当页面重新刷新，又只剩下常量路由可以访问。</p>
+<p>所以需要保留权限数组，在App.vue的生命周期created中（意味着应用加载），过滤异步路由并挂载。</p>
+<p><strong>解决三：自定义指令与刷新</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 注册权限指令</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">directive</span>(<span class="string">&quot;permission&quot;</span>,&#123;</span><br><span class="line">  <span class="attr">inserted</span>: <span class="keyword">function</span>(<span class="params">el, binding</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(binding.<span class="property">value</span>)&#123;</span><br><span class="line">      <span class="keyword">const</span> authorityArray = <span class="title class_">Vue</span>.<span class="property">$store</span>.<span class="property">state</span>.<span class="property">login</span>.<span class="property">authorityArray</span></span><br><span class="line">      <span class="keyword">if</span>(!authorityArray) <span class="keyword">return</span></span><br><span class="line">      <span class="comment">// 权限数组是否包含绑定值</span></span><br><span class="line">      <span class="keyword">const</span> hasPermission = authorityArray.<span class="title function_">includes</span>(binding.<span class="property">value</span>)</span><br><span class="line">      !hasPermission &amp;&amp; (el.<span class="property">parentNode</span> &amp;&amp; el.<span class="property">parentNode</span>.<span class="title function_">removeChild</span>(el))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>但有个问题是，在我切换不同权限的账号登录时，页面相应的权限页面入口并不是实时更新的，而是必须刷新页面才有效果。</p>
+<p>我的解决办法是：在登录后重定向的页面的<code>组件内守卫beforeRouteEnter</code>中，强制刷新</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">beforeRouteEnter</span>(<span class="params">to, <span class="keyword">from</span>, next</span>)&#123;</span><br><span class="line">    <span class="comment">// 这种方式会导致重新请求资源：暂时用这种</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">from</span>.<span class="property">path</span> == <span class="string">&quot;/login&quot;</span>)&#123;</span><br><span class="line">        <span class="title function_">next</span>()</span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">location</span>.<span class="title function_">reload</span>()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">next</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="第三十一周（6-x2F-19-6-x2F-21）"><a href="#第三十一周（6-x2F-19-6-x2F-21）" class="headerlink" title="第三十一周（6&#x2F;19 - 6&#x2F;21）"></a>第三十一周（6&#x2F;19 - 6&#x2F;21）</h4><h6 id="Monday-Wednesday-1"><a href="#Monday-Wednesday-1" class="headerlink" title="Monday - Wednesday"></a>Monday - Wednesday</h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+来了一个UI，改了七八个页面。</p>
+<p>UI会把设计稿通过<code>蓝湖</code>分享给我，一般是一倍图（375px）。选择设计稿上的不同元素，就会显示相应的font-size等字体信息、背景信息、长宽信息等。不过还要考虑多屏适配问题，否则现在只有一倍屏布局效果最佳。</p>
+<p>之前有不清晰地讲过，主要用vw去做适配，比如目前元素的宽占375px的比例，乘以100vw，即适配宽度。</p>
+<p>不过暂时没有去做，这几天只是改页面。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+Vue项目路由history模式。</p>
+<p>和hash模式不同，history模式的链接地址中不包含#，但需要后端做nginx配置。</p>
+<p>前端也需要补充修改：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// vue.config.js配置文件</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="attr">publicPath</span>: <span class="string">&#x27;/mx/&#x27;</span>,   <span class="comment">// 公共路径</span></span><br><span class="line">  <span class="attr">outputDir</span>: <span class="string">&quot;mx&quot;</span>,     <span class="comment">// 打包输出目录</span></span><br><span class="line">  ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>主要需要做的是publicPath的设置，在hash模式下配置为相对路径，history模式需要配置为绝对路径。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+性能优化之虚拟列表。</p>
+<p>v-for渲染的数据过多，长列表结构会造成资源性能的损耗，虚拟列表就是无论多少个数据，本质上只固定比如十个结构去渲染。</p>
+<p>没做完。</p>
+</li>
+</ul>
+<h4 id="第三十二周（6-x2F-26-6-x2F-30）"><a href="#第三十二周（6-x2F-26-6-x2F-30）" class="headerlink" title="第三十二周（6&#x2F;26 - 6&#x2F;30）"></a>第三十二周（6&#x2F;26 - 6&#x2F;30）</h4><h6 id="Monday-28"><a href="#Monday-28" class="headerlink" title="Monday"></a><em>Monday</em></h6><h6 id="Tuesday-27"><a href="#Tuesday-27" class="headerlink" title="Tuesday"></a><em>Tuesday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+Git，分支对应功能</p>
+<p><strong>场景</strong></p>
+<p>今天开发时有两个任务同步进行。</p>
+<p>其中一个任务开发到50%时，需要对另一个任务紧急处理。前者是UI上的翻版，从而导致了某些功能入口的缺少，后者不管进度怎样，对于用户感知到的视图是没有影响的。</p>
+<p>现在我对后者紧急处理了，并且是需要上线的一个功能。如果我此时发版（体验），那么对于影响用户体验的前者是不应该保留的，但我如果用<code>git stash</code>暂存，两个开发功能都发版不了。</p>
+<p>因为它两耦合了，<code>git stash</code>将上次提交后的所有更新都暂存了。</p>
+<p><strong>想法</strong></p>
+<p>每开发一个功能时，都应该去新建一个分支。</p>
+</li>
+</ul>
+<h6 id="Wednesday-24"><a href="#Wednesday-24" class="headerlink" title="Wednesday"></a><em>Wednesday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+自定义导航栏抖动问题。</p>
+<p><strong>场景</strong></p>
+<p>手机设备状态栏、小程序右上角胶囊长宽等信息，都是调用官方api得到的。</p>
+<p>如果想要自定义导航栏中左侧的返回按钮和右侧小程序自带的胶囊<code>对称</code>，以及中心显示的标题与胶囊处于同一水平线，就要动态的调用api渲染结构。</p>
+<p>问题在于，长宽等信息获取是从无到有的。具体来说，对于自定义导航栏中心的标题，就会出现一个抖动的效果。</p>
+<p>即使最终达到预期。</p>
+<p>（具体的实现见<code>第十二周Wednesday</code>）</p>
+<p><strong>解决</strong></p>
+<p>在App.vue中onLaunch生命周期，调用封装的方法，去获取长宽信息，主要是：手机状态栏高度、小程序导航栏高度。</p>
+<p>其次，将它们存在本地。</p>
+<p>在每个页面的自定义导航栏，读取本地的高度数据，就不再重新调用api获取。</p>
+</li>
+<li><p><input checked disabled type="checkbox"> 
+小程序长按保存图片。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 长按保存图片</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@params</span> &#123;<span class="type">String</span>&#125; imgPath 云图片地址、本地图片地址</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">longpressSaveImg</span>(<span class="params">imgPath</span>) &#123;</span><br><span class="line">	<span class="title function_">p1</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="title function_">p2</span>(imgPath)</span><br><span class="line">	&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="title function_">p3</span>(res)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 弹出选项卡</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">p1</span>(<span class="params"></span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">		wx.<span class="title function_">showActionSheet</span>(&#123;</span><br><span class="line">			<span class="attr">itemList</span>: [<span class="string">&quot;保存到相册&quot;</span>],</span><br><span class="line">			<span class="title function_">success</span>(<span class="params"></span>) &#123;</span><br><span class="line">				<span class="title function_">resolve</span>()</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取图片的本地文件地址</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">p2</span>(<span class="params">imgPath</span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">		wx.<span class="title function_">getImageInfo</span>(&#123;</span><br><span class="line">			<span class="attr">src</span>: imgPath,</span><br><span class="line">			<span class="title function_">success</span>(<span class="params">res</span>) &#123;</span><br><span class="line">				<span class="title function_">resolve</span>(res.<span class="property">path</span>)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">p3</span>(<span class="params">filePath</span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">		wx.<span class="title function_">saveImageToPhotosAlbum</span>(&#123;</span><br><span class="line">			filePath,</span><br><span class="line">			<span class="title function_">success</span>(<span class="params">res</span>) &#123;</span><br><span class="line">				uni.$showMsg(<span class="string">&quot;保存成功&quot;</span>)</span><br><span class="line">				<span class="title function_">resolve</span>()</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> longpressSaveImg</span><br></pre></td></tr></table></figure>
+
+<h6 id="Thursday-Friday-1"><a href="#Thursday-Friday-1" class="headerlink" title="Thursday - Friday"></a><em>Thursday - Friday</em></h6></li>
+</ul>
+<h4 id="第三十三周（7-x2F-3-7-x2F-7）"><a href="#第三十三周（7-x2F-3-7-x2F-7）" class="headerlink" title="第三十三周（7&#x2F;3 - 7&#x2F;7）"></a>第三十三周（7&#x2F;3 - 7&#x2F;7）</h4><h6 id="Monday-Friday"><a href="#Monday-Friday" class="headerlink" title="Monday - Friday"></a><em>Monday - Friday</em></h6><ul>
+<li><p><input checked disabled type="checkbox"> 
+私享价（vip价）</p>
+<p><strong>业务场景</strong></p>
+<p>对于<code>普通用户</code>，他购买的商品是正常价。</p>
+<p>对于<code>会员</code>，分为v1和v2两种会员，享受的是优惠价。</p>
+<p><strong>前端需求1与实现</strong></p>
+<p>需求：不同用户所得到的价格不同。</p>
+<p>实现：</p>
+<p>之前提过一个H5的项目：用户提交表单信息，提交申请会员的申请，其中有个字段就是微信绑定的手机号。</p>
+<p>那么，微信小程序手机号授权登录时，能通过手机号拿到H5项目中相关信息：是否已是会员。</p>
+<p>在Vuex中定义一个getter：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * 是否能看到私享价的权限，以及是否能以私享价购买</span></span><br><span class="line"><span class="comment"> * 0-乐享会员，1-乐享会员Pro, 2-漫享会员</span></span><br><span class="line"><span class="comment"> * @return false 表示该用户看不到vipPrice</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="title function_">hasPrivatePriceAuth</span>(<span class="params">state</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(state.<span class="property">vip_info</span> == <span class="literal">null</span> || !<span class="title class_">Object</span>.<span class="title function_">keys</span>(state.<span class="property">vip_info</span>).<span class="property">length</span>) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">let</span> auth = state.<span class="property">vip_info</span>?.<span class="property">userType</span>?.<span class="title function_">includes</span>(<span class="string">&quot;2&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> !auth</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>那么对于商城中的商品价格，就根据这个字段v-if好了。</p>
+<p>（现在无论是普通价，还是vipPrice，都一股脑返回了，所以不用考虑v-if的权限不彻底，只需要不展示。）</p>
+<p><strong>前端需求2与实现</strong></p>
+<p>若用户是第二种<code>乐享会员pro</code>，当它分享小程序出去时，子级用户进入同样可以享受到私享价，即便他是默认的<code>漫享会员</code>。</p>
+<p>这里需要做：</p>
+<ol>
+<li>分享时，判断用户是否是<code>乐享会员pro</code>，是则带上他的会员Id。</li>
+<li>若上级是<code>乐享会员pro</code>，子级用户则存储该Id。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	定义getter：判断是否乐享会员pro</span></span><br><span class="line"><span class="comment">	决定用户分享链接中是否包含kolId</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="title function_">isKol</span>(<span class="params">state</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> state.<span class="property">vip_info</span>?.<span class="property">userType</span>?.<span class="title function_">includes</span>(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// computed 分享参数</span></span><br><span class="line"><span class="title function_">shareParam</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">isKol</span> ? <span class="string">`?kolId=<span class="subst">$&#123;<span class="variable language_">this</span>.vip_info.applyId&#125;</span>`</span> : <span class="string">&quot;&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生命周期：分享好友、朋友圈</span></span><br><span class="line"><span class="title function_">onShareAppMessage</span>(<span class="params"><span class="keyword">from</span>, to</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&quot;xxx&quot;</span>,</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&quot;/pages/shop/shop&quot;</span> + <span class="variable language_">this</span>.<span class="property">shareParam</span>,</span><br><span class="line">        <span class="attr">imageUrl</span>: <span class="string">&quot;https://xxx.jpg&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">    <span class="title function_">onShareTimeline</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">title</span>: <span class="string">&quot;xxx&quot;</span>,</span><br><span class="line">            <span class="attr">query</span>: <span class="variable language_">this</span>.<span class="property">shareParam</span>.<span class="title function_">split</span>(<span class="string">&quot;?&quot;</span>)[<span class="number">1</span>],</span><br><span class="line">            <span class="attr">imageUrl</span>: <span class="string">&quot;https://xxx.jpg&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">        </span><br><span class="line"><span class="comment">// onLoad生命周期中</span></span><br><span class="line"><span class="comment">// setFatherKolId是Vuex mutations，存到本地</span></span><br><span class="line"><span class="keyword">if</span>(e.<span class="property">kolId</span>) <span class="variable language_">this</span>.<span class="title function_">setFatherKolId</span>(e.<span class="property">kolId</span>)</span><br></pre></td></tr></table></figure>
+
+<p>那么，对于这种用户而言，仅凭会员类型他是无法享受私享价（vip价）的，</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">因此，html结构需要v-<span class="keyword">if</span>判断：v-<span class="keyword">if</span>=<span class="string">&quot;hasPrivatePriceAuth || fatherKolId&quot;</span></span><br><span class="line">html内容（价格）需要判断：&#123;&#123; ( ((hasPrivatePriceAuth || fatherKolId) &amp;&amp; item.<span class="property">vipPrice</span>) || item.<span class="property">priceFee</span>) &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="基于需求1、2的后端实现"><a href="#基于需求1、2的后端实现" class="headerlink" title="基于需求1、2的后端实现"></a><em>基于需求1、2的后端实现</em></h6><p>以上只是价格的前端渲染，但实际支付的价格需要后端修改。</p>
+<p>对此，前端需要在请求接口时，携带参数：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;isSharePrice&quot;</span>: <span class="title class_">Number</span>(<span class="variable language_">this</span>.<span class="property">hasPrivatePriceAuth</span> || <span class="title class_">Boolean</span>(<span class="variable language_">this</span>.<span class="property">fatherKolId</span>)),</span><br></pre></td></tr></table></figure>
+
+<h6 id="购物车私享价字段的添加"><a href="#购物车私享价字段的添加" class="headerlink" title="购物车私享价字段的添加"></a><em>购物车私享价字段的添加</em></h6><p>对于从后端获取到的购物项数据而言，没有私享价该字段。（可后端改，可前端改）</p>
+<p>具体讲，就是对于每个购物项的spuId和skuId，去首页的商品数据匹配，有则将首页商品数据中的私享价字段添加进购物车本地数据。这种情况考虑的是：重登时，若之前购物车中已有购物商品。</p>
+<p>对于正常情况，则直接在添加购物车时，将私享价字段添加本地就行。</p>
+<p>这样，在用户勾选购物项时，未勾选是正常价，勾选后是私享价（若是）。</p>
+<p><strong>Bug：购物车已选私享价总金额0</strong></p>
+<p>重新登录时，若之前已有购物项，同时用户有私享价权限，那么由于computed金额渲染到结构上时，没有私享价这个字段（尚未通过接口去查），就会得到结果0渲染。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">	页面 computed</span></span><br><span class="line"><span class="comment">    由于私享价是查sku得到的，在重登时若之前购物车有数据，</span></span><br><span class="line"><span class="comment">    payTotalPrivatePrice一开始为0</span></span><br><span class="line"><span class="comment">    @return payTotalPrivatePrice 私享价， payTotalPrice 正常价</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="title function_">userTotalPrice</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">hasPrivatePriceAuth</span> || <span class="variable language_">this</span>.<span class="property">fatherKolId</span>) <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">payTotalPrivatePrice</span></span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">payTotalPrice</span></span><br><span class="line">&#125;,</span><br><span class="line">    </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Vuex getter</span></span><br><span class="line"><span class="comment">	购物车已选商品的总金额（私享价）</span></span><br><span class="line"><span class="comment">	这里不加权限校验，由使用处校验</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="title function_">payTotalPrivatePrice</span>(<span class="params">state</span>)&#123;</span><br><span class="line">	<span class="keyword">return</span> state.<span class="property">cartGoods</span>.<span class="title function_">filter</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">isChecked</span>)</span><br><span class="line">        .<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">sku_private_price</span> || <span class="number">0</span> * item.<span class="property">count</span>)</span><br><span class="line">        .<span class="title function_">reduce</span>(<span class="function">(<span class="params">prev, current</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> prev + current</span><br><span class="line">	&#125;, <span class="number">0</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那就会显示出一个<strong>Bug</strong>，重登时购物车全选，但私享价总和不符，必须要刷新。</p>
+<p><strong>解决</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	对于页面中接口获取的购物车数据进行reduce遍历，获取私享价总和（此时已经是查到私享价数据后了）</span></span><br><span class="line"><span class="comment">	商品价格以这种形式渲染：&#123;&#123; userTotalPrice || appPrivatePrice &#125;&#125;</span></span><br><span class="line"><span class="comment">	如果 userTotalPrice 返回的是正常价，即使是0，那么也不会使用到已用权限if判断的appPrivatePrice（默认0）</span></span><br><span class="line"><span class="comment">					    返回的是私享价，若是0，那么就会用页面中的appPrivatePrice</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="attr">watch</span>: &#123;</span><br><span class="line">    <span class="attr">cartGoods</span>: &#123;</span><br><span class="line">        <span class="title function_">handler</span>(<span class="params">newV, oldV</span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> sum = newV.<span class="title function_">filter</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">isChecked</span>)</span><br><span class="line">            .<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">sku_private_price</span> || <span class="number">0</span> * item.<span class="property">count</span>)</span><br><span class="line">            .<span class="title function_">reduce</span>(<span class="function">(<span class="params">prev, current</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> prev + current</span><br><span class="line">            &#125;, <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">hasPrivatePriceAuth</span> || <span class="variable language_">this</span>.<span class="property">fatherKolId</span>) <span class="variable language_">this</span>.<span class="property">appPrivatePrice</span> = sum</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">immediate</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">deep</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></li>
 </ul>
 ]]></content>
       <categories>
