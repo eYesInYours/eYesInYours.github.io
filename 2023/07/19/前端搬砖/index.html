@@ -10,21 +10,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="用来分享平日接触到的有意思的知识,微信小程序前端退款用户旅程
-
-点击订单申请退款按钮，跳转下页。
-
-选择退款方式：
-
-我要退款
-我要退货退款
-
-跳转下页。
-
-选择退款理由：
-
-若是我要退款，退款完成，来到成功页面。
-若是我要退货退款,"> 
+    <meta name="description" content="用来分享平日接触到的有意思的知识,性能优化之虚拟列表场景
+尽管接口做了分页处理，但请求次数过多时，页面渲染的结构即长列表，会造成性能损耗。
+描述
+虚拟列表，就是让数据在固定个数的结构上渲染，结构不发生改变，而对应结构上的数据发生变化,"> 
     <meta name="author" content="ikchen"> 
     <link rel="alternative" href="atom.xml" title="小书斋" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -33,21 +22,10 @@
     
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:title" content=" - 小书斋"/>
-    <meta name="twitter:description" content="用来分享平日接触到的有意思的知识,微信小程序前端退款用户旅程
-
-点击订单申请退款按钮，跳转下页。
-
-选择退款方式：
-
-我要退款
-我要退货退款
-
-跳转下页。
-
-选择退款理由：
-
-若是我要退款，退款完成，来到成功页面。
-若是我要退货退款,"/>
+    <meta name="twitter:description" content="用来分享平日接触到的有意思的知识,性能优化之虚拟列表场景
+尽管接口做了分页处理，但请求次数过多时，页面渲染的结构即长列表，会造成性能损耗。
+描述
+虚拟列表，就是让数据在固定个数的结构上渲染，结构不发生改变，而对应结构上的数据发生变化,"/>
     
     
     
@@ -55,21 +33,10 @@
     <meta property="og:site_name" content="小书斋"/>
     <meta property="og:type" content="object"/>
     <meta property="og:title" content=" - 小书斋"/>
-    <meta property="og:description" content="用来分享平日接触到的有意思的知识,微信小程序前端退款用户旅程
-
-点击订单申请退款按钮，跳转下页。
-
-选择退款方式：
-
-我要退款
-我要退货退款
-
-跳转下页。
-
-选择退款理由：
-
-若是我要退款，退款完成，来到成功页面。
-若是我要退货退款,"/>
+    <meta property="og:description" content="用来分享平日接触到的有意思的知识,性能优化之虚拟列表场景
+尽管接口做了分页处理，但请求次数过多时，页面渲染的结构即长列表，会造成性能损耗。
+描述
+虚拟列表，就是让数据在固定个数的结构上渲染，结构不发生改变，而对应结构上的数据发生变化,"/>
     
 <link rel="stylesheet" href="/css/diaspora.css">
 
@@ -109,64 +76,35 @@
 
         </div>
         <div class="content markdown">
-            <h5 id="微信小程序前端退款"><a href="#微信小程序前端退款" class="headerlink" title="微信小程序前端退款"></a>微信小程序前端退款</h5><p><strong>用户旅程</strong></p>
-<ol>
-<li><p>点击订单<code>申请退款</code>按钮，跳转下页。</p>
-</li>
-<li><p>选择<code>退款方式</code>：</p>
-<ol>
-<li><code>我要退款</code></li>
-<li><code>我要退货退款</code></li>
-</ol>
-<p>跳转下页。</p>
-</li>
-<li><p>选择<code>退款理由</code>：</p>
-<ol>
-<li>若是<code>我要退款</code>，退款完成，来到<code>成功页面</code>。</li>
-<li>若是<code>我要退货退款</code>，跳转下页。</li>
-</ol>
-</li>
-<li><p>进入<code>审核页面</code>。</p>
-<ol>
-<li>等待审核。</li>
-<li>审核通过，填写物流，等待商家验货退款。</li>
-<li>审核拒绝，再次申请。</li>
-</ol>
-</li>
-</ol>
-<p><strong>流程</strong></p>
-<ol>
-<li>商品未发货，则直接退款。</li>
-<li>商品已发货，用户申请退款，此时状态1：正在审核。<ol>
-<li>商家通过审核，则退款状态为2：通过，此时用户可以提交物流单号；拒绝，则退款状态为3：拒绝。</li>
-<li>用户可取消退款，状态为6：取消。</li>
-<li>用户提交物流单号后，退款状态为4：待退款。</li>
-<li>商家收货验收，确认退款，退款状态为5：成功结束。</li>
-</ol>
-</li>
-</ol>
-<p><strong>接口</strong></p>
-<ol>
-<li><p><code>查询微信订单流水</code>接口 &amp;&amp; <code>提交退款申请</code>接口</p>
-<p>在选择<code>退款理由</code>后提交，首先通过自有平台的<code>订单号</code>，去查询微信平台上相应的<code>微信订单流水号</code>（背靠了微信支付，实际是微信平台原路退款），然后就是提交时带上这个参数。</p>
-</li>
-<li><p><code>查询退款状态</code>接口</p>
-<p>根据查询所得状态值，对应展示前端效果。</p>
-<p>用户每次通过<code>退款详情</code>进入时，onShow生命周期请求。</p>
-<p>（主要用于退货退款）</p>
-</li>
-<li><p>&#96;&#96;查询物流公司<code>接口 &amp;&amp; </code>提交物流&#96;接口</p>
-<p>查询后端所有物流公司的对应数值，与用户输入物流单号一起提交。</p>
-</li>
-<li><p><code>修改退款状态</code>接口</p>
-<p>撤销申请时与提交物流信息后调用。</p>
-<p>参数为自有平台<code>订单号</code>与<code>状态值</code>。</p>
-</li>
-</ol>
-<p><strong>注意</strong></p>
-<ol>
-<li>在进行了<code>退款操作</code>后，返回订单列表，应该重新调用接口刷新列表数据，此时退款订单可能由于<code>撤销申请</code>，状态从<code>退款中</code>退回<code>未发货</code>或<code>已发货</code>。目前我只做了第一页的数据替换，但如果操作的订单是第一页往后，则需要获取相应页数的数据进行页面数据的替换，这里主要是判断当前订单在哪一页。</li>
-</ol>
+            <h4 id="性能优化之虚拟列表"><a href="#性能优化之虚拟列表" class="headerlink" title="性能优化之虚拟列表"></a>性能优化之虚拟列表</h4><p><strong>场景</strong></p>
+<p>尽管接口做了分页处理，但请求次数过多时，页面渲染的结构即长列表，会造成性能损耗。</p>
+<p><strong>描述</strong></p>
+<p>虚拟列表，就是让数据在固定个数的结构上渲染，结构不发生改变，而对应结构上的数据发生变化。</p>
+<p>例如，设定列表容器容纳十个子组件，页面初始第一个子组件渲染的数据索引为0，当页面下滑一个子组件高度时，将第一个 子组件渲染的数据改为索引为1。</p>
+<p>简而言之，获取的长列表数据可以十分大，几百、几千——</p>
+<p>而虚拟列表只节选其中连续的十个，进行渲染展示。</p>
+<p><strong>技术背景</strong></p>
+<p><code>Vue3</code> <code>Ts</code></p>
+<p><strong>页面结构</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;virtual-list--container&quot; @scroll=&quot;vaScrollHandler&quot; :style=&quot;&#123; &#x27;height&#x27;: listHeight &#125;&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 可视区 --&gt;</span><br><span class="line">    &lt;div id=&quot;main-list--box&quot; ref=&quot;visibleArea&quot;&gt;</span><br><span class="line">        &lt;UserProfile :mode=&quot;0&quot; v-for=&quot;(item, index) in fakeList&quot; :key=&quot;index&quot; :userInfo=&quot;item&quot;&gt;&lt;/UserProfile&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	在上述结构中，首先通过获取可视区的ref，获取它的容器高度，</span></span><br><span class="line"><span class="comment">	并除以虚拟列表总个数（10），得到每个子项的高度</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">itemHeight.<span class="property">value</span> = visibleArea.<span class="property">value</span>?.<span class="property">clientHeight</span> / <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	其中itemCount表示列表中显示出来的个数，</span></span><br><span class="line"><span class="comment">	比如8，表示列表总显示8个列表项，另2个总是由于滚动被遮住</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">const</span> listHeight = <span class="title function_">computed</span>(<span class="function">() =&gt;</span> itemCount * itemHeight.<span class="property">value</span> + <span class="string">&quot;px&quot;</span>)     <span class="comment">// 展示的列表高度</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>逻辑实现</strong></p>
+<p>在页面下滑过程中，如果距离底部还有一个列表项的高度，并且满足请求条件，则发起请求、添加数据。</p>
+<p>接着，如果发生触底，那么就去节选所有数据<code>allList</code>中相应的十个，进行渲染<code>fakeList</code>。</p>
+<p>在页面下滑过程中，下滑了一个列表项的高度，其实就是虚拟列表结构整体渲染的数据的索引，都向后增加1位。</p>
+<p>由于数据的更替，页面看起来就会闪烁，因此，此时需要做的就是通过scrollTop，纠正两个相同索引的数据，在前后两次页面渲染中的偏差。</p>
+<p>对于向上滑动页面，同样的在触顶时更新渲染的数据<code>fakeList</code>，并修正偏差。</p>
+<p><strong>图示（来源掘金）</strong></p>
+<img src="DestTop\list.jpg" style="zoom: 20%;">
+
+<p><strong>参数变量</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> visibleArea = <span class="title function_">ref</span>()</span><br><span class="line"><span class="keyword">const</span> itemHeight = <span class="title function_">ref</span>(<span class="number">0</span>)   <span class="comment">// 单个item高度</span></span><br><span class="line"><span class="keyword">const</span> itemCount = <span class="number">8</span>    <span class="comment">// 列表展示的个数8，而非当前页总数10</span></span><br><span class="line"><span class="keyword">const</span> listHeight = <span class="title function_">computed</span>(<span class="function">() =&gt;</span> itemCount * itemHeight.<span class="property">value</span> + <span class="string">&quot;px&quot;</span>)     <span class="comment">// 展示的列表高度</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> startIndex = <span class="title function_">ref</span>(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">let</span> endIndex = <span class="title function_">ref</span>(<span class="number">9</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> isBottom = <span class="title function_">ref</span>(<span class="literal">false</span>)			<span class="comment">// 触底节流阀</span></span><br><span class="line"><span class="keyword">let</span> allowPreRequest = <span class="title function_">ref</span>(<span class="literal">true</span>)    <span class="comment">// 预加载阀</span></span><br><span class="line"><span class="keyword">let</span> initScrollTop = <span class="title function_">ref</span>(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">let</span> hideCount = <span class="title function_">ref</span>(<span class="number">0</span>)			<span class="comment">// 由于滚动隐藏的列表项个数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> allList = reactive&lt;<span class="title class_">Object</span>[]&gt;([])	<span class="comment">// 所有数据</span></span><br><span class="line"><span class="keyword">let</span> fakeList = reactive&lt;<span class="title class_">Object</span>[]&gt;([])	<span class="comment">// 虚拟列表渲染数据</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>滚动监听函数</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">vaScrollHandler</span> = (<span class="params">e: any</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> &#123; scrollTop, scrollHeight, clientHeight &#125; = e.<span class="property">target</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">        step4：触底或触顶时：更新触底变量，以使数据能刷新</span></span><br><span class="line"><span class="comment">        触底后修正了scrollTop，因此会进入这一层判断</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">if</span> (scrollTop.<span class="title function_">toFixed</span>(<span class="number">2</span>) == itemHeight.<span class="property">value</span> || scrollTop == <span class="number">0</span>) &#123;</span><br><span class="line">        isBottom.<span class="property">value</span> = <span class="literal">false</span></span><br><span class="line">        allowPreRequest.<span class="property">value</span> = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断滚动方向</span></span><br><span class="line">    <span class="keyword">let</span> direction = scrollTop - initScrollTop.<span class="property">value</span></span><br><span class="line">    initScrollTop.<span class="property">value</span> = scrollTop</span><br><span class="line">    <span class="keyword">if</span> (direction &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 更新触底变量，否则每次只能触顶后才能触底更新</span></span><br><span class="line">        isBottom.<span class="property">value</span> = <span class="literal">false</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (scrollTop == <span class="number">0</span> &amp;&amp; startIndex.<span class="property">value</span>) &#123;</span><br><span class="line">            <span class="title function_">onReachTop</span>()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">        step1：预加载下页数据（先）</span></span><br><span class="line"><span class="comment">        allowPreRequest节流阀用于由于scrollTop等参数的误差导致的重复进入判断</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="title class_">Math</span>.<span class="title function_">ceil</span>(scrollTop) + clientHeight &gt;= <span class="title class_">Math</span>.<span class="title function_">ceil</span>(scrollHeight - itemHeight.<span class="property">value</span> * <span class="number">1</span>) &amp;&amp; allowPreRequest.<span class="property">value</span>) &#123;</span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">			虚拟列表结束索引初始为9，每次触底都会更新endIndex的索引值（之后）</span></span><br><span class="line"><span class="comment">			如果结束索引endIndex 和 所有数据allList最后位元素的索引一致，满足更新条件，请求数据</span></span><br><span class="line"><span class="comment">		*/</span></span><br><span class="line">        <span class="keyword">if</span> (endIndex.<span class="property">value</span> == allList.<span class="property">length</span> - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="title function_">mockRequest</span>()</span><br><span class="line">                .<span class="title function_">then</span>(<span class="function">(<span class="params">res: any</span>) =&gt;</span> &#123;</span><br><span class="line">                    res.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item: any</span>) =&gt;</span> &#123;</span><br><span class="line">                        allList.<span class="title function_">push</span>(item)</span><br><span class="line">                    &#125;)</span><br><span class="line">                    pageParam.<span class="property">pages</span>++</span><br><span class="line">                &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        allowPreRequest.<span class="property">value</span> = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    	step2：触底判断（后）</span></span><br><span class="line"><span class="comment">    	同样，isBottom节流阀用途一致</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="title class_">Math</span>.<span class="title function_">ceil</span>(scrollTop) + clientHeight == scrollHeight &amp;&amp; !isBottom.<span class="property">value</span>) &#123;</span><br><span class="line">        <span class="title function_">onReachBotoom</span>()</span><br><span class="line">        isBottom.<span class="property">value</span> = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">        step3：触底后更新列表数据</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">onReachBotoom</span>(<span class="params"></span>) &#123;</span><br><span class="line">        hideCount.<span class="property">value</span> = <span class="number">10</span> - itemCount</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 更新虚拟列表起始索引</span></span><br><span class="line">        startIndex.<span class="property">value</span> += hideCount.<span class="property">value</span> - <span class="number">1</span></span><br><span class="line">        endIndex.<span class="property">value</span> += hideCount.<span class="property">value</span> - <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; fakeList.<span class="property">length</span>; i++) &#123;</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">            	这里是预防下滑速度过快，尽管成功发起了请求，</span></span><br><span class="line"><span class="comment">            	但触底更新时数据仍不存在，导致页面列表项展示undefined</span></span><br><span class="line"><span class="comment">            */</span> </span><br><span class="line">            <span class="keyword">if</span> (allList[i + startIndex.<span class="property">value</span>]) fakeList[i] = allList[i + startIndex.<span class="property">value</span>]</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        	hideCount虚拟列表隐藏的个数是2，则前面更新索引时，其实虚拟列表渲染的数据只是整体向后移动了一位</span></span><br><span class="line"><span class="comment">        	这里就是修正同一个数据的位移偏差，看起来不会抖</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        e.<span class="property">target</span>.<span class="property">scrollTop</span> = itemHeight.<span class="property">value</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">        上拉时更新列表数据</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">onReachTop</span>(<span class="params"></span>) &#123;</span><br><span class="line">        startIndex.<span class="property">value</span> -= hideCount.<span class="property">value</span></span><br><span class="line">        endIndex.<span class="property">value</span> -= hideCount.<span class="property">value</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; fakeList.<span class="property">length</span>; i++) &#123;</span><br><span class="line">            fakeList[i] = allList[i + startIndex.<span class="property">value</span>]</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        e.<span class="property">target</span>.<span class="property">scrollTop</span> = itemHeight.<span class="property">value</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -203,7 +141,7 @@
     </div>
     
         <div class="side">
-            <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%89%8D%E7%AB%AF%E9%80%80%E6%AC%BE"><span class="toc-number">1.</span> <span class="toc-text">微信小程序前端退款</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E8%99%9A%E6%8B%9F%E5%88%97%E8%A1%A8"><span class="toc-number">1.</span> <span class="toc-text">性能优化之虚拟列表</span></a></li></ol>
         </div>
     
 </div>

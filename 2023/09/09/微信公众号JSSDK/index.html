@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title> - 小书斋</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="用来分享平日接触到的有意思的知识,微信公众号JSSDK场景
+在微信小程序中，通过webview标签，可以访问到H5页面，这种就是混合开发模式。
+而这种情况下的网页，由于在微信环境内，借助微信公众号JSSDK可以实现原本网页不能实现的,"> 
+    <meta name="author" content="ikchen"> 
+    <link rel="alternative" href="atom.xml" title="小书斋" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content=" - 小书斋"/>
+    <meta name="twitter:description" content="用来分享平日接触到的有意思的知识,微信公众号JSSDK场景
+在微信小程序中，通过webview标签，可以访问到H5页面，这种就是混合开发模式。
+而这种情况下的网页，由于在微信环境内，借助微信公众号JSSDK可以实现原本网页不能实现的,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="小书斋"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content=" - 小书斋"/>
+    <meta property="og:description" content="用来分享平日接触到的有意思的知识,微信公众号JSSDK场景
+在微信小程序中，通过webview标签，可以访问到H5页面，这种就是混合开发模式。
+而这种情况下的网页，由于在微信环境内，借助微信公众号JSSDK可以实现原本网页不能实现的,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">小书斋</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://ikchen.top"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle"></h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title"></h1>
+        <div class="stuff">
+            <span>九月 09, 2023</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h4 id="微信公众号JSSDK"><a href="#微信公众号JSSDK" class="headerlink" title="微信公众号JSSDK"></a>微信公众号JSSDK</h4><p><strong>场景</strong></p>
+<p>在微信小程序中，通过webview标签，可以访问到H5页面，这种就是混合开发模式。</p>
+<p>而这种情况下的网页，由于在微信环境内，借助微信公众号JSSDK可以实现原本网页不能实现的功能。</p>
+<p>比如网页中，我用vant4中的upload组件做图片上传，但官方也说明了部分机型有适配问题，会出现图片不能多选、选择失效的情况。此时，借助官方API可以很友好的进行选图操作。</p>
+<p><strong>配置</strong></p>
+<p>我封装了一个配置的方法，在需要的页面直接调用。</p>
+<p>第一步需要后端开发一个接口，将微信jssdk需要的配置参数返回前端。</p>
+<p>在jssdk的配置中，需要每次使用场景的路径，所以通过<code>window.location.href</code>获取全路径。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 微信jssdk npm包</span></span><br><span class="line"><span class="keyword">import</span> wx <span class="keyword">from</span> <span class="string">&#x27;weixin-js-sdk&#x27;</span>	</span><br><span class="line"><span class="comment">// 获取签名api</span></span><br><span class="line"><span class="keyword">import</span> <span class="variable constant_">WXAUTH</span> <span class="keyword">from</span> <span class="string">&#x27;@/api/coupon/wx_auth&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">    使用微信公众号jssdk前的配置方法</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">interface <span class="title class_">Config</span> &#123;</span><br><span class="line">    <span class="attr">jsApiList</span>: <span class="title class_">Array</span>&lt;string&gt;,</span><br><span class="line">    ready?: <span class="title class_">Function</span>,</span><br><span class="line">    error?: <span class="title class_">Function</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">wxJssdkConfig</span> = <span class="keyword">async</span> (<span class="params">params: Config</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; <span class="attr">data</span>: signatureObj &#125; = <span class="keyword">await</span> <span class="variable constant_">WXAUTH</span>.<span class="title function_">getSignature</span>(&#123;</span><br><span class="line">        <span class="attr">url</span>: <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span>,</span><br><span class="line">        <span class="attr">access_token</span>: <span class="string">&quot;/&quot;</span></span><br><span class="line">    &#125;) <span class="keyword">as</span> &#123; <span class="attr">data</span>: &#123;&#125; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> &#123; appId, nonceStr, signature, timestamp &#125; = signatureObj <span class="keyword">as</span> any</span><br><span class="line"></span><br><span class="line">    wx.<span class="title function_">config</span>(&#123;</span><br><span class="line">        <span class="attr">debug</span>: <span class="literal">false</span>, <span class="comment">// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。</span></span><br><span class="line">        appId, <span class="comment">// 必填，公众号的唯一标识</span></span><br><span class="line">        timestamp, <span class="comment">// 必填，生成签名的时间戳</span></span><br><span class="line">        nonceStr, <span class="comment">// 必填，生成签名的随机串</span></span><br><span class="line">        <span class="attr">signature</span>: signature,<span class="comment">// 必填，签名</span></span><br><span class="line">        <span class="attr">jsApiList</span>: params.<span class="property">jsApiList</span> <span class="comment">// 必填，需要使用的JS接口列表</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    wx.<span class="title function_">ready</span>(<span class="keyword">function</span> (<span class="params">res: any</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;ready&quot;</span>, res)</span><br><span class="line">        <span class="keyword">if</span>(params.<span class="property">ready</span>)&#123;</span><br><span class="line">            params.<span class="title function_">ready</span>()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    wx.<span class="title function_">error</span>(<span class="keyword">function</span> (<span class="params">err: any</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(err)</span><br><span class="line">        <span class="keyword">if</span>(params.<span class="property">error</span>)&#123;</span><br><span class="line">            params.<span class="title function_">error</span>()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> wxJssdkConfig</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用（微信选图）</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 封装的微信选图组件</span></span><br><span class="line"></span><br><span class="line"><span class="title function_">onMounted</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">wxJssdkConfig</span>(&#123;</span><br><span class="line">        <span class="attr">jsApiList</span>: [<span class="string">&#x27;checkJsApi&#x27;</span>, <span class="string">&#x27;chooseImage&#x27;</span>],</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 微信选图获取的Id</span></span><br><span class="line"><span class="keyword">let</span> localIds = <span class="title function_">ref</span>([])</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">wxChooseImg</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    wx.<span class="title function_">checkJsApi</span>(&#123;</span><br><span class="line">        <span class="attr">jsApiList</span>: [<span class="string">&#x27;chooseImage&#x27;</span>], <span class="comment">// 需要检测的JS接口列表，所有JS接口列表见附录2,</span></span><br><span class="line">        <span class="attr">success</span>: <span class="keyword">function</span> (<span class="params">res: any</span>) &#123;</span><br><span class="line">            <span class="comment">// 以键值对的形式返回，可用的api值true，不可用为false</span></span><br><span class="line">            <span class="comment">// 如：&#123;&quot;checkResult&quot;:&#123;&quot;chooseImage&quot;:true&#125;,&quot;errMsg&quot;:&quot;checkJsApi:ok&quot;&#125;</span></span><br><span class="line">            <span class="keyword">if</span> (res.<span class="property">checkResult</span>.<span class="property">chooseImage</span>) &#123;</span><br><span class="line">                localIds.<span class="property">value</span>.<span class="property">length</span> = <span class="number">0</span></span><br><span class="line">                cousor.<span class="property">value</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">// showToast(&quot;JSSDK可用&quot;)</span></span><br><span class="line"></span><br><span class="line">                wx.<span class="title function_">chooseImage</span>(&#123;</span><br><span class="line">                    <span class="attr">count</span>: <span class="number">9</span> - wxUrls.<span class="property">length</span>, <span class="comment">// 默认9</span></span><br><span class="line">                    <span class="attr">sizeType</span>: [<span class="string">&#x27;original&#x27;</span>, <span class="string">&#x27;compressed&#x27;</span>], <span class="comment">// 可以指定是原图还是压缩图，默认二者都有</span></span><br><span class="line">                    <span class="attr">sourceType</span>: [<span class="string">&#x27;album&#x27;</span>, <span class="string">&#x27;camera&#x27;</span>], <span class="comment">// 可以指定来源是相册还是相机，默认二者都有</span></span><br><span class="line">                    <span class="attr">success</span>: <span class="keyword">function</span> (<span class="params">res: any</span>) &#123;</span><br><span class="line">                        <span class="comment">/*</span></span><br><span class="line"><span class="comment">                        	返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片</span></span><br><span class="line"><span class="comment">                        	但是我在ios上试并不行，所需后续只能获取图片的base64</span></span><br><span class="line"><span class="comment">                        */</span></span><br><span class="line">                        localIds.<span class="property">value</span> = res.<span class="property">localIds</span></span><br><span class="line">                        <span class="title function_">getWxImgBase64</span>()</span><br><span class="line">                    &#125;,</span><br><span class="line"></span><br><span class="line">                &#125;);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="title function_">showToast</span>(<span class="string">&quot;不可用JSSDK&quot;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     jssdk：获取图片base64，并转换为File，同时显示图片</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	localIds游标</span></span><br><span class="line"><span class="comment">	它的存在只是让加载loading一直持续到最后，因为这是通过api去拿图片，是有过程时间的</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">let</span> cousor = <span class="title function_">ref</span>(<span class="number">0</span>)    </span><br><span class="line"><span class="keyword">const</span> <span class="title function_">getWxImgBase64</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="title function_">showLoadingToast</span>(<span class="string">&quot;正在加载&quot;</span>)</span><br><span class="line"></span><br><span class="line">    wx.<span class="title function_">getLocalImgData</span>(&#123;</span><br><span class="line">        <span class="attr">localId</span>: localIds.<span class="property">value</span>[cousor.<span class="property">value</span>], <span class="comment">// 图片的localID</span></span><br><span class="line">        <span class="attr">success</span>: <span class="keyword">function</span> (<span class="params">local: any</span>) &#123;</span><br><span class="line">            <span class="comment">// localData是图片的base64数据，可以用img标签显示</span></span><br><span class="line">            <span class="keyword">let</span> base64String = local.<span class="property">localData</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 处理在微信环境中，图片地址莫名丢失了 base64 前缀</span></span><br><span class="line">            <span class="keyword">if</span> (!base64String.<span class="title function_">includes</span>(<span class="string">&quot;data:image&quot;</span>)) &#123;</span><br><span class="line">                base64String = <span class="string">&quot;data:image/jpg;base64,&quot;</span> + base64String</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 添加到数组中，页面展示</span></span><br><span class="line">            wxUrls.<span class="title function_">push</span>(base64String)</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 解码 Base64 数据为 Uint8Array 字节数组</span></span><br><span class="line">            <span class="keyword">const</span> base64Data = base64String.<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>)[<span class="number">1</span>]; <span class="comment">// 去除 data:image/png;base64, 部分</span></span><br><span class="line">            <span class="keyword">const</span> byteArray = <span class="keyword">new</span> <span class="title class_">Uint8Array</span>(<span class="title function_">atob</span>(base64Data).<span class="title function_">split</span>(<span class="string">&#x27;&#x27;</span>).<span class="title function_">map</span>(<span class="function"><span class="params">char</span> =&gt;</span> char.<span class="title function_">charCodeAt</span>(<span class="number">0</span>)));</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 创建 Blob 对象</span></span><br><span class="line">            <span class="keyword">const</span> blob = <span class="keyword">new</span> <span class="title class_">Blob</span>([byteArray], &#123; <span class="attr">type</span>: <span class="string">&#x27;image/png&#x27;</span> &#125;); <span class="comment">// 根据实际的数据类型设置 type</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 使用 Blob 对象创建 File 对象</span></span><br><span class="line">            <span class="keyword">const</span> file = <span class="keyword">new</span> <span class="title class_">File</span>([blob], <span class="string">&#x27;image.png&#x27;</span>, &#123; <span class="attr">type</span>: <span class="string">&#x27;image/png&#x27;</span> &#125;); <span class="comment">// 根据实际的文件名和类型设置</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 这一步拿到File对象，调用接口上传，最后拿到图片在云端的地址</span></span><br><span class="line">            wxUrlFiles.<span class="title function_">push</span>(file)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (cousor.<span class="property">value</span> &lt; localIds.<span class="property">value</span>.<span class="property">length</span> - <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// 递归</span></span><br><span class="line">                cousor.<span class="property">value</span>++</span><br><span class="line">                <span class="title function_">getWxImgBase64</span>()</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="title function_">closeToast</span>()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>IOS异常</strong></p>
+<p>以上选图的功能在安卓上是正常运行的，但在IOS机型上会失效。</p>
+<p>如果此时刷新一下，就能恢复正常。</p>
+<p>原因：尽管程序控制路由做了切换，但在IOS机型上，它本身并没有改变路由。也就是说，尽管来到了当前选图页面，但路由路径还是上一层级的。而前面配置jssdk时，也声明了需要配置实际使用的全路径路由。</p>
+<p>这也解释了为什么刷新就能恢复正常，此时路由重新加载。</p>
+<p>解决办法：</p>
+<ol>
+<li><p>进入当前页面时，通过window.location.reload()，刷新路由。</p>
+<p>但这种方法用户可以明显看到再加载过程，不友好。</p>
+</li>
+<li><p>在上一层页面时，仍然通过vue-router做切换，但通过组件内路由离开守卫做控制。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">onBeforeRouteLeave</span>(<span class="function">(<span class="params">to, <span class="keyword">from</span></span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> u = navigator.<span class="property">userAgent</span>;</span><br><span class="line">    <span class="keyword">let</span> isiOS = !!u.<span class="title function_">match</span>(<span class="regexp">/\(i[^;]+;( U;)? CPU.+Mac OS X/</span>); <span class="comment">//ios终端</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果不满足条件，还是正常的vue路由跳转</span></span><br><span class="line">    <span class="keyword">if</span> (isiOS &amp;&amp; to.<span class="property">name</span> == <span class="string">&quot;upload&quot;</span>) &#123;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span> = <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">origin</span> + <span class="string">&quot;/mxlife&quot;</span> + to.<span class="property">fullPath</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这样在进入选图页面时，路由就已经是正确匹配的了。</p>
+</li>
+</ol>
+<p><strong>使用（H5与小程序通信）</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> wx <span class="keyword">from</span> <span class="string">&#x27;weixin-js-sdk&#x27;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">// 和微信小程序原生的方法名一样，通过这种方法可以跳转到指定页面</span></span><br><span class="line">wx.<span class="property">miniProgram</span>.<span class="title function_">navigateTo</span>(&#123;</span><br><span class="line">        <span class="attr">url</span>: <span class="string">&quot;/subpkg_goods/recommend-series-detail/recommend-series-detail?spuId=&quot;</span> + props.<span class="property">discount</span>.<span class="property">primaryKey</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">  传递消息给小程序</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">wx.<span class="property">miniProgram</span>.<span class="title function_">postMessage</span>(&#123;</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: courseDetail.<span class="property">name</span>,</span><br><span class="line">        <span class="attr">cover</span>: courseDetail.<span class="property">cover</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在小程序中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;web-view :src=<span class="string">&quot;url&quot;</span> @message=<span class="string">&quot;receive&quot;</span>&gt;&lt;/web-view&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span>&#123;  </span><br><span class="line">    <span class="title function_">data</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">courseDetail</span>:&#123;	</span><br><span class="line">				<span class="attr">name</span>: <span class="string">&quot;xxx&quot;</span>,	<span class="comment">// 默认值</span></span><br><span class="line">				<span class="attr">cover</span>: <span class="string">&quot;xxx&quot;</span></span><br><span class="line">			&#125;,</span><br><span class="line">            <span class="attr">shareParam</span>: <span class="string">&quot;&quot;</span>,	<span class="comment">// 分享参数，在分享出去的页面onload生命周期接收</span></span><br><span class="line">            url： <span class="string">&quot;&quot;</span>,	<span class="comment">// h5地址</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    	分享好友生命周期</span></span><br><span class="line"><span class="comment">    	这样可以实现分享时，标题和封面的数据来自H5</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="title function_">onShareAppMessage</span>(<span class="params"><span class="keyword">from</span>, to</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">title</span>: <span class="variable language_">this</span>.<span class="property">courseDetail</span>.<span class="property">name</span>,</span><br><span class="line">            <span class="attr">path</span>: <span class="string">&quot;/pages/community/advertising-detail&quot;</span> + <span class="variable language_">this</span>.<span class="property">shareParam</span>,</span><br><span class="line">            <span class="attr">imageUrl</span>: <span class="variable language_">this</span>.<span class="property">courseDetail</span>.<span class="property">cover</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">	<span class="attr">methods</span>: &#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        	接受来自H5的消息</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="title function_">receive</span>(<span class="params">e</span>)&#123;</span><br><span class="line">            <span class="keyword">const</span> &#123; name, cover&#125; = e.<span class="property">detail</span>.<span class="property">data</span>[<span class="number">0</span>]</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">courseDetail</span>.<span class="property">name</span> = name</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">courseDetail</span>.<span class="property">cover</span> = cover</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>其他</strong></p>
+<p>到此，微信开发文档（公众号）JSSDK其他api，就直接调用就可以了。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7JSSDK"><span class="toc-number">1.</span> <span class="toc-text">微信公众号JSSDK</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
