@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>大文件上传2：秒传&amp;断点续传 - 小书斋</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="用来分享平日接触到的有意思的知识,大文件上传（二）：秒传&amp;amp;断点续传前言
+基于上一篇的《大文件上传》。
+
+秒传秒传的字面意思是：在极短的时间内上传文件。但这其实是一种障眼法，真实情况是：校验服务端是否已经有这个文件，如有，前端,"> 
+    <meta name="author" content="ikchen"> 
+    <link rel="alternative" href="atom.xml" title="小书斋" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="大文件上传2：秒传&amp;断点续传 - 小书斋"/>
+    <meta name="twitter:description" content="用来分享平日接触到的有意思的知识,大文件上传（二）：秒传&amp;amp;断点续传前言
+基于上一篇的《大文件上传》。
+
+秒传秒传的字面意思是：在极短的时间内上传文件。但这其实是一种障眼法，真实情况是：校验服务端是否已经有这个文件，如有，前端,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="小书斋"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="大文件上传2：秒传&amp;断点续传 - 小书斋"/>
+    <meta property="og:description" content="用来分享平日接触到的有意思的知识,大文件上传（二）：秒传&amp;amp;断点续传前言
+基于上一篇的《大文件上传》。
+
+秒传秒传的字面意思是：在极短的时间内上传文件。但这其实是一种障眼法，真实情况是：校验服务端是否已经有这个文件，如有，前端,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">小书斋</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://ikchen.top"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">大文件上传2：秒传&断点续传</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">大文件上传2：秒传&断点续传</h1>
+        <div class="stuff">
+            <span>二月 18, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%A0%87%E7%AD%BE1/" rel="tag">标签1</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="大文件上传（二）：秒传-amp-断点续传"><a href="#大文件上传（二）：秒传-amp-断点续传" class="headerlink" title="大文件上传（二）：秒传&amp;断点续传"></a>大文件上传（二）：秒传&amp;断点续传</h3><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><blockquote>
+<p>基于上一篇的《大文件上传》。</p>
+</blockquote>
+<h4 id="秒传"><a href="#秒传" class="headerlink" title="秒传"></a>秒传</h4><p><code>秒传</code>的字面意思是：在极短的时间内上传文件。<br>但这其实是一种障眼法，真实情况是：校验服务端是否已经有这个文件，如有，前端则跳过<code>上传</code>、<code>合并</code>过程，直接显示【上传成功】。</p>
+<p>这时注意到一个问题：怎么唯一的标识一个文件？<br>如果依照<code>文件名</code>，前端所上传的文件若是更改名字后的，那么这个<code>上传</code>依旧要进行吗？</p>
+<p>因此，引入<code>文件hash</code>：根据文件内容，唯一地生成一段标识符。</p>
+<h5 id="引入spark-md5库"><a href="#引入spark-md5库" class="headerlink" title="引入spark-md5库"></a>引入spark-md5库</h5><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生成hash库</span></span><br><span class="line">npm install spark-md5</span><br></pre></td></tr></table></figure>
+
+<p>下载后，在项目中有【public】和【src】目录，从【node_modules】中找到&lt;spard-md5.js&gt;，复制到【public】下。</p>
+<p>并在【public】下新建&lt;hash.js&gt;。</p>
+<h5 id="Worker线程"><a href="#Worker线程" class="headerlink" title="Worker线程"></a>Worker线程</h5><p><code>MDN</code>是这样介绍的：<br>Web Worker 为 Web 内容在后台线程中运行脚本提供了一种简单的方法。线程可以执行任务而不干扰用户界面。</p>
+<p>生成大文件的hash，是一件十分占据线程和时间的事。<br>如果放在主线程中进行，那么会造成<code>用户界面卡顿</code>、<code>可能无法操作</code>的情况。</p>
+<p>可以这样理解<code>Worker</code>线程和主线程间的通信：主线程将<code>生成hash</code>的事交给worker线程，worker线程完成后通知主线程。</p>
+<img src="Blog\source\_posts\大文件上传2：秒传-断点续传\work.png">
+
+<p>实现如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /public/hash.js</span></span><br><span class="line"><span class="comment">// self 是 Web Worker 的一个全局对象，就像主线程中的 window对象</span></span><br><span class="line"><span class="comment">// 导入脚本</span></span><br><span class="line">self.<span class="title function_">importScripts</span>(<span class="string">&quot;spark-md5.js&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 当接收到主线程的消息时，读取文件内容，生成hash（由文件内容生成的hash是唯一的）</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line">self.<span class="property">onmessage</span> = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 文件切片数组</span></span><br><span class="line">    <span class="keyword">const</span> &#123; chunkList &#125; = e.<span class="property">data</span></span><br><span class="line">    <span class="comment">// 解析实例</span></span><br><span class="line">    <span class="keyword">const</span> spark = <span class="keyword">new</span> self.<span class="property">SparkMD5</span>.<span class="title class_">ArrayBuffer</span>()</span><br><span class="line">    <span class="keyword">let</span> percentage = <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span> count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    * 递归工具函数：读取文件内容生成hash</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">loadNext</span> = index =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> reader = <span class="keyword">new</span> <span class="title class_">FileReader</span>()</span><br><span class="line">        <span class="comment">// 读取文件内容（文件类型是ArrayBuffer）</span></span><br><span class="line">        reader.<span class="title function_">readAsArrayBuffer</span>(chunkList[index].<span class="property">chunk</span>)</span><br><span class="line">        <span class="comment">// 读取完毕</span></span><br><span class="line">        reader.<span class="property">onload</span> = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">            count++</span><br><span class="line">            <span class="comment">// 添加当前文件切片的解析结果</span></span><br><span class="line">            spark.<span class="title function_">append</span>(e.<span class="property">target</span>.<span class="property">result</span>)</span><br><span class="line">            <span class="keyword">if</span>(count === chunkList.<span class="property">length</span>) &#123;</span><br><span class="line">                self.<span class="title function_">postMessage</span>(&#123;</span><br><span class="line">                    <span class="attr">percentage</span>: <span class="number">100</span>,</span><br><span class="line">                    <span class="comment">// 返回最终hash结果</span></span><br><span class="line">                    <span class="attr">hash</span>: spark.<span class="title function_">end</span>()</span><br><span class="line">                &#125;)</span><br><span class="line">                <span class="comment">// 关闭 Web Worker</span></span><br><span class="line">                self.<span class="title function_">close</span>()</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                percentage += <span class="number">100</span> / chunkList.<span class="property">length</span></span><br><span class="line">                self.<span class="title function_">postMessage</span>(&#123;</span><br><span class="line">                    percentage</span><br><span class="line">                &#125;)</span><br><span class="line">                <span class="title function_">loadNext</span>(count)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">loadNext</span>(<span class="number">0</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="主线程异步等待"><a href="#主线程异步等待" class="headerlink" title="主线程异步等待"></a>主线程异步等待</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// hashPercentage相当于Vue中的data，setHashPercentage是相应的设置方法</span></span><br><span class="line"><span class="keyword">const</span> [hashPercentage, setHashPercentage] = <span class="title function_">useState</span>(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * （Web Worker）生成文件hash</span></span><br><span class="line"><span class="comment"> * @param &#123;chunkList&#125; 文件切片数组</span></span><br><span class="line"><span class="comment"> * */</span> </span><br><span class="line"><span class="keyword">const</span> <span class="title function_">createHash</span> = (<span class="params">chunkList: <span class="built_in">Array</span>&lt;ChunkItem&gt;</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> worker = <span class="keyword">new</span> <span class="title class_">Worker</span>(<span class="string">&#x27;/hash.js&#x27;</span>)</span><br><span class="line">        worker.<span class="title function_">postMessage</span>(&#123;chunkList&#125;)</span><br><span class="line">        worker.<span class="property">onmessage</span> = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> &#123;percentage, hash&#125; = e.<span class="property">data</span></span><br><span class="line">            <span class="title function_">setHashPercentage</span>(<span class="title class_">Math</span>.<span class="title function_">round</span>(percentage))</span><br><span class="line">            <span class="keyword">if</span>(hash)</span><br><span class="line">                <span class="title function_">resolve</span>(hash)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么接下来就要修改上一篇中的上传处理了，顺序如下：</p>
+<ol>
+<li>生成hash，通过hash与文件后缀查询后端。</li>
+<li>若已经存在，前端显示【上传成功】。</li>
+<li>若不存在，再<code>依次上传文件切片</code>、<code>合并切片</code>。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">handleUpload</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">       <span class="keyword">let</span> <span class="attr">chunkList</span>: <span class="title class_">Array</span>&lt;<span class="title class_">ChunkItem</span>&gt; = <span class="title function_">slicefileChunk</span>()</span><br><span class="line"></span><br><span class="line">    	<span class="comment">// 生成hash</span></span><br><span class="line">       <span class="keyword">const</span> fileHash = <span class="keyword">await</span> <span class="title function_">createHash</span>(chunkList)</span><br><span class="line"></span><br><span class="line">       chunkList = chunkList.<span class="title function_">map</span>(<span class="function">(<span class="params">item: ChunkItem</span>) =&gt;</span> (&#123;</span><br><span class="line">           ...item,</span><br><span class="line">           fileHash</span><br><span class="line">       &#125;))</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 文件后缀</span></span><br><span class="line">       <span class="keyword">const</span> suffix = fileList[<span class="number">0</span>].<span class="property">name</span>.<span class="title function_">split</span>(<span class="string">&#x27;.&#x27;</span>)[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">       <span class="keyword">try</span>&#123;</span><br><span class="line">           <span class="title function_">setUploading</span>(<span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line">           <span class="comment">// 查询文件是否已经存在</span></span><br><span class="line">           <span class="keyword">const</span> verify = <span class="keyword">await</span> service.<span class="title function_">get</span>(<span class="string">`/verify?filename=<span class="subst">$&#123;fileHash&#125;</span>.<span class="subst">$&#123;suffix&#125;</span>`</span>)</span><br><span class="line">           <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;isExist&#x27;</span>, verify)</span><br><span class="line">           <span class="keyword">if</span>(verify.<span class="property">data</span>)&#123;</span><br><span class="line">               message.<span class="title function_">success</span>(<span class="string">&quot;上传成功&quot;</span>)</span><br><span class="line">               <span class="keyword">return</span></span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">const</span> chunkPromiseList = <span class="title function_">turnChunkIntoPromise</span>(chunkList)</span><br><span class="line"></span><br><span class="line">           <span class="keyword">await</span> <span class="title class_">Promise</span>.<span class="title function_">all</span>(chunkPromiseList)</span><br><span class="line">           <span class="keyword">const</span> formData = <span class="keyword">new</span> <span class="title class_">FormData</span>()</span><br><span class="line">           <span class="comment">// 文件后缀交给后端合并文件</span></span><br><span class="line">           formData.<span class="title function_">append</span>(<span class="string">&#x27;suffix&#x27;</span>, suffix)</span><br><span class="line">           formData.<span class="title function_">append</span>(<span class="string">&quot;fileHash&quot;</span>, fileHash+<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">           formData.<span class="title function_">append</span>(<span class="string">&quot;size&quot;</span>, <span class="variable constant_">CHUNK_SIZE</span>+<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">           <span class="keyword">await</span> service.<span class="title function_">post</span>(<span class="string">&#x27;/merge&#x27;</span>, formData)</span><br><span class="line">           message.<span class="title function_">success</span>(<span class="string">&#x27;上传成功&#x27;</span>)</span><br><span class="line">       &#125;<span class="keyword">catch</span> (e) &#123;</span><br><span class="line">           message.<span class="title function_">error</span>(<span class="string">&#x27;上传失败&#x27;</span>)</span><br><span class="line">       &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">           <span class="title function_">setUploading</span>(<span class="literal">false</span>)</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="服务端查询与合并"><a href="#服务端查询与合并" class="headerlink" title="服务端查询与合并"></a>服务端查询与合并</h5><p><code>查询接口</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 验证文件是否存在 */</span></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/verify&#x27;</span>, <span class="keyword">async</span> (ctx, next) =&gt; &#123;</span><br><span class="line">  ctx.<span class="title function_">set</span>(<span class="string">&quot;Access-Control-Allow-Origin&quot;</span>, <span class="string">&quot;*&quot;</span>);</span><br><span class="line">  <span class="keyword">const</span> &#123; filename &#125; = ctx.<span class="property">query</span>;</span><br><span class="line">  <span class="keyword">const</span> filePath = path.<span class="title function_">resolve</span>(<span class="variable constant_">UPLOAD_DIR</span>, filename);</span><br><span class="line">  <span class="keyword">const</span> isExist = fse.<span class="title function_">existsSync</span>(filePath);</span><br><span class="line">  ctx.<span class="property">body</span> = &#123;</span><br><span class="line">    <span class="attr">code</span>: <span class="number">200</span>,</span><br><span class="line">    <span class="attr">msg</span>: <span class="string">&#x27;验证成功&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>: isExist</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">await</span> <span class="title function_">next</span>()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>合并接口/merge</code>同样需要处理：更改文件的命名方式，由文件名命名更改为hash命名。<br>前端因此做出的改变在<code>handleUpload</code>方法中可见：携带<code>文件后缀</code>和<code>文件hash</code>。</p>
+<h5 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h5><p>&lt;hash.js&gt;和&lt;spark-md5.js&gt;文件为什么要放在【public】目录下？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> worker = <span class="keyword">new</span> <span class="title class_">Worker</span>(<span class="string">&#x27;/hash.js&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在以上实例化worker线程时，如果&lt;hash.js&gt;文件是在其他位置，那么worker是没有工作起来的（代码无效）。<br>原文叙述如下：<code>实例化 web-worker 时，参数是一个 js 文件路径且不能跨域。</code></p>
+<h4 id="断点续传"><a href="#断点续传" class="headerlink" title="断点续传"></a>断点续传</h4><p>其实就是<code>暂停上传</code>和<code>暂停后恢复上传</code>。</p>
+<h5 id="暂停上传"><a href="#暂停上传" class="headerlink" title="暂停上传"></a>暂停上传</h5><p>首先介绍一个构造函数：<code>AbortController</code><br>通过它创建的实例<code>controller</code>，可以和每一个<code>promise</code>请求唯一关联。<br>调用<code>controller</code>身上的方法，进而取消处于<code>pendding</code>中的<code>promise</code>请求。</p>
+<h6 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// abort.ts</span></span><br><span class="line"><span class="keyword">import</span> service <span class="keyword">from</span> <span class="string">&quot;@/utils/request.ts&quot;</span>;</span><br><span class="line"></span><br><span class="line">type <span class="title class_">ListItem</span> =  &#123;</span><br><span class="line">    <span class="attr">abortController</span>: <span class="title class_">AbortController</span>,</span><br><span class="line">    <span class="attr">promise</span>: <span class="title class_">Promise</span>&lt;any&gt;,</span><br><span class="line">    <span class="attr">formData</span>: <span class="title class_">FormData</span>,</span><br><span class="line">    callBack?: <span class="title class_">Function</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AboutRequest</span> &#123;</span><br><span class="line">    private <span class="attr">list</span>: <span class="title class_">Map</span>&lt;string, <span class="title class_">ListItem</span>&gt; = <span class="keyword">new</span> <span class="title class_">Map</span>()</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    * @param &#123;formData&#125; 需要上传的文件数据</span></span><br><span class="line"><span class="comment">    * @param &#123;callBack&#125; upload请求成功后的回调函数</span></span><br><span class="line"><span class="comment">    * @return &#123;promise&#125; 上传请求promise实例，给文件切片最终的Promise.all使用</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line">    public <span class="title function_">setAbortController</span>(<span class="attr">formData</span>: <span class="title class_">FormData</span>, callBack?: <span class="title class_">Function</span>): <span class="title class_">Promise</span>&lt;any&gt;&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        * 将每个取消实例的signal属性，添加到api请求config的signal中</span></span><br><span class="line"><span class="comment">        * 这一步就将取消实例和api请求，建立起了个一一对应关系</span></span><br><span class="line"><span class="comment">        * 即后续通过取消实例，能唯一取消一个请求</span></span><br><span class="line"><span class="comment">        * */</span></span><br><span class="line">        <span class="keyword">const</span> controller = <span class="keyword">new</span> <span class="title class_">AbortController</span>()</span><br><span class="line">        <span class="keyword">const</span> signal = controller.<span class="property">signal</span></span><br><span class="line">        <span class="keyword">const</span> pId = formData.<span class="title function_">get</span>(<span class="string">&#x27;index&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> p = service.<span class="title function_">post</span>(<span class="string">&#x27;/upload&#x27;</span>, formData, &#123;signal&#125;)</span><br><span class="line">            .<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                callBack &amp;&amp; <span class="title function_">callBack</span>()</span><br><span class="line">                <span class="variable language_">this</span>.<span class="title function_">removeAbortController</span>(pId <span class="keyword">as</span> string)</span><br><span class="line">            &#125;)</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">list</span>.<span class="title function_">set</span>(pId <span class="keyword">as</span> string, &#123;</span><br><span class="line">            <span class="attr">abortController</span>: controller,</span><br><span class="line">            <span class="attr">promise</span>: p,</span><br><span class="line">            formData,</span><br><span class="line">            callBack</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    * 请求成功后，需要删除 promiseList 和 abortControllerList 中的这一条请求记录</span></span><br><span class="line"><span class="comment">    * 剩下的记录即可作为恢复上传的数据</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line">    public <span class="title function_">removeAbortController</span>(<span class="params">pId: string</span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">list</span>.<span class="title function_">delete</span>(pId)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    * 暂停剩余的&lt;文件切片上传&gt;请求</span></span><br><span class="line"><span class="comment">    * abort是永久性的，即相应的promise请求取消后，不可再发起请求</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line">    public <span class="title function_">pause</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">list</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item: ListItem</span>) =&gt;</span> &#123;</span><br><span class="line">            item.<span class="property">abortController</span>.<span class="title function_">abort</span>()</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> <span class="title class_">AboutRequest</span>()</span><br></pre></td></tr></table></figure>
+
+<h6 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h6><p>通过<code>class</code>类维持了一个公用的状态库，其中类属性<code>list</code>包含了：</p>
+<ol>
+<li>一一对应的取消控制器 <code>aboutController</code> 和请求 <code>promise</code></li>
+<li>再次构建 <code>promise</code> 时需要的 <code>formData </code>文件数据和外部方法 <code>callBack</code>（后续<em><strong>恢复上传</strong></em>会提及）</li>
+</ol>
+<p>那么，解下来的代码调用<em><strong>流程</strong></em>就是：</p>
+<ol>
+<li><p>调用类方法 <code>setAbortController</code></p>
+<p>上篇文章中有一个 <code>turnChunkIntoPromise</code> 方法，作用是将 <code>文件切片数组</code> 转换为 <code>promise实例数组</code> ，以提供给<code>Promise.all</code>做上传的并发等待。此时更改请求的定义，将 <code>取消请求的实例</code> 和 <code>请求</code> 映射起来。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">turnChunkIntoPromise</span> = (<span class="params">chunkList: <span class="built_in">Array</span>&lt;ChunkItem&gt;</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="attr">chunkPromiseList</span>: <span class="title class_">Array</span>&lt;<span class="title class_">Promise</span>&lt;any&gt;&gt; = []</span><br><span class="line">    chunkList.<span class="title function_">forEach</span>(<span class="function">(<span class="params">&#123;chunk,index, fileHash&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> formData = <span class="keyword">new</span> <span class="title class_">FormData</span>()</span><br><span class="line">        formData.<span class="title function_">append</span>(<span class="string">&#x27;chunk&#x27;</span>, chunk)</span><br><span class="line">        <span class="comment">// formData.append(&#x27;hash&#x27;, hash)</span></span><br><span class="line">        formData.<span class="title function_">append</span>(<span class="string">&#x27;index&#x27;</span>, index)</span><br><span class="line">        formData.<span class="title function_">append</span>(<span class="string">&#x27;fileHash&#x27;</span>, fileHash)</span><br><span class="line">        formData.<span class="title function_">append</span>(<span class="string">&#x27;filename&#x27;</span>, fileList[<span class="number">0</span>].<span class="property">name</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 更改部分</span></span><br><span class="line">        <span class="keyword">const</span> p = <span class="title class_">AboutReqInstance</span>.<span class="title function_">setAbortController</span>(formData, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">setImagePercentage</span>(imagePercentage + <span class="number">1</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">        chunkPromiseList.<span class="title function_">push</span>(p)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> chunkPromiseList</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用类方法 <code>removeAbortController</code></p>
+<p>类方法<code>setAbortController</code>中，每个请求的 <code>then</code>处理中调用这个函数。<br>去除相应的记录，意味着该数据已经成功上传，后续不需要关注。</p>
+</li>
+<li><p>给 <code>按钮</code> 绑定 类方法 <code>pause</code></p>
+<p>取消请求。</p>
+</li>
+</ol>
+<h5 id="恢复上传"><a href="#恢复上传" class="headerlink" title="恢复上传"></a>恢复上传</h5><h6 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AboutRequest</span>&#123;</span><br><span class="line">    <span class="comment">// ...省略...</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    * 取出剩下的未请求成功的promise</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line">    public <span class="title function_">getList</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">list</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    * 恢复上传：将剩余的promise请求重新进行AbortController绑定</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line">    public <span class="title function_">continue</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">list</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">value: ListItem, key</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> controller = <span class="keyword">new</span> <span class="title class_">AbortController</span>()</span><br><span class="line">            <span class="keyword">const</span> signal = controller.<span class="property">signal</span></span><br><span class="line">            value.<span class="property">abortController</span> = controller</span><br><span class="line">            value.<span class="property">promise</span> = service.<span class="title function_">post</span>(<span class="string">&#x27;/upload&#x27;</span>, value.<span class="property">formData</span>, &#123;signal&#125;)</span><br><span class="line">                .<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">                    value.<span class="property">callBack</span> &amp;&amp; value.<span class="title function_">callBack</span>()</span><br><span class="line">                    <span class="variable language_">this</span>.<span class="title function_">removeAbortController</span>(key)</span><br><span class="line">                &#125;)</span><br><span class="line"></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="解析-1"><a href="#解析-1" class="headerlink" title="解析"></a>解析</h6><p>类方法 <code>continue</code>所做正是：重新创建 <code>promise请求</code> 和 <code>取消实例aboutController</code>，并一一映射。</p>
+<p>在类方法 <code>pause</code> 方法注释中说明了原因：取消后的请求，不能再发起。</p>
+<p>那么，最后给出 <code>恢复上传按钮</code> 的绑定方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">continueUpload</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="title class_">AboutReqInstance</span>.<span class="title function_">continue</span>()</span><br><span class="line">        <span class="comment">// Map to Array</span></span><br><span class="line">        <span class="keyword">const</span> remainPromiselist = <span class="title class_">Array</span>.<span class="title function_">from</span>(<span class="title class_">AboutReqInstance</span>.<span class="title function_">getList</span>().<span class="title function_">values</span>())</span><br><span class="line">        	.<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">promise</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">await</span> <span class="title class_">Promise</span>.<span class="title function_">all</span>(remainPromiselist)</span><br><span class="line">        <span class="keyword">const</span> formData = <span class="keyword">new</span> <span class="title class_">FormData</span>()</span><br><span class="line">        formData.<span class="title function_">append</span>(<span class="string">&#x27;suffix&#x27;</span>, suffix)</span><br><span class="line">        formData.<span class="title function_">append</span>(<span class="string">&quot;fileHash&quot;</span>, fileHash+<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        formData.<span class="title function_">append</span>(<span class="string">&quot;size&quot;</span>, <span class="variable constant_">CHUNK_SIZE</span>+<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        <span class="keyword">await</span> service.<span class="title function_">post</span>(<span class="string">&#x27;/merge&#x27;</span>, formData)</span><br><span class="line">        message.<span class="title function_">success</span>(<span class="string">&#x27;恢复上传成功&#x27;</span>)</span><br><span class="line">    &#125;<span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(e)</span><br><span class="line">        message.<span class="title function_">error</span>(<span class="string">&#x27;上传失败&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="可优化"><a href="#可优化" class="headerlink" title="可优化"></a>可优化</h4><p>以上所提及的<em><strong>恢复上传</strong></em>，其实仍然是基于本地的。<br>如果重启浏览器（数据丢失），而又一次进行上传的文件是<em><strong>暂停</strong></em>过的，那么此时进行的上传理应是上传<em><strong>后续未上传文件</strong></em>。</p>
+<p>那么，在校验后端文件是否存在的 <code>/verify</code> 接口中，返回结果再加上一种中间状态：</p>
+<pre><code>1. 后端已有该文件。
+ 2. ***后端已有部分***。
+ 3. 后端没有。
+</code></pre>
+<p>此时后端将已有部分的文件顺序<code>index</code>返回给前端，前端跳过相应文件的上传。</p>
+<p>限于篇幅（偷懒O.o），大家这部分可以看看上篇提及的原文。</p>
+<p>其实偷懒的功能还有一个：<em><strong>上传进度条</strong></em><br>——包含两部分时间：生成文件hash时间，和请求接口时间。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="http://domain.com/awesome.mp3">
+            </audio>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E7%A7%92%E4%BC%A0-amp-%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0"><span class="toc-number">1.</span> <span class="toc-text">大文件上传（二）：秒传&amp;断点续传</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A7%92%E4%BC%A0"><span class="toc-number">1.2.</span> <span class="toc-text">秒传</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%95%E5%85%A5spark-md5%E5%BA%93"><span class="toc-number">1.2.1.</span> <span class="toc-text">引入spark-md5库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Worker%E7%BA%BF%E7%A8%8B"><span class="toc-number">1.2.2.</span> <span class="toc-text">Worker线程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%BB%E7%BA%BF%E7%A8%8B%E5%BC%82%E6%AD%A5%E7%AD%89%E5%BE%85"><span class="toc-number">1.2.3.</span> <span class="toc-text">主线程异步等待</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%9F%A5%E8%AF%A2%E4%B8%8E%E5%90%88%E5%B9%B6"><span class="toc-number">1.2.4.</span> <span class="toc-text">服务端查询与合并</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-number">1.2.5.</span> <span class="toc-text">补充</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0"><span class="toc-number">1.3.</span> <span class="toc-text">断点续传</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9A%82%E5%81%9C%E4%B8%8A%E4%BC%A0"><span class="toc-number">1.3.1.</span> <span class="toc-text">暂停上传</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">解析</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%81%A2%E5%A4%8D%E4%B8%8A%E4%BC%A0"><span class="toc-number">1.3.2.</span> <span class="toc-text">恢复上传</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90-1"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E4%BC%98%E5%8C%96"><span class="toc-number">1.4.</span> <span class="toc-text">可优化</span></a></li></ol></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

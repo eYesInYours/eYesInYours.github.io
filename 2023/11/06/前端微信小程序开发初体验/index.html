@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>前端微信小程序开发初体验 - 小书斋</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="用来分享平日接触到的有意思的知识,基本结构微信小程序中创建一个页面，在页面目录下分别有json、scss、ts、wxml文件，分别是配置、样式、逻辑、页面结构。
+和Vue的比较computed和watch
+在Vue中需要根据一个数据,"> 
+    <meta name="author" content="ikchen"> 
+    <link rel="alternative" href="atom.xml" title="小书斋" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="前端微信小程序开发初体验 - 小书斋"/>
+    <meta name="twitter:description" content="用来分享平日接触到的有意思的知识,基本结构微信小程序中创建一个页面，在页面目录下分别有json、scss、ts、wxml文件，分别是配置、样式、逻辑、页面结构。
+和Vue的比较computed和watch
+在Vue中需要根据一个数据,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="小书斋"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="前端微信小程序开发初体验 - 小书斋"/>
+    <meta property="og:description" content="用来分享平日接触到的有意思的知识,基本结构微信小程序中创建一个页面，在页面目录下分别有json、scss、ts、wxml文件，分别是配置、样式、逻辑、页面结构。
+和Vue的比较computed和watch
+在Vue中需要根据一个数据,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">小书斋</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://ikchen.top"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">前端微信小程序开发初体验</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">前端微信小程序开发初体验</h1>
+        <div class="stuff">
+            <span>十一月 06, 2023</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%A0%87%E7%AD%BE1/" rel="tag">标签1</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h6 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h6><p>微信小程序中创建一个页面，在页面目录下分别有json、scss、ts、wxml文件，分别是配置、样式、逻辑、页面结构。</p>
+<h6 id="和Vue的比较"><a href="#和Vue的比较" class="headerlink" title="和Vue的比较"></a>和Vue的比较</h6><p><strong>computed和watch</strong></p>
+<p>在<code>Vue</code>中需要根据一个数据，从而派生出另一个数据使用，就会使用到computed计算属性，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue</span></span><br><span class="line"><span class="attr">computed</span>:&#123;</span><br><span class="line">    <span class="title function_">operateText</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;</span><br><span class="line">            status,</span><br><span class="line">            courseStatus</span><br><span class="line">        &#125; = <span class="variable language_">this</span>.<span class="property">courseDetail</span></span><br><span class="line">        <span class="comment">// 1未开始 2进行中 3已结束</span></span><br><span class="line">        <span class="keyword">if</span> (status == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 1未预约 2已预约 3预约已满 4 不可预约</span></span><br><span class="line">            <span class="keyword">switch</span> (courseStatus) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="string">&quot;立即预约&quot;</span></span><br><span class="line">                <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="string">&quot;取消预约&quot;</span></span><br><span class="line">                <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="string">&quot;预约已满&quot;</span></span><br><span class="line">                <span class="attr">default</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="string">&quot;立即预约&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// return status == 2 ? &quot;进行中&quot; : &quot;已结束&quot;</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;不可预约&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上是我根据一个字段，相应的展示一个按钮的文字内容，这一点可以用来在进行某些操作后，只修改本地数据的一个字段，就可以达到和“调用接口刷新页面”一样的效果。<br>比如，当按钮显示<code>立即预约</code>时（status为1），用户点击按钮，那么请求预约接口后，只需要将<code>status</code>的值，修改成2。</p>
+<p>但我在刚开始用微信小程序时，没有用到它的computed，而是使用到了wxs语法：在wxml中使用js。例如：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;wxs module=&quot;show&quot;&gt;</span><br><span class="line">	<span class="comment">/* </span></span><br><span class="line"><span class="comment">		根据状态去决定关注按钮的样式与文字</span></span><br><span class="line"><span class="comment">		0：未关注，1：对方已关注我，2：我以关注对方，3,互相关注，</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	function <span class="built_in">getOperateText</span>(status) &#123;</span><br><span class="line">		switch (status) &#123;</span><br><span class="line">			case <span class="number">0</span>:</span><br><span class="line">				return <span class="string">&#x27;+ 关注&#x27;</span></span><br><span class="line">			case <span class="number">1</span>:</span><br><span class="line">				return <span class="string">&#x27;+ 关注&#x27;</span></span><br><span class="line">			case <span class="number">2</span>:</span><br><span class="line">				return <span class="string">&#x27;已关注&#x27;</span></span><br><span class="line">			case <span class="number">3</span>:</span><br><span class="line">				return <span class="string">&#x27;互相关注&#x27;</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	module<span class="selector-class">.exports</span> = &#123;</span><br><span class="line">		getOperateText: getOperateText,</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/wxs&gt;</span><br><span class="line"></span><br><span class="line">&lt;-- 也可以直接这样导入 --&gt;</span><br><span class="line">&lt;wxs <span class="attribute">src</span>=&quot;../../utils/filters<span class="selector-class">.wxs</span>&quot; module=&quot;global&quot; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;-- 结构 --&gt;</span><br><span class="line">&lt;view class=&quot;operate&quot; catchtap=&quot;operate&quot; data-info=&quot;&#123;&#123;item&#125;&#125;&quot;&gt;&#123;&#123;show<span class="selector-class">.getOperateText</span>(item.isStatus)&#125;&#125;&lt;/view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>因为一开始，我是希望通过方法去获得某一个派生值，但是这样做造成的结果就是，得到的派生值只是页面渲染时初次获得的值，而非动态的，也就是说，修改了<code>status</code>并不会引起按钮文字的修改。</p>
+<p>其实，微信小程序也提供了computed、watch语法，只是作为扩展，而非原生语法使用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 下载插件</span></span><br><span class="line"><span class="comment">// npm install --save miniprogram-computed</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; behavior <span class="keyword">as</span> computedBehavior &#125; <span class="keyword">from</span> <span class="string">&#x27;miniprogram-computed&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ts</span></span><br><span class="line"><span class="title function_">page</span>(&#123;</span><br><span class="line">    <span class="comment">// 数据</span></span><br><span class="line">    <span class="attr">data</span>:&#123;</span><br><span class="line">        <span class="attr">num</span>: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 类似Vue2中的mixin，代码复用。</span></span><br><span class="line">    <span class="attr">behaviors</span>: [computedBehavior],</span><br><span class="line">    </span><br><span class="line">    <span class="attr">watch</span>: &#123;</span><br><span class="line">        <span class="attr">num</span>: <span class="keyword">function</span>(<span class="params">val:any</span>)&#123;</span><br><span class="line">            <span class="comment">// 得到的变化值</span></span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(val);</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">// 监听多个值</span></span><br><span class="line">        <span class="string">&#x27;numA, numB&#x27;</span>: <span class="keyword">function</span>(<span class="params">numA:any,numB:any</span>)&#123;</span><br><span class="line"></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">// 监听对象下的子属性 </span></span><br><span class="line">        <span class="string">&#x27;obj.**&#x27;</span>: <span class="keyword">function</span> (<span class="params">obj</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">setData</span>(&#123;</span><br><span class="line">                <span class="attr">sum</span>: obj.<span class="property">a</span> + obj.<span class="property">b</span>,</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    </span><br><span class="line">    <span class="attr">computed</span>:&#123;</span><br><span class="line">        <span class="title function_">str</span>(<span class="params">data: any</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> data.<span class="property">num</span> + <span class="string">&quot;hello world&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 方法，修改num值</span></span><br><span class="line">    <span class="title function_">change</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">setData</span>(&#123;</span><br><span class="line">            <span class="attr">num</span>: ++<span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">num</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>补充文档说明的一点：</p>
+<p>Q：[watch 和小程序基础库本身的 observers（监听） 有什么区别？</p>
+<p>A：无论字段是否真的改变， observers 都会被触发，而 watch 只在字段值改变了的时候触发，并且触发时带有参数。</p>
+<h6 id="状态管理Mobx"><a href="#状态管理Mobx" class="headerlink" title="状态管理Mobx"></a>状态管理Mobx</h6><p>Vue中一般用Vuex作为状态仓库，小程序使用Mobx，很类似，直接看就行。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install <span class="attr">--save</span> mobx-miniprogram mobx-miniprogram-bindings</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// store/store.js 创建仓库</span></span><br><span class="line"><span class="keyword">import</span> &#123; observable, action &#125; <span class="keyword">from</span> <span class="string">&quot;mobx-miniprogram&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> user = <span class="title function_">observable</span>(&#123;</span><br><span class="line">  <span class="comment">// 数据字段</span></span><br><span class="line">  <span class="attr">numA</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">numB</span>: <span class="number">2</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 计算属性</span></span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">sum</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">numA</span> + <span class="variable language_">this</span>.<span class="property">numB</span>;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// actions</span></span><br><span class="line">  <span class="attr">update</span>: <span class="title function_">action</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> sum = <span class="variable language_">this</span>.<span class="property">sum</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">numA</span> = <span class="variable language_">this</span>.<span class="property">numB</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">numB</span> = sum;</span><br><span class="line">  &#125;),</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// page页面中使用仓库</span></span><br><span class="line"><span class="keyword">import</span> &#123; createStoreBindings &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx-miniprogram-bindings&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; user &#125; <span class="keyword">from</span> <span class="string">&quot;../../store/user&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_">page</span>(&#123;</span><br><span class="line">    <span class="title function_">onLoad</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 绑定 MobX store</span></span><br><span class="line">    <span class="comment">// this指向当前页面对象</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">storeBindings</span> = <span class="title function_">createStoreBindings</span>(<span class="variable language_">this</span>, &#123;</span><br><span class="line">      <span class="attr">store</span>: user,</span><br><span class="line">      <span class="attr">fields</span>: [<span class="string">&#x27;numA&#x27;</span>, <span class="string">&#x27;numB&#x27;</span>],	<span class="comment">// 引用字段</span></span><br><span class="line">      <span class="attr">actions</span>: [<span class="string">&#x27;setList&#x27;</span>],	<span class="comment">// 引用方法</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">    </span><br><span class="line">   <span class="title function_">onUnload</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 解绑</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">storeBindings</span>.<span class="title function_">destroyStoreBindings</span>()</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>以上针对于创建的一个Page，如何创建了一个组件Component，那么this指向于当前组件。<br>组件的状态使用如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注意这里，和Page不一样！</span></span><br><span class="line"><span class="keyword">import</span> &#123; storeBindingsBehavior &#125; <span class="keyword">from</span> <span class="string">&quot;mobx-miniprogram-bindings&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; user &#125; <span class="keyword">from</span> <span class="string">&quot;./store&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Component</span>(&#123;</span><br><span class="line">  <span class="attr">behaviors</span>: [storeBindingsBehavior],</span><br><span class="line">  <span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="attr">someData</span>: <span class="string">&quot;...&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">storeBindings</span>: &#123;</span><br><span class="line">    <span class="attr">store</span>:user,</span><br><span class="line">    <span class="attr">fields</span>: &#123;</span><br><span class="line">      <span class="attr">numA</span>: <span class="function">() =&gt;</span> store.<span class="property">numA</span>,</span><br><span class="line">      <span class="attr">numB</span>: <span class="function">(<span class="params">store</span>) =&gt;</span> store.<span class="property">numB</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">actions</span>: &#123;</span><br><span class="line">      <span class="comment">// 方法重命名 </span></span><br><span class="line">      <span class="attr">buttonTap</span>: <span class="string">&quot;update&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">methods</span>: &#123;</span><br><span class="line">    <span class="title function_">myMethod</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">numA</span>; <span class="comment">// 来自于 MobX store 的字段</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>组件中使用Mobx和页面中使用Mobx不相同，所以要注意区分。</p>
+<h6 id="app全局数据"><a href="#app全局数据" class="headerlink" title="app全局数据"></a>app全局数据</h6><p>其实除了Mobx作为状态管理，还有一种方法就是在app.ts中配置全局数据，下级页面都可以使用这些数据。<br>接着再通过修改，达到全局使用到的数据始终一致的效果。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.ts</span></span><br><span class="line"><span class="title class_">App</span>(&#123;</span><br><span class="line">    globalData：&#123;</span><br><span class="line">    	<span class="attr">numC</span>: <span class="number">1</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 页面 index.ts 使用全局属性</span></span><br><span class="line"><span class="title class_">Page</span>(&#123;</span><br><span class="line">    <span class="comment">// 获取app实例</span></span><br><span class="line">    <span class="attr">num</span>: <span class="title function_">getApp</span>().<span class="property">globalData</span>.<span class="property">numC</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>不过我觉得这种方式其实比较麻烦，比如上面给<code>num</code>赋了一个初始值，但仅此而已，<br>后续<code>app</code>中的numC发生变化时，<code>num</code>并不会自动更新，而是要手动重新赋值。</p>
+<h6 id="修改上一级页面的数据"><a href="#修改上一级页面的数据" class="headerlink" title="修改上一级页面的数据"></a>修改上一级页面的数据</h6><p>以下的操作发生的时机是：从一个用户列表（包含我的粉丝、关注、朋友），进入到相应用户的个人主页中，产生某个动作（关注、取关）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">  更新关系列表状态：将操作后的用户仍然保存到列表页面，而不刷新掉</span></span><br><span class="line"><span class="comment">  该功能废弃，按产品：刷新列表</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">// 路由栈</span></span><br><span class="line"><span class="keyword">const</span> pages = <span class="title function_">getCurrentPages</span>()</span><br><span class="line"><span class="comment">// length-1为当前页面</span></span><br><span class="line"><span class="keyword">const</span> prevPage = pages[pages.<span class="property">length</span> - <span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (prevPage.<span class="property">route</span> == <span class="string">&#x27;pkg_personal/relation_list/index&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> prevRelationList = [...prevPage.<span class="property">data</span>.<span class="property">relationList</span>]</span><br><span class="line">    <span class="comment">// const assignIndex = prevRelationList.findIndex((item: any) =&gt; item.id == this.data.userId)</span></span><br><span class="line">    <span class="comment">// prevRelationList[assignIndex].isStatus = afterOpeStatus</span></span><br><span class="line">    <span class="comment">// prevPage.setData(&#123;</span></span><br><span class="line">    <span class="comment">//   relationList: prevRelationList</span></span><br><span class="line">    <span class="comment">// &#125;)</span></span><br><span class="line">    prevPage.<span class="title function_">setData</span>(&#123;</span><br><span class="line">        <span class="attr">relationList</span>: prevRelationList.<span class="title function_">filter</span>(<span class="function">(<span class="params">item: any</span>) =&gt;</span> item.<span class="property">id</span> != <span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">userId</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过这种方法，可以在当前页面进行某些操作后，再继续对上个页面的数据进行操作。<br>这也是为了减少请求，这应该也算是性能优化的一部分。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="http://domain.com/awesome.mp3">
+            </audio>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">基本结构</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%92%8CVue%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">2.</span> <span class="toc-text">和Vue的比较</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86Mobx"><span class="toc-number">3.</span> <span class="toc-text">状态管理Mobx</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#app%E5%85%A8%E5%B1%80%E6%95%B0%E6%8D%AE"><span class="toc-number">4.</span> <span class="toc-text">app全局数据</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%8A%E4%B8%80%E7%BA%A7%E9%A1%B5%E9%9D%A2%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">5.</span> <span class="toc-text">修改上一级页面的数据</span></a></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

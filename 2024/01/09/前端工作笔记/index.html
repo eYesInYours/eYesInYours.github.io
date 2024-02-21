@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>前端工作笔记 - 小书斋</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="用来分享平日接触到的有意思的知识,nvm管理node版本背景最近分别要跑两个项目，一个需要的node版本最高是12.22.12（老项目），另一个需要的node版本至少是16.20.2。
+当前情况下，运行其中一个项目，另一个项目就运行,"> 
+    <meta name="author" content="ikchen"> 
+    <link rel="alternative" href="atom.xml" title="小书斋" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="前端工作笔记 - 小书斋"/>
+    <meta name="twitter:description" content="用来分享平日接触到的有意思的知识,nvm管理node版本背景最近分别要跑两个项目，一个需要的node版本最高是12.22.12（老项目），另一个需要的node版本至少是16.20.2。
+当前情况下，运行其中一个项目，另一个项目就运行,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="小书斋"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="前端工作笔记 - 小书斋"/>
+    <meta property="og:description" content="用来分享平日接触到的有意思的知识,nvm管理node版本背景最近分别要跑两个项目，一个需要的node版本最高是12.22.12（老项目），另一个需要的node版本至少是16.20.2。
+当前情况下，运行其中一个项目，另一个项目就运行,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">小书斋</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://ikchen.top"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">前端工作笔记</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">前端工作笔记</h1>
+        <div class="stuff">
+            <span>一月 09, 2024</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E8%AE%B0%E5%BD%95/" rel="tag">记录</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h5 id="nvm管理node版本"><a href="#nvm管理node版本" class="headerlink" title="nvm管理node版本"></a>nvm管理node版本</h5><h6 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h6><p>最近分别要跑两个项目，一个需要的node版本<strong>最高</strong>是<code>12.22.12</code>（老项目），另一个需要的node版本<strong>至少</strong>是<code>16.20.2</code>。</p>
+<p>当前情况下，运行其中一个项目，另一个项目就运行不了。</p>
+<p>我之前的办法就是：卸载当前node版本，安装相应的node版本。<br>但是这种实在太麻烦了，肯定不是这样解决的。</p>
+<p>nvm就是用来管理node版本的一个工具。</p>
+<h6 id="安装（windows版本）"><a href="#安装（windows版本）" class="headerlink" title="安装（windows版本）"></a>安装（windows版本）</h6><p>在<code>GitHub</code>上搜索<code>nvm-windows</code>，下载<code>nvm-setup.zip</code>，解压后，双击运行<code>exe</code>。<br>安装一路默认。</p>
+<p>不用提前卸载已安装<code>node</code>，安装nvm时会弹框提示将已安装<code>node</code>交给<code>nvm</code>管理。</p>
+<p>在<code>nvm</code>安装目录下找到<code>settings.txt</code>，配置淘宝镜像（提高下载速度）。将以下代码贴在文件内：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node_mirror: https://npm.taobao.org/mirrors/node/</span><br><span class="line">npm_mirror: https://npm.taobao.org/mirrors/npm/</span><br></pre></td></tr></table></figure>
+
+<h6 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h6><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 安装最新版本node.js，也可指定版本</span></span><br><span class="line">nvm install latest 	</span><br><span class="line"><span class="comment">// 使用某一具体版本，例如 ：nvm use 14.3.0</span></span><br><span class="line">nvm use &lt;版本号&gt; 		</span><br><span class="line"><span class="comment">// 列出当前已安装的所有版本</span></span><br><span class="line">nvm list 	</span><br><span class="line">nvm ls</span><br><span class="line"><span class="comment">// 卸载某一具体版本，例如：nvm uninstall 14.3.0</span></span><br><span class="line">nvm uninstall &lt;版本号&gt; </span><br><span class="line"><span class="comment">// Mac版本中,列出全部可以安装的node版本</span></span><br><span class="line">nvm ls-remote</span><br><span class="line"><span class="comment">// windows版本,列出全部可以安装的node版本</span></span><br><span class="line">nvm ls available</span><br><span class="line"><span class="comment">// 显示当前的版本</span></span><br><span class="line">nvm current</span><br><span class="line"><span class="comment">// 给不同的版本号添加别名</span></span><br><span class="line">nvm alias</span><br><span class="line"><span class="comment">// 删除已定义的别名</span></span><br><span class="line">nvm unalias</span><br><span class="line"><span class="comment">// 在当前版本node环境下，重新全局安装指定版本号的npm包</span></span><br><span class="line">nvm reinstall-packages </span><br></pre></td></tr></table></figure>
+
+<h6 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h6><p>如果<code>nvm</code>不是默认安装路径，那要注意配置电脑的环境变量（略）。<br>如果配置了后，但在<code>cmd</code>中输入<code>nvm</code>没有提示信息，重启一下电脑就好。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="http://domain.com/awesome.mp3">
+            </audio>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#nvm%E7%AE%A1%E7%90%86node%E7%89%88%E6%9C%AC"><span class="toc-number">1.</span> <span class="toc-text">nvm管理node版本</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%EF%BC%88windows%E7%89%88%E6%9C%AC%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">安装（windows版本）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.</span> <span class="toc-text">命令</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">1.4.</span> <span class="toc-text">注意</span></a></li></ol></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
